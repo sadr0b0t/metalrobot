@@ -24,9 +24,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="6.3356768"
-     inkscape:cx="20.003745"
-     inkscape:cy="588.09091"
+     inkscape:zoom="8.9600001"
+     inkscape:cx="17.344494"
+     inkscape:cy="588.04155"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -165,8 +165,8 @@
        sodipodi:cy="141.73228"
        sodipodi:rx="17.716536"
        sodipodi:ry="17.716536"
-       d="m 212.59843,141.73228 c 0,9.78458 -7.93196,17.71654 -17.71653,17.71654 -9.78458,0 -17.71654,-7.93196 -17.71654,-17.71654 0,-9.78457 7.93196,-17.71653 17.71654,-17.71653 9.78457,0 17.71653,7.93196 17.71653,17.71653 z"
-       transform="matrix(0.69999999,0,0,0.69999999,-124.01575,359.64564)" />
+       d="m 212.59843,141.73228 a 17.716536,17.716536 0 1 1 -35.43307,0 17.716536,17.716536 0 1 1 35.43307,0 z"
+       transform="matrix(0.74999999,0,0,0.74999999,-133.75985,352.55902)" />
     <path
        sodipodi:type="arc"
        style="fill:#00ffff;fill-opacity:1;stroke:#502d16;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
