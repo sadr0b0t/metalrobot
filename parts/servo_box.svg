@@ -24,9 +24,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.5839192"
-     inkscape:cx="40.045026"
-     inkscape:cy="12.151811"
+     inkscape:zoom="2.24"
+     inkscape:cx="200.22567"
+     inkscape:cy="67.574"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -71,11 +71,11 @@
        id="guide3771" />
     <sodipodi:guide
        orientation="1,0"
-       position="77.952756,49.606299"
+       position="76.181102,113.38583"
        id="guide3773" />
     <sodipodi:guide
        orientation="1,0"
-       position="155.90551,38.976378"
+       position="157.67717,120.47244"
        id="guide3775" />
     <sodipodi:guide
        orientation="1,0"
@@ -129,6 +129,16 @@
        orientation="1,0"
        position="170.07874,56.692913"
        id="guide3801" />
+    <inkscape:grid
+       type="xygrid"
+       id="grid3326"
+       empspacing="5"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true"
+       spacingx="0.5mm"
+       spacingy="0.5mm"
+       units="mm" />
   </sodipodi:namedview>
   <metadata
      id="metadata7">
@@ -138,7 +148,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -149,7 +159,7 @@
      transform="translate(0,-308.26769)">
     <path
        style="fill:#8dd35f;fill-opacity:1;stroke:#000000;stroke-width:0;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-       d="M 46.062992,999.21257 2.5196852e-7,999.21257 0,956.69288 l 46.062992,0 -4e-6,-10.62992 4e-6,-46.06299 31.88976,-10e-6 0,46.063 77.952758,0 0,-46.063 31.88977,10e-6 0,46.06299 0,10.62995 46.06299,-3e-5 0,42.51969 -46.06299,0 0,7.08663 0,46.063 -141.732288,0 0,-46.063 z"
+       d="M 46.062992,999.21257 2.5196852e-7,999.21257 0,956.69288 l 46.062992,0 -4e-6,-10.62992 4e-6,-46.06299 30.11811,0 0,46.06299 81.496068,0 0,-46.06299 30.11811,0 0,46.06299 0,10.62995 46.06299,-3e-5 0,42.51969 -46.06299,0 0,7.08663 0,46.063 -141.732288,0 0,-46.063 z"
        id="path3236"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="ccccccccccccccccccccc" />
