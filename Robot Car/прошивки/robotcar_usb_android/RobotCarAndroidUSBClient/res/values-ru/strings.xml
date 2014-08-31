@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Робот Машинка - USB аксессуар</string>
+        
+    <string name="connected_to_accessory">Аксессуар подключен</string>
+    <string name="no_accessory">Аксессуар не подключен</string>    
+    <string name="action_connect_to_accessory">Подключиться к аксессуару</string>
+    <string name="action_disconnect_from_accessory">Отключиться от аксессуара</string>
+    
+    <string name="cmd_forward">Вперед</string>
+    <string name="cmd_backward">Назад</string>
+    <string name="cmd_left">Влево</string>
+    <string name="cmd_right">Вправо</string>
+    <string name="cmd_stop">Стоп</string>
+
+</resources>

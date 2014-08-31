@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <usb-accessory 
+        manufacturer="NNTU" 
+        model="Robot Car Android accessory" 
+        version="1.0" />
+</resources>

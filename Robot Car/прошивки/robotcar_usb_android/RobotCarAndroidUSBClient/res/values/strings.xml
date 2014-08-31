@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Robot Car USB accessory</string>
+        
+    <string name="connected_to_accessory">Connected to accessory</string>
+    <string name="no_accessory">No accessory</string>    
+    <string name="action_connect_to_accessory">Connect to accessory</string>
+    <string name="action_disconnect_from_accessory">Disconnect from accessory</string>
+    
+    <string name="cmd_forward">Forward</string>
+    <string name="cmd_backward">Backward</string>
+    <string name="cmd_left">Left</string>
+    <string name="cmd_right">Right</string>
+    <string name="cmd_stop">Stop</string>
+</resources>
