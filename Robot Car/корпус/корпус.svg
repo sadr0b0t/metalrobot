@@ -26,20 +26,21 @@
      inkscape:pageshadow="2"
      inkscape:zoom="1.12"
      inkscape:cx="274.62451"
-     inkscape:cy="106.50393"
+     inkscape:cy="197.03069"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="true"
      inkscape:window-width="1011"
      inkscape:window-height="577"
-     inkscape:window-x="175"
-     inkscape:window-y="192"
+     inkscape:window-x="166"
+     inkscape:window-y="93"
      inkscape:window-maximized="0"
      units="mm"
      showguides="true"
      inkscape:guide-bbox="true"
      inkscape:snap-bbox="true"
-     inkscape:snap-bbox-midpoints="true">
+     inkscape:snap-bbox-midpoints="true"
+     inkscape:snap-global="false">
     <sodipodi:guide
        orientation="1,0"
        position="0,283.46457"
@@ -184,7 +185,7 @@
        transform="matrix(0.5330837,0,0,0.46937589,113.62692,588.05115)" />
     <path
        sodipodi:type="arc"
-       style="fill:#0044aa;fill-opacity:1;stroke:none"
+       style="fill:#5d0b26;fill-opacity:1;stroke:none"
        id="path3790-5-4-5-9"
        sodipodi:cx="19.48819"
        sodipodi:cy="574.01575"
@@ -764,14 +765,15 @@
        transform="matrix(0.5330837,0,0,0.46937589,255.35919,552.61807)" />
     <path
        sodipodi:type="arc"
-       style="fill:#0044aa;fill-opacity:1;stroke:none"
+       style="fill:#5d0b26;fill-opacity:1;stroke:none"
        id="path3790-61-1-9-0-9-8"
        sodipodi:cx="19.48819"
        sodipodi:cy="574.01575"
        sodipodi:rx="13.293624"
        sodipodi:ry="15.097951"
-       d="m 32.781814,574.01575 c 0,8.33837 -5.951759,15.09795 -13.293624,15.09795 -7.341866,0 -13.2936242,-6.75958 -13.2936242,-15.09795 0,-8.33837 5.9517582,-15.09795 13.2936242,-15.09795 7.341865,0 13.293624,6.75958 13.293624,15.09795 z"
-       transform="matrix(0.5330837,0,0,0.46937589,255.35919,517.185)" />
+       d="m 32.781814,574.01575 a 13.293624,15.097951 0 1 1 -26.5872482,0 13.293624,15.097951 0 1 1 26.5872482,0 z"
+       transform="matrix(0.5330837,0,0,0.46937589,262.41769,506.55507)"
+       inkscape:transform-center-y="13.392857" />
     <path
        sodipodi:type="arc"
        style="fill:#0044aa;fill-opacity:1;stroke:none"
