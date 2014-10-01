@@ -68,7 +68,7 @@ void mright_stop() {
 /**
  * Измерить дистанцию, возвращает результат в сантиметрах.
  */
-int measureDistance() {
+int measureDistanceCm() {
     // Отправить на ножку TRIG прямоугольный сигнал 
     // шириной 10 микросекунд
     digitalWrite(SONAR_TRIG, LOW);
@@ -78,11 +78,13 @@ int measureDistance() {
     digitalWrite(SONAR_TRIG, LOW);
     delayMicroseconds(2);
     
-    // Получить ответ HIGH на ножке ECHO и замерить время
+    // Получить ответ HIGH на ножке ECHO и замерить время 
+    // в микросекундах
     long duration = pulseIn(SONAR_ECHO, HIGH);
     
     // Вычислить расстояние до препятствия в сантиметрах
-    return (duration / 29 /2);
+    // время мкс/скорость ультразвука 1/29 см/мкс /2 (туда-обратно)
+    return (duration / 29 / 2);
 }
 
 void setup() {
@@ -113,7 +115,7 @@ void setup() {
 }
 
 void loop() {
-    if(measureDistance() < 10) {
+    if(measureDistanceCm() < 10) {
         Serial.print("Met obstruction, distance=");
         Serial.print(measureDistance());
         Serial.println("cm");
