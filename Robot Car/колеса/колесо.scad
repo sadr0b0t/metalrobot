@@ -1,7 +1,7 @@
 // левое колесо
-wheel_with_axis();
+//wheel_with_axis();
 // правое колесо
-//mirror([0, 0, -1]) wheel_with_axis();
+mirror([0, 0, -1]) wheel_with_axis();
 
 
 /** Колесо с отверстием под ось */
@@ -63,9 +63,9 @@ module rundle() {
 }
 
 /**
- * Просто круглая ось, по умолчанию диаметр 2мм.
+ * Просто круглая ось, по умолчанию диаметр 3мм.
  */
-module generic_axis(length=22, radius=1) {
+module generic_axis(length=22, radius=1.5) {
   translate([0,0,-1])
     cylinder(h=length, r=radius, $fn=20);
 }
