@@ -17,8 +17,6 @@
 #define SONAR_TRIG 31
 #define SONAR_ECHO 30
 
-boolean run_forward = false;
-
 void mleft_forward() {
     // задать направление
     digitalWrite(MOTOR_LEFT_1, HIGH);
@@ -38,7 +36,7 @@ void mleft_backward() {
 }
 
 void mleft_stop() {
-    // выключить моторы
+    // выключить мотор
     digitalWrite(MOTOR_LEFT_EN, LOW);
 }
 
@@ -61,7 +59,7 @@ void mright_backward() {
 }
 
 void mright_stop() {
-    // выключить моторы
+    // выключить мотор
     digitalWrite(MOTOR_RIGHT_EN, LOW);
 }
 
@@ -134,7 +132,7 @@ void loop() {
         mright_backward();
         delay(2000);
         
-        // секунду поворачиваем (~45 градусов)
+        // полсекунды поворачиваем (~45 градусов)
         if(random(0, 2)) {
             // поворачиваем влево
             mleft_backward();
