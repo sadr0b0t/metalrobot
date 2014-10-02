@@ -74,6 +74,8 @@ int measureDistanceCm() {
     digitalWrite(SONAR_TRIG, HIGH);
     delayMicroseconds(5);
     digitalWrite(SONAR_TRIG, LOW);
+    
+    // время на подготовку отправки импульса
     delayMicroseconds(2);
     
     // Получить ответ HIGH на ножке ECHO и замерить время 
