@@ -43,8 +43,8 @@ int conectionId = DWIFIcK::INVALID_CONNECTION_ID;
 TcpClient tcpClient;
 
 // Буферы для обмена данными с сервером
-static char read_buffer[128];
-static char write_buffer[128];
+char read_buffer[128];
+char write_buffer[128];
 int write_size;
 
 /**

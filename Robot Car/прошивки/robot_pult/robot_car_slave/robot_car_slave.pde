@@ -53,8 +53,8 @@ int CLIENT_IDLE_TIMEOUT = 10000;
 int clientIdleStart = 0;
 
 // Буферы для обмена данными с клиентом
-static char read_buffer[128];
-static char write_buffer[128];
+char read_buffer[128];
+char write_buffer[128];
 int write_size;
 
 /**

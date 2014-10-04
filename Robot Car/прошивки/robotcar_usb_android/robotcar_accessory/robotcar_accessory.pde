@@ -24,12 +24,12 @@ const char* CMD_BACKWARD = "backward";
 const char* CMD_LEFT = "left";
 const char* CMD_RIGHT = "right";
 const char* CMD_STOP = "stop";
-static char* CMD_LETMEGO = "letmego";
+const char* CMD_LETMEGO = "letmego";
 
 // Ответы для Android-устройства
-static char* REPLY_OK = "ok";
-static char* REPLY_GETOUT = "getout";
-static char* REPLY_UNKNOWN_CMD = "dontunderstand";
+const char* REPLY_OK = "ok";
+const char* REPLY_GETOUT = "getout";
+const char* REPLY_UNKNOWN_CMD = "dontunderstand";
 
 // Ножки для моторов
 #define MOTOR_LEFT_1 8
@@ -46,8 +46,8 @@ void* deviceHandle = NULL;
 BOOL readInProgress = FALSE;
 BOOL writeInProgress = FALSE;
 
-static char read_buffer[128];
-static char write_buffer[128];
+char read_buffer[128];
+char write_buffer[128];
 int write_size;
 
 BOOL USBEventHandlerApplication( uint8_t address, USB_EVENT event, void *data, DWORD size ) {
