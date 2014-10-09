@@ -396,7 +396,12 @@ void cmd_stop() {
  * Обработать входные данные - разобрать строку, выполнить команду.
  * @return размер ответа в байтах (0, чтобы не отправлять ответ).
  */
-int handleInput(char* buffer, int size, char* reply_buffer) {
+int handleInput(char* buffer, int buffer_size, char* reply_buffer) {
+    // добавим к входным данным завершающий ноль, 
+    // чтобы рассматривать их как корректную строку
+    buffer[buffer_size] = 0;
+    
+    // ответ
     int replySize = 0;
     reply_buffer[0] = 0;
     
@@ -605,9 +610,7 @@ void loop() {
             readSize = readSize < sizeof(read_buffer) ? readSize : sizeof(read_buffer);
             readSize = tcpClient.readStream((byte*)read_buffer, readSize);
             
-            // Считали порцию данных - добавим завершающий ноль
-            read_buffer[readSize] = 0;
-            
+            // Считали порцию данных
             Serial.print("Read: ");
             Serial.println(read_buffer);
  
