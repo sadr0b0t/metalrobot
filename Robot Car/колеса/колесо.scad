@@ -1,7 +1,7 @@
 // левое колесо
-//wheel_with_axis();
+wheel_with_axis();
 // правое колесо
-mirror([0, 0, -1]) wheel_with_axis();
+//mirror([0, 0, -1]) wheel_with_axis();
 
 
 /** Колесо с отверстием под ось */
@@ -75,10 +75,10 @@ module generic_axis(length=22, radius=1.5) {
  * GM7 - Gear Motor 7 - Baby GM3 (прямой, белый)
  * www.robotshop.com/en/solarbotics-gm7-gear-motor-7.html
  *
- * Диаметр оси мотора 2мм, сделаем модель 1,5мм.
+ * Диаметр оси мотора 2мм, сделаем модель 1.5мм.
  */
 module motor1_axis(length=22) {
-  // 1,5мм диаметр
+  // 1.5мм диаметр
   generic_axis(length, 0.75);
 }
 
@@ -87,16 +87,16 @@ module motor1_axis(length=22) {
  * Pololu 4.5V, 80rpm Right Angle (прямой, желтый)
  * www.robotshop.com/en/solarbotics-gm7-gear-motor-7.html
  *
- * Диаметр оси мотора 3мм, срез с одного бока 0,5мм.
+ * Диаметр оси мотора 3мм, срез с одного бока 0.4мм.
  */
 module motor2_axis(length=22) {
-  // диаметр 3мм, срез с одного бока 0,5мм
+  // диаметр 3мм, срез с одного бока 0.4мм
   translate([0,0,-1])
   difference() {
     cylinder(h=length, r=1.5, $fn=20);
-    // 1,5 мм "вниз" по y (совместить куб с цилиндром), 
-    // 1 "вправо" по x (срезать справа 0,5мм: 1,5-0,5=1)
-    translate([1, -1.5, 0]) 
+    // 1.5 мм "вниз" по y (совместить куб с цилиндром), 
+    // 1.1 "вправо" по x (срезать справа 0.4мм: 1.5-0.4=1.1)
+    translate([1.1, -1.5, 0]) 
       cube([2, 3, length]);
   }
 }
