@@ -4,7 +4,7 @@
     <id>org.ekips.filter.rack_and_pinion</id>
     <dependency type="executable" location="extensions">rack_and_pinion.py</dependency>
     <dependency type="executable" location="extensions">inkex.py</dependency>
-    <param name="teeth"    type="int"   min="1"                    _gui-text="Number of teeth">24</param>
+    <param name="teeth"    type="int"   min="1"    max="10000"     _gui-text="Number of teeth">24</param>
     <param name="pitch"    type="float" min="0.0"  max="1000.0"    _gui-text="Circular pitch">20.0</param>
     <param name="angle"    type="float" min="10.0" max="30.0"      _gui-text="Pressure angle">20.0</param>
     <param name="height"   type="float" min="0.0"  max="100000.0"  _gui-text="Rack height">20.0</param>
