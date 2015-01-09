@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+    <_name>Rack and pinion</_name>
+    <id>org.ekips.filter.rack_and_pinion</id>
+    <dependency type="executable" location="extensions">rack_and_pinion.py</dependency>
+    <dependency type="executable" location="extensions">inkex.py</dependency>
+    <param name="teeth"    type="int"   min="1"                    _gui-text="Number of teeth">24</param>
+    <param name="pitch"    type="float" min="0.0"  max="1000.0"    _gui-text="Circular pitch">20.0</param>
+    <param name="angle"    type="float" min="10.0" max="30.0"      _gui-text="Pressure angle">20.0</param>
+    <param name="height"   type="float" min="0.0"  max="100000.0"  _gui-text="Rack height">20.0</param>
+    <param name="lindent"  type="float" min="0.0"  max="100000.0"  _gui-text="Left indent">5.0</param>
+    <param name="rindent"  type="float" min="0.0"  max="100000.0"  _gui-text="Right indent">5.0</param>
+    <param name="unit"     type="optiongroup" appearance="minimal" _gui-text="Unit">
+	  <option value="cm">cm</option>
+	  <option value="ft">ft</option>
+	  <option value="in">in</option>
+	  <option value="m">m</option>
+	  <option value="mm">mm</option>
+	  <option value="pc">pc</option>
+	  <option value="pt">pt</option>
+	  <option value="px">px</option>
+    </param>
+    <effect>
+	<object-type>all</object-type>
+        <effects-menu>
+            <submenu _name="Render"/>
+        </effects-menu>						    		
+    </effect>
+    <script>
+        <command reldir="extensions" interpreter="python">rack_and_pinion.py</command>
+    </script>
+</inkscape-extension>
