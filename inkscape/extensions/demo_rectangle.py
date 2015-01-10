@@ -53,7 +53,7 @@ class Rectangle(inkex.Effect):
         # Create SVG Path for demo rectangle
         style = { 'stroke': '#000000', 'fill': 'none' }
         rectangle_attribs = {'style':simplestyle.formatStyle(style), 'd':path}
-        gear = inkex.etree.SubElement(g, inkex.addNS('path','svg'), rectangle_attribs )
+        rectangle = inkex.etree.SubElement(g, inkex.addNS('path','svg'), rectangle_attribs )
 
 if __name__ == '__main__':
     e = Rectangle()
