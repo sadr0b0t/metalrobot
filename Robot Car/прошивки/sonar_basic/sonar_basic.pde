@@ -119,7 +119,7 @@ void setup() {
 void loop() {
     if(measureDistanceCm() < 10) {
         Serial.print("Met obstruction, distance=");
-        Serial.print(measureDistance());
+        Serial.print(measureDistanceCm());
         Serial.println("cm");
         
         // встретили препятствие, остановить моторы
