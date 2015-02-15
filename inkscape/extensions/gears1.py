@@ -62,7 +62,7 @@ class Gears(inkex.Effect):
     def effect(self):
 
         teeth = self.options.teeth
-        pitch = inkex.unittouu( str(self.options.pitch)  + self.options.unit )
+        pitch = self.unittouu( str(self.options.pitch)  + self.options.unit )
         angle = self.options.angle  # Angle of tangent to tooth at circular pitch wrt radial line.
 
         # print >>sys.stderr, "Teeth: %s\n"        % teeth

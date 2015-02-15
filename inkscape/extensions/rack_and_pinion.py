@@ -76,11 +76,11 @@ class Gears(inkex.Effect):
     def effect(self):
 
         teeth = self.options.teeth
-        pitch = inkex.unittouu( str(self.options.pitch)  + self.options.unit )
+        pitch = self.unittouu( str(self.options.pitch)  + self.options.unit )
         angle = self.options.angle  # Angle of tangent to tooth at circular pitch wrt radial line.
-        height = inkex.unittouu( str(self.options.height)  + self.options.unit )
-        lindent = inkex.unittouu( str(self.options.lindent)  + self.options.unit )
-        rindent = inkex.unittouu( str(self.options.rindent)  + self.options.unit )
+        height = self.unittouu( str(self.options.height)  + self.options.unit )
+        lindent = self.unittouu( str(self.options.lindent)  + self.options.unit )
+        rindent = self.unittouu( str(self.options.rindent)  + self.options.unit )
 
         # Take most calculations for the tooth shape from gears.py and at the end just draw teeth
         # on a straight line instead of circle

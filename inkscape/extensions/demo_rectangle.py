@@ -32,8 +32,8 @@ class Rectangle(inkex.Effect):
                         help="The unit of dimensions")
     def effect(self):
 
-        width  = inkex.unittouu( str(self.options.width) + self.options.unit )
-        height = inkex.unittouu( str(self.options.height) + self.options.unit )
+        width  = self.unittouu( str(self.options.width) + self.options.unit )
+        height = self.unittouu( str(self.options.height) + self.options.unit )
 
         # Debug messages
         #inkex.debug( "Width=" + str(width) + ", height=" + str(height) )
@@ -53,7 +53,7 @@ class Rectangle(inkex.Effect):
         # Create SVG Path for demo rectangle
         style = { 'stroke': '#000000', 'fill': 'none' }
         rectangle_attribs = {'style':simplestyle.formatStyle(style), 'd':path}
-        rectangle = inkex.etree.SubElement(g, inkex.addNS('path','svg'), rectangle_attribs )
+        gear = inkex.etree.SubElement(g, inkex.addNS('path','svg'), rectangle_attribs )
 
 if __name__ == '__main__':
     e = Rectangle()
