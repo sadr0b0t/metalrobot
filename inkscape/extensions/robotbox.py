@@ -46,6 +46,9 @@ class RobotBox(inkex.Effect):
         skew_shift = depth*2/3 * 0.47
 
         # Generate box points
+        # Details on the shape here:
+        # https://github.com/1i7/metalrobot/blob/master/inkscape/extensions/robotbox-devel/draft1.svg
+        # https://github.com/1i7/metalrobot/blob/master/inkscape/extensions/robotbox-devel/draft2.svg
         bound_points = [
             [ 'M', [
                 # start from left bottom "ear" and go left and up
