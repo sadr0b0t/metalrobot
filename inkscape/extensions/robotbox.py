@@ -24,8 +24,12 @@ class RobotBox(inkex.Effect):
                         help="The Box Depth - in the Z dimension")
         self.OptionParser.add_option("-p", "--paper-thickness",
                         action="store", type="float",
-                        dest="thickness", default=0.01,
-                        help="Paper Thickness - sometimes that is important")
+                        dest="thickness", default=1.0,
+                        help="Paper thickness - important for thick carton")
+        self.OptionParser.add_option("-c", "--cramp-height",
+                        action="store", type="float",
+                        dest="cramp_height", default=1.0,
+                        help="Cramp ear height - render cramping ears and slots on the left and right walls (0 for no cramp)")
         self.OptionParser.add_option("-u", "--unit",
                         action="store", type="string",
                         dest="unit", default="px",
@@ -37,9 +41,10 @@ class RobotBox(inkex.Effect):
         height = self.unittouu( str(self.options.height) + self.options.unit )
         depth  = self.unittouu( str(self.options.depth) + self.options.unit )
         thickness  = self.unittouu( str(self.options.thickness) + self.options.unit )
+        cramp_height  = self.unittouu( str(self.options.cramp_height) + self.options.unit )
 
         # small ears (to be hidden inside the box borders) length
-        ear1 = height / 3
+        ear1 = height / 2 - thickness*2
 
         # big ears skew = ~25 degrees
         # skew_shift = depth*2/3 * tg(25)
@@ -49,20 +54,41 @@ class RobotBox(inkex.Effect):
         # use it just for convenience
         width2 = width-thickness*4
 
+        # render 2 cramps as 1/5 of box height with same (1/5 of height) step
+        cramp_width = (height-thickness*2)/5
+
+        
         # Generate box points
         # Details on the shape here:
         # https://github.com/1i7/metalrobot/blob/master/inkscape/extensions/robotbox-devel/draft1.svg
         # https://github.com/1i7/metalrobot/blob/master/inkscape/extensions/robotbox-devel/draft2.svg
-        bound_points = [
-            [ 'M', [
+
+        # points for straight lines of the left bound
+        left_points = [
                 # start from left bottom "ear" and go left and up
                 # ear 1
                 0,0,    -ear1,0, 
                 -ear1,depth-thickness*2,    0,depth-thickness*2, 
                 # ear 2
                 0,depth,    -thickness*2,depth,    -thickness*2-depth,depth,    -thickness*2-depth-thickness*4,depth,    
-                -thickness*2-depth-thickness*4-depth+thickness,depth,
+                -thickness*2-depth-thickness*4-depth+thickness,depth 
+        ]
+
+        # render cramping ears if set
+        if cramp_height > 0:
+            left_points += [
+                # left cramp ear1
+                -thickness*2-depth-thickness*4-depth+thickness,depth+cramp_width,    -thickness*2-depth-thickness*4-depth+thickness-cramp_height,depth+cramp_width+thickness,
+                -thickness*2-depth-thickness*4-depth+thickness-cramp_height,depth+cramp_width*2-thickness,    -thickness*2-depth-thickness*4-depth+thickness,depth+cramp_width*2,
                 
+                # left cramp ear2
+                -thickness*2-depth-thickness*4-depth+thickness,depth+cramp_width*3,    -thickness*2-depth-thickness*4-depth+thickness-cramp_height,depth+cramp_width*3+thickness,
+                -thickness*2-depth-thickness*4-depth+thickness-cramp_height,depth+cramp_width*4-thickness,    -thickness*2-depth-thickness*4-depth+thickness,depth+cramp_width*4,
+            ]
+                
+                
+        left_points += [
+                # ear 2 finish
                 -thickness*2-depth-thickness*4-depth+thickness,depth+height-thickness*2,    -thickness*2-depth-thickness*4,depth+height-thickness*2,    
                 -thickness*2-depth,depth+height-thickness*2,    -thickness*2,depth+height-thickness*2,    0,depth+height-thickness*2,
                 # ear 3
@@ -71,7 +97,45 @@ class RobotBox(inkex.Effect):
                 # ear 4
                 thickness*2,depth+height+depth,    thickness*2-depth*2/3,depth+height+depth+skew_shift,
                 thickness*2-depth*2/3,depth+height+depth+height-thickness*2-skew_shift,    thickness*2,depth+height+depth+height-thickness*2
-            ] ],
+        ]
+
+        
+        # points for straight lines of the right bound
+        right_points = [
+                width2-thickness*2,depth+height+depth+height-thickness*2,    width2-thickness*2+depth*2/3,depth+height+depth+height-thickness*2-skew_shift,
+                width2-thickness*2+depth*2/3,depth+height+depth+skew_shift,    width2-thickness*2,depth+height+depth,
+                # ear 8
+                width2-thickness*2,depth+height+depth-thickness*2,    width2+ear1,depth+height+depth-thickness*2,
+                width2+ear1,depth+height,    width2,depth+height,
+                # ear 9
+                width2,depth+height-thickness*2,    width2+thickness*2,depth+height-thickness*2,    width2+thickness*2+depth,depth+height-thickness*2,    
+                width2+thickness*2+depth+thickness*4,depth+height-thickness*2,    width2+thickness*2+depth+thickness*4+depth-thickness,depth+height-thickness*2
+        ]
+
+        # render cramping ears if set
+        if cramp_height > 0:
+            right_points += [
+                # right cramp ear1
+                width2+thickness*2+depth+thickness*4+depth-thickness,depth+height-thickness*2-cramp_width,    width2+thickness*2+depth+thickness*4+depth-thickness+cramp_height,depth+height-thickness*2-cramp_width-thickness,
+                width2+thickness*2+depth+thickness*4+depth-thickness+cramp_height,depth+height-thickness*2-cramp_width*2+thickness,    width2+thickness*2+depth+thickness*4+depth-thickness,depth+height-thickness*2-cramp_width*2,    
+                
+                # right cramp ear2
+                width2+thickness*2+depth+thickness*4+depth-thickness,depth+height-thickness*2-cramp_width*3,    width2+thickness*2+depth+thickness*4+depth-thickness+cramp_height,depth+height-thickness*2-cramp_width*3-thickness,
+                width2+thickness*2+depth+thickness*4+depth-thickness+cramp_height,depth+height-thickness*2-cramp_width*4+thickness,    width2+thickness*2+depth+thickness*4+depth-thickness,depth+height-thickness*2-cramp_width*4
+            ]
+
+        right_points += [
+                # ear 9 finish
+                width2+thickness*2+depth+thickness*4+depth-thickness,depth,    width2+thickness*2+depth+thickness*4,depth,    width2+thickness*2+depth,depth,    
+                width2+thickness*2,depth,    width2,depth,
+                # ear 10
+                width2,depth-thickness*2,    width2+ear1,depth-thickness*2,
+                width2+ear1,0,    width2,0
+        ]
+
+        
+        bound_points = [
+            [ 'M', left_points ],
             # ear 5: manual shape (drawn for 62x38x23 box), converted to proportion based on depth value
             # m 0,0 c -39.88719,-0.7697 -90.44391,-0.7593 -73.26685,35.3985 11.37507,22.1855 33.21015,45.182 73.26685,46.0975 z
             [ 'L', [
@@ -108,23 +172,41 @@ class RobotBox(inkex.Effect):
                 width2-thickness*2,depth+height+depth+height+thickness
             ] ],
             # ear 7    
-            [ 'L', [
-                width2-thickness*2,depth+height+depth+height-thickness*2,    width2-thickness*2+depth*2/3,depth+height+depth+height-thickness*2-skew_shift,
-                width2-thickness*2+depth*2/3,depth+height+depth+skew_shift,    width2-thickness*2,depth+height+depth,
-                # ear 8
-                width2-thickness*2,depth+height+depth-thickness*2,    width2+ear1,depth+height+depth-thickness*2,
-                width2+ear1,depth+height,    width2,depth+height,
-                # ear 9
-                width2,depth+height-thickness*2,    width2+thickness*2,depth+height-thickness*2,    width2+thickness*2+depth,depth+height-thickness*2,    
-                width2+thickness*2+depth+thickness*4,depth+height-thickness*2,    width2+thickness*2+depth+thickness*4+depth-thickness,depth+height-thickness*2,
-
-                width2+thickness*2+depth+thickness*4+depth-thickness,depth,    width2+thickness*2+depth+thickness*4,depth,    width2+thickness*2+depth,depth,    
-                width2+thickness*2,depth,    width2,depth,
-                # ear 10
-                width2,depth-thickness*2,    width2+ear1,depth-thickness*2,
-                width2+ear1,0,    width2,0
-            ] ],
+            [ 'L', right_points ],
             [ 'Z', [] ]
+        ]
+
+        # render slots for cramp ears
+        # slot for left cramp ear1
+        slot_l1 =  [ [ 'M', [
+                thickness,depth+cramp_width,    thickness+thickness,depth+cramp_width,
+                thickness+thickness,depth+cramp_width*2,    thickness,depth+cramp_width*2
+                ] ],
+                [ 'Z', [] ] 
+        ]
+
+        # slot for left cramp ear2
+        slot_l2 =  [ [ 'M', [
+                thickness,depth+cramp_width*3,    thickness+thickness,depth+cramp_width*3,
+                thickness+thickness,depth+cramp_width*4,    thickness,depth+cramp_width*4
+                ] ],
+                [ 'Z', [] ] 
+        ]
+
+        # slot for right cramp ear1
+        slot_r1 =  [ [ 'M', [
+                width2-thickness,depth+height-thickness*2-cramp_width,    width2-thickness-thickness,depth+height-thickness*2-cramp_width,
+                width2-thickness-thickness,depth+height-thickness*2-cramp_width*2,    width2-thickness,depth+height-thickness*2-cramp_width*2    
+                ] ],
+                [ 'Z', [] ] 
+        ]
+
+        # slot for right cramp ear2
+        slot_r2 =  [ [ 'M', [
+                width2-thickness,depth+height-thickness*2-cramp_width*3,    width2-thickness-thickness,depth+height-thickness*2-cramp_width*3,
+                width2-thickness-thickness,depth+height-thickness*2-cramp_width*4,    width2-thickness,depth+height-thickness*2-cramp_width*4
+                ] ],
+                [ 'Z', [] ] 
         ]
 
         # vertical bends
@@ -185,6 +267,21 @@ class RobotBox(inkex.Effect):
         style = { 'stroke': '#000000', 'fill': 'none' }
         path_attribs = {'style':simplestyle.formatStyle(style), 'd':formatPath( bound_points )}
         inkex.etree.SubElement(g, inkex.addNS('path','svg'), path_attribs )
+
+        # Create SVG paths for crmap slots if set
+        # render slots for cramp ears
+        if cramp_height > 0:
+            path_attribs = {'style':simplestyle.formatStyle(style), 'd':formatPath( slot_l1 )}
+            inkex.etree.SubElement(g, inkex.addNS('path','svg'), path_attribs )
+            
+            path_attribs = {'style':simplestyle.formatStyle(style), 'd':formatPath( slot_l2 )}
+            inkex.etree.SubElement(g, inkex.addNS('path','svg'), path_attribs )
+            
+            path_attribs = {'style':simplestyle.formatStyle(style), 'd':formatPath( slot_r1 )}
+            inkex.etree.SubElement(g, inkex.addNS('path','svg'), path_attribs )
+            
+            path_attribs = {'style':simplestyle.formatStyle(style), 'd':formatPath( slot_r2 )}
+            inkex.etree.SubElement(g, inkex.addNS('path','svg'), path_attribs )
 
         # Create SVG Paths for bend lines
         # draw bend lines with blue
