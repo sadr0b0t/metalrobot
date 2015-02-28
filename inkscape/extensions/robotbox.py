@@ -30,9 +30,17 @@ class RobotBox(inkex.Effect):
                         action="store", type="float",
                         dest="cramp_height", default=1.0,
                         help="Cramp ear height - render cramping ears and slots on the left and right walls (0 for no cramp)")
+        self.OptionParser.add_option("-d", "--dash-width",
+                        action="store", type="float",
+                        dest="dash_width", default=5.0,
+                        help="Bend line dash width")
+        self.OptionParser.add_option("-s", "--dash-step",
+                        action="store", type="float",
+                        dest="dash_step", default=5.0,
+                        help="Bend line dash step")
         self.OptionParser.add_option("-u", "--unit",
                         action="store", type="string",
-                        dest="unit", default="px",
+                        dest="unit", default="mm",
                         help="The unit of dimensions")
                         
     def effect(self):
@@ -42,6 +50,8 @@ class RobotBox(inkex.Effect):
         depth  = self.unittouu( str(self.options.depth) + self.options.unit )
         thickness  = self.unittouu( str(self.options.thickness) + self.options.unit )
         cramp_height  = self.unittouu( str(self.options.cramp_height) + self.options.unit )
+        dash_width  = self.unittouu( str(self.options.dash_width) + self.options.unit )
+        dash_step  = self.unittouu( str(self.options.dash_step) + self.options.unit )
 
         # small ears (to be hidden inside the box borders) length
         ear1 = height / 2 - thickness*2
@@ -285,7 +295,7 @@ class RobotBox(inkex.Effect):
 
         # Create SVG Paths for bend lines
         # draw bend lines with blue
-        style = { 'stroke': '#44aaff', 'fill': 'none' }
+        style = { 'stroke': '#44aaff', 'fill': 'none', 'stroke-dasharray': str(dash_width) + ',' + str(dash_step) }
 
         # left
         path_attribs = {'style':simplestyle.formatStyle(style), 'd':formatPath( bend_line_vl1 )}

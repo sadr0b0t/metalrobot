@@ -11,6 +11,8 @@
     <param name="depth"    type="float" min="0.0"  max="10000.0"    _gui-text="Depth">23.0</param>
     <param name="paper-thickness" type="float" min="0.0" max="100.0" _gui-text="Paper thickness">1.0</param>
     <param name="cramp-height" type="float" min="0.0" max="100.0" _gui-text="Cramp ear height (0 for no cramp)">1.0</param>
+    <param name="dash-width"   type="float" min="0.0" max="100.0" _gui-text="Bend line dash width">5.0</param>
+    <param name="dash-step"    type="float" min="0.0" max="100.0" _gui-text="Bend line dash step">5.0</param>
     <param name="unit"     type="optiongroup" appearance="minimal" _gui-text="Unit">
 	  <option value="cm">cm</option>
 	  <option value="ft">ft</option>
