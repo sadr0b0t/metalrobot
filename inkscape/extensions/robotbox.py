@@ -295,7 +295,10 @@ class RobotBox(inkex.Effect):
 
         # Create SVG Paths for bend lines
         # draw bend lines with blue
-        style = { 'stroke': '#44aaff', 'fill': 'none', 'stroke-dasharray': str(dash_width) + ',' + str(dash_step) }
+        style = { 'stroke': '#44aaff', 'fill': 'none', 
+            'stroke-dasharray': str(dash_width) + ',' + str(dash_step),
+            # positive dash offset moves dash backward
+            'stroke-dashoffset': str(dash_width) }
 
         # left
         path_attribs = {'style':simplestyle.formatStyle(style), 'd':formatPath( bend_line_vl1 )}
