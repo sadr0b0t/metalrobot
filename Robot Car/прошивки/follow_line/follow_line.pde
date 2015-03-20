@@ -1,13 +1,5 @@
 // Робот Машинка едет по линии
 
-// Ножки для моторов
-#define MOTOR_LEFT_1 8
-#define MOTOR_LEFT_2 9
-#define MOTOR_LEFT_EN 11
-#define MOTOR_RIGHT_1 4
-#define MOTOR_RIGHT_2 3
-#define MOTOR_RIGHT_EN 6
-
 /**
  * Сенсор линии: сенсор подключен к входной ножке и 
  * подает на нее сигнал:
@@ -17,7 +9,13 @@
 #define LINE_SENSOR_L 27
 #define LINE_SENSOR_R 28
 
-boolean run_forward = false;
+// Ножки для моторов
+#define MOTOR_LEFT_1 8
+#define MOTOR_LEFT_2 9
+#define MOTOR_LEFT_EN 11
+#define MOTOR_RIGHT_1 4
+#define MOTOR_RIGHT_2 3
+#define MOTOR_RIGHT_EN 6
 
 void mleft_forward() {
     // задать направление
