@@ -146,9 +146,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.35355339"
-     inkscape:cx="544.84685"
-     inkscape:cy="201.38838"
+     inkscape:zoom="2.8284271"
+     inkscape:cx="693.27755"
+     inkscape:cy="320.76895"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -216,7 +216,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -334,14 +334,14 @@
        inkscape:export-ydpi="90"><tspan
          sodipodi:role="line"
          id="tspan3348"
-         x="459.11133"
+         x="459.11136"
          y="565.59589"
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Sans;-inkscape-font-specification:'Sans Bold';text-align:center;text-anchor:middle;fill:#ffffff">Линии нет </tspan><tspan
          sodipodi:role="line"
          x="456.56577"
          y="583.90125"
          id="tspan3350"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Sans;-inkscape-font-specification:'Sans Bold';text-align:center;text-anchor:middle;fill:#ffffff">ни на одном датчике</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Sans;-inkscape-font-specification:'Sans Bold';text-align:center;text-anchor:middle;fill:#ffffff">ни на одном датчике?</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:27.03947449px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -410,7 +410,7 @@
          x="666.16736"
          y="759.2691"
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Sans;-inkscape-font-specification:'Sans Bold';text-align:center;text-anchor:middle;fill:#ffffff"
-         id="tspan3410">на правом датчике</tspan></text>
+         id="tspan3410">на правом датчике?</tspan></text>
     <rect
        style="fill:#ffffff;fill-opacity:1;stroke:#5599ff;stroke-width:8.92794895;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:8;stroke-opacity:1"
        id="rect3356-3"
