@@ -87,7 +87,7 @@ void setup() {
 }
 
 void loop() {
-    if( digitalRead(27) == 0 && digitalRead(28) == 0 ) {
+    if( digitalRead(LINE_SENSOR_L) == 0 && digitalRead(LINE_SENSOR_R) == 0 ) {
       //Serial.println("Proverka linii: linii net na 2x datchikah");
       
       // линии нет на обоих датчиках
@@ -103,7 +103,7 @@ void loop() {
       mleft_stop();
       mright_stop();
       
-      if( digitalRead(28) ) {
+      if( digitalRead(LINE_SENSOR_R) ) {
         // линия под правым датчиком
         
         Serial.println("praviy datchik -> povorot napravo");
