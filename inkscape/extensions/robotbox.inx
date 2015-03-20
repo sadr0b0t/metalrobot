@@ -13,6 +13,13 @@
     <param name="cramp-height" type="float" min="0.0" max="100.0" _gui-text="Cramp ear height (0 for no cramp)">1.0</param>
     <param name="dash-width"   type="float" min="0.0" max="100.0" _gui-text="Bend line dash width">5.0</param>
     <param name="dash-step"    type="float" min="0.0" max="100.0" _gui-text="Bend line dash step">5.0</param>
+
+    <param name="bendline-surface"    type="optiongroup" appearance="minimal" _gui-text="Bend line surface">
+	  <option value="middle">middle</option>
+	  <option value="inner">inner</option>
+	  <option value="outer">outer</option>
+    </param>
+
     <param name="unit"     type="optiongroup" appearance="minimal" _gui-text="Unit">
 	  <option value="cm">cm</option>
 	  <option value="ft">ft</option>

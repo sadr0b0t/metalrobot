@@ -1,6 +1,24 @@
 #! /usr/bin/env python
 '''
 Draw box with given width, height and depth.
+
+Use "Extensions / Modify Path / Convert to dashes" to convert dashed bend lines to CNC-friendly style.
+
+Copyright (C) 2015 Anton Moiseev  (1i7.livejournal.com)
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 '''
 
 import inkex
@@ -38,6 +56,10 @@ class RobotBox(inkex.Effect):
                         action="store", type="float",
                         dest="dash_step", default=5.0,
                         help="Bend line dash step")
+        self.OptionParser.add_option("-b", "--bendline-surface",
+                        action="store", type="string",
+                        dest="bend_surface", default="inner",
+                        help="Bend line surface (innder or outer) - depends on the way you will make actual bends")
         self.OptionParser.add_option("-u", "--unit",
                         action="store", type="string",
                         dest="unit", default="mm",
@@ -52,21 +74,31 @@ class RobotBox(inkex.Effect):
         cramp_height  = self.unittouu( str(self.options.cramp_height) + self.options.unit )
         dash_width  = self.unittouu( str(self.options.dash_width) + self.options.unit )
         dash_step  = self.unittouu( str(self.options.dash_step) + self.options.unit )
+        bend_surface  = self.options.bend_surface
+
+        # bend correction: it makes sense when compose the box whether the bend line would
+        # lay on the inner or outer surface of the thick carton
+        bcorr = 0
+        if bend_surface == "inner":
+            bcorr = 0
+        elif bend_surface == "outer":
+            bcorr = thickness
+        else :# "middle"
+            bcorr = thickness/2
 
         # small ears (to be hidden inside the box borders) length
-        ear1 = height / 2 - thickness*2
+        ear1 = height / 2 - bcorr*2
+
+        # slot width - make slots a bit thiner than ears (thickness)
+        slot_width_factor = 0.8
+        slot_width = thickness * slot_width_factor
 
         # big ears skew = ~25 degrees
         # skew_shift = depth*2/3 * tg(25)
         skew_shift = depth*2/3 * 0.47
 
-        # inner width of the box (without left and right slots),
-        # use it just for convenience
-        width2 = width-thickness*4
-
         # render 2 cramps as 1/5 of box height with same (1/5 of height) step
-        cramp_width = (height-thickness*2)/5
-
+        cramp_width = height/5
         
         # Generate box points
         # Details on the shape here:
@@ -78,69 +110,81 @@ class RobotBox(inkex.Effect):
                 # start from left bottom "ear" and go left and up
                 # ear 1
                 0,0,    -ear1,0, 
-                -ear1,depth-thickness*2,    0,depth-thickness*2, 
+                -ear1,depth,    0,depth, 
                 # ear 2
-                0,depth,    -thickness*2,depth,    -thickness*2-depth,depth,    -thickness*2-depth-thickness*4,depth,    
-                -thickness*2-depth-thickness*4-depth+thickness,depth 
+                0,depth+bcorr*2,    -((thickness-bcorr)+slot_width+bcorr),depth+bcorr*2,    -((thickness-bcorr)+slot_width+bcorr)-(depth+bcorr*2),depth+bcorr*2,    
+                -((thickness-bcorr)+slot_width+bcorr)-(depth+bcorr*2)-(bcorr+slot_width+thickness+bcorr),depth+bcorr*2,    
+                -((thickness-bcorr)+slot_width+bcorr)-(depth+bcorr*2)-(bcorr+slot_width+thickness+bcorr)-(bcorr+depth),depth+bcorr*2 
         ]
 
         # render cramping ears if set
         if cramp_height > 0:
+            left_cramp_x = -((thickness-bcorr)+slot_width+bcorr)-(depth+bcorr*2)-(bcorr+slot_width+thickness+bcorr)-(bcorr+depth)
+        
             left_points += [
                 # left cramp ear1
-                -thickness*2-depth-thickness*4-depth+thickness,depth+cramp_width,    -thickness*2-depth-thickness*4-depth+thickness-cramp_height,depth+cramp_width+thickness,
-                -thickness*2-depth-thickness*4-depth+thickness-cramp_height,depth+cramp_width*2-thickness,    -thickness*2-depth-thickness*4-depth+thickness,depth+cramp_width*2,
+                left_cramp_x,(depth+bcorr*2)+cramp_width,    left_cramp_x-cramp_height,(depth+bcorr*2)+cramp_width+thickness,
+                left_cramp_x-cramp_height,(depth+bcorr*2)+cramp_width*2-thickness,    left_cramp_x,(depth+bcorr*2)+cramp_width*2,
                 
                 # left cramp ear2
-                -thickness*2-depth-thickness*4-depth+thickness,depth+cramp_width*3,    -thickness*2-depth-thickness*4-depth+thickness-cramp_height,depth+cramp_width*3+thickness,
-                -thickness*2-depth-thickness*4-depth+thickness-cramp_height,depth+cramp_width*4-thickness,    -thickness*2-depth-thickness*4-depth+thickness,depth+cramp_width*4,
+                left_cramp_x,(depth+bcorr*2)+cramp_width*3,    left_cramp_x-cramp_height,(depth+bcorr*2)+cramp_width*3+thickness,
+                left_cramp_x-cramp_height,(depth+bcorr*2)+cramp_width*4-thickness,    left_cramp_x,(depth+bcorr*2)+cramp_width*4
             ]
                 
                 
         left_points += [
                 # ear 2 finish
-                -thickness*2-depth-thickness*4-depth+thickness,depth+height-thickness*2,    -thickness*2-depth-thickness*4,depth+height-thickness*2,    
-                -thickness*2-depth,depth+height-thickness*2,    -thickness*2,depth+height-thickness*2,    0,depth+height-thickness*2,
+                -((thickness-bcorr)+slot_width+bcorr)-(depth+bcorr*2)-(bcorr+slot_width+thickness+bcorr)-(bcorr+depth),(depth+bcorr*2)+height,    
+                -((thickness-bcorr)+slot_width+bcorr)-(depth+bcorr*2)-(bcorr+slot_width+thickness+bcorr),(depth+bcorr*2)+height,    
+                -((thickness-bcorr)+slot_width+bcorr)-(depth+bcorr*2),(depth+bcorr*2)+height,    
+                -((thickness-bcorr)+slot_width+bcorr),(depth+bcorr*2)+height,    0,(depth+bcorr*2)+height,
                 # ear 3
-                0,depth+height,    -ear1,depth+height,
-                -ear1,depth+height+depth-thickness*2,    thickness*2,depth+height+depth-thickness*2,
+                0,(depth+bcorr*2)+(height+bcorr*2),    -ear1,(depth+bcorr*2)+(height+bcorr*2),
+                -ear1,(depth+bcorr*2)+(height+bcorr*2)+depth,    0,(depth+bcorr*2)+(height+bcorr*2)+depth,    bcorr+thickness+(thickness-bcorr),(depth+bcorr*2)+(height+bcorr*2)+depth,
                 # ear 4
-                thickness*2,depth+height+depth,    thickness*2-depth*2/3,depth+height+depth+skew_shift,
-                thickness*2-depth*2/3,depth+height+depth+height-thickness*2-skew_shift,    thickness*2,depth+height+depth+height-thickness*2
+                (bcorr+thickness+(thickness-bcorr)),(depth+bcorr*2)+(height+bcorr*2)+(depth+bcorr*2),    (bcorr+thickness+(thickness-bcorr))-depth*2/3,(depth+bcorr*2)+(height+bcorr*2)+(depth+bcorr*2)+skew_shift,
+                (bcorr+thickness+(thickness-bcorr))-depth*2/3,(depth+bcorr*2)+(height+bcorr*2)+(depth+bcorr*2)+height-skew_shift,    (bcorr+thickness+(thickness-bcorr)),(depth+bcorr*2)+(height+bcorr*2)+(depth+bcorr*2)+height
         ]
-
         
+
         # points for straight lines of the right bound
+        right_base_x = bcorr+thickness+width+thickness+bcorr
         right_points = [
-                width2-thickness*2,depth+height+depth+height-thickness*2,    width2-thickness*2+depth*2/3,depth+height+depth+height-thickness*2-skew_shift,
-                width2-thickness*2+depth*2/3,depth+height+depth+skew_shift,    width2-thickness*2,depth+height+depth,
+                # ear 7
+                right_base_x-(bcorr+thickness+(thickness-bcorr)),(depth+bcorr*2)+(height+bcorr*2)+(depth+bcorr*2)+height,    right_base_x-(bcorr+thickness+(thickness-bcorr))+depth*2/3,(depth+bcorr*2)+(height+bcorr*2)+(depth+bcorr*2)+height-skew_shift,
+                right_base_x-(bcorr+thickness+(thickness-bcorr))+depth*2/3,(depth+bcorr*2)+(height+bcorr*2)+(depth+bcorr*2)+skew_shift,    right_base_x-(bcorr+thickness+(thickness-bcorr)),(depth+bcorr*2)+(height+bcorr*2)+(depth+bcorr*2),
                 # ear 8
-                width2-thickness*2,depth+height+depth-thickness*2,    width2+ear1,depth+height+depth-thickness*2,
-                width2+ear1,depth+height,    width2,depth+height,
+                right_base_x-(bcorr+thickness+(thickness-bcorr)),(depth+bcorr*2)+(height+bcorr*2)+depth,    right_base_x,(depth+bcorr*2)+(height+bcorr*2)+depth,    right_base_x+ear1,(depth+bcorr*2)+(height+bcorr*2)+depth,
+                right_base_x+ear1,(depth+bcorr*2)+(height+bcorr*2),    right_base_x,(depth+bcorr*2)+(height+bcorr*2),
                 # ear 9
-                width2,depth+height-thickness*2,    width2+thickness*2,depth+height-thickness*2,    width2+thickness*2+depth,depth+height-thickness*2,    
-                width2+thickness*2+depth+thickness*4,depth+height-thickness*2,    width2+thickness*2+depth+thickness*4+depth-thickness,depth+height-thickness*2
+                right_base_x,(depth+bcorr*2)+height,    right_base_x+((thickness-bcorr)+slot_width+bcorr),(depth+bcorr*2)+height,    
+                right_base_x+((thickness-bcorr)+slot_width+bcorr)+(depth+bcorr*2),(depth+bcorr*2)+height,    
+                right_base_x+((thickness-bcorr)+slot_width+bcorr)+(depth+bcorr*2)+(bcorr+slot_width+thickness+bcorr),(depth+bcorr*2)+height,    
+                right_base_x+((thickness-bcorr)+slot_width+bcorr)+(depth+bcorr*2)+(bcorr+slot_width+thickness+bcorr)+(bcorr+depth),(depth+bcorr*2)+height
         ]
 
         # render cramping ears if set
         if cramp_height > 0:
+            right_cramp_x = right_base_x+((thickness-bcorr)+slot_width+bcorr)+(depth+bcorr*2)+(bcorr+slot_width+thickness+bcorr)+(bcorr+depth)
             right_points += [
                 # right cramp ear1
-                width2+thickness*2+depth+thickness*4+depth-thickness,depth+height-thickness*2-cramp_width,    width2+thickness*2+depth+thickness*4+depth-thickness+cramp_height,depth+height-thickness*2-cramp_width-thickness,
-                width2+thickness*2+depth+thickness*4+depth-thickness+cramp_height,depth+height-thickness*2-cramp_width*2+thickness,    width2+thickness*2+depth+thickness*4+depth-thickness,depth+height-thickness*2-cramp_width*2,    
+                right_cramp_x,(depth+bcorr*2)+height-cramp_width,    right_cramp_x+cramp_height,(depth+bcorr*2)+height-cramp_width-thickness,
+                right_cramp_x+cramp_height,(depth+bcorr*2)+height-cramp_width*2+thickness,    right_cramp_x,(depth+bcorr*2)+height-cramp_width*2,    
                 
                 # right cramp ear2
-                width2+thickness*2+depth+thickness*4+depth-thickness,depth+height-thickness*2-cramp_width*3,    width2+thickness*2+depth+thickness*4+depth-thickness+cramp_height,depth+height-thickness*2-cramp_width*3-thickness,
-                width2+thickness*2+depth+thickness*4+depth-thickness+cramp_height,depth+height-thickness*2-cramp_width*4+thickness,    width2+thickness*2+depth+thickness*4+depth-thickness,depth+height-thickness*2-cramp_width*4
+                right_cramp_x,(depth+bcorr*2)+height-cramp_width*3,    right_cramp_x+cramp_height,(depth+bcorr*2)+height-cramp_width*3-thickness,
+                right_cramp_x+cramp_height,(depth+bcorr*2)+height-cramp_width*4+thickness,    right_cramp_x,(depth+bcorr*2)+height-cramp_width*4
             ]
 
         right_points += [
                 # ear 9 finish
-                width2+thickness*2+depth+thickness*4+depth-thickness,depth,    width2+thickness*2+depth+thickness*4,depth,    width2+thickness*2+depth,depth,    
-                width2+thickness*2,depth,    width2,depth,
+                right_base_x+((thickness-bcorr)+slot_width+bcorr)+(depth+bcorr*2)+(bcorr+slot_width+thickness+bcorr)+(bcorr+depth),(depth+bcorr*2),    
+                right_base_x+((thickness-bcorr)+slot_width+bcorr)+(depth+bcorr*2)+(bcorr+slot_width+thickness+bcorr),(depth+bcorr*2),    
+                right_base_x+((thickness-bcorr)+slot_width+bcorr)+(depth+bcorr*2),(depth+bcorr*2),    
+                right_base_x+((thickness-bcorr)+slot_width+bcorr),(depth+bcorr*2),    right_base_x,(depth+bcorr*2),
                 # ear 10
-                width2,depth-thickness*2,    width2+ear1,depth-thickness*2,
-                width2+ear1,0,    width2,0
+                right_base_x,depth,    right_base_x+ear1,depth,
+                right_base_x+ear1,0,    right_base_x,0
         ]
 
         
@@ -149,37 +193,38 @@ class RobotBox(inkex.Effect):
             # ear 5: manual shape (drawn for 62x38x23 box), converted to proportion based on depth value
             # m 0,0 c -39.88719,-0.7697 -90.44391,-0.7593 -73.26685,35.3985 11.37507,22.1855 33.21015,45.182 73.26685,46.0975 z
             [ 'L', [
-                thickness*2,depth+height+depth+height+thickness,    -thickness,depth+height+depth+height+thickness
+                (bcorr+thickness+(thickness-bcorr)),(depth+bcorr*2)+(height+bcorr*2)+(depth+bcorr*2)+(height+thickness+bcorr*2),
+                -(bcorr+(thickness-bcorr)),(depth+bcorr*2)+(height+bcorr*2)+(depth+bcorr*2)+(height+thickness+bcorr*2)
             ] ],
             [ 'C', [
-#                -39.88719,          depth+height+depth+height+thickness-0.7697,
-#                -90.44391,          depth+height+depth+height+thickness-0.7593,
-#                -73.26685,          depth+height+depth+height+thickness+35.3985,
-#                -73.26685+11.37507, depth+height+depth+height+thickness+35.3985+22.1855,
-#                -73.26685+33.21015, depth+height+depth+height+thickness+35.3985+45.182,
+#                -39.88719,          (depth+bcorr*2)+(height+bcorr*2)+(depth+bcorr*2)+(height+bcorr*2)-0.7697,
+#                -90.44391,          (depth+bcorr*2)+(height+bcorr*2)+(depth+bcorr*2)+(height+bcorr*2)-0.7593,
+#                -73.26685,          (depth+bcorr*2)+(height+bcorr*2)+(depth+bcorr*2)+(height+bcorr*2)+35.3985,
+#                -73.26685+11.37507, (depth+bcorr*2)+(height+bcorr*2)+(depth+bcorr*2)+(height+bcorr*2)+35.3985+22.1855,
+#                -73.26685+33.21015, (depth+bcorr*2)+(height+bcorr*2)+(depth+bcorr*2)+(height+bcorr*2)+35.3985+45.182,
 
-                -thickness-(depth-thickness*2)/2,     depth+height+depth+height+thickness,
-                -thickness-(depth-thickness*2)/10*11, depth+height+depth+height+thickness,
-                -thickness-(depth-thickness*2)/8*7,   depth+height+depth+height+thickness+(depth-thickness*2)/16*7,
-                -thickness-(depth-thickness*2)/8*6,   depth+height+depth+height+thickness+(depth-thickness*2)/16*11,
-                -thickness-(depth-thickness*2)/2,     depth+height+depth+height+thickness+(depth-thickness*2),
-                -thickness,                           depth+height+depth+height+thickness+(depth-thickness*2)
+                -(bcorr+(thickness-bcorr))-depth/2,     (depth+bcorr*2)+(height+bcorr*2)+(depth+bcorr*2)+(height+thickness+bcorr*2),
+                -(bcorr+(thickness-bcorr))-depth/10*11, (depth+bcorr*2)+(height+bcorr*2)+(depth+bcorr*2)+(height+thickness+bcorr*2),
+                -(bcorr+(thickness-bcorr))-depth/8*7,   (depth+bcorr*2)+(height+bcorr*2)+(depth+bcorr*2)+(height+thickness+bcorr*2)+depth/16*7,
+                -(bcorr+(thickness-bcorr))-depth/8*6,   (depth+bcorr*2)+(height+bcorr*2)+(depth+bcorr*2)+(height+thickness+bcorr*2)+depth/16*11,
+                -(bcorr+(thickness-bcorr))-depth/2,     (depth+bcorr*2)+(height+bcorr*2)+(depth+bcorr*2)+(height+thickness+bcorr*2)+depth,
+                -(bcorr+(thickness-bcorr)),             (depth+bcorr*2)+(height+bcorr*2)+(depth+bcorr*2)+(height+thickness+bcorr*2)+depth
             ] ],
             # now go to the right and go down in reverse order
             # ear 6: manual shape (drawn for 62x38x23 box), converted to proportion based on depth value
             [ 'L', [
-                width2+thickness,depth+height+depth+height+thickness+(depth-thickness*2)
+                right_base_x+(bcorr+(thickness-bcorr)),(depth+bcorr*2)+(height+bcorr*2)+(depth+bcorr*2)+(height+thickness+bcorr*2)+depth
             ] ],
             [ 'C', [
-                width2+thickness+(depth-thickness*2)/2,     depth+height+depth+height+thickness+(depth-thickness*2),
-                width2+thickness+(depth-thickness*2)/8*6,   depth+height+depth+height+thickness+(depth-thickness*2)/16*11,
-                width2+thickness+(depth-thickness*2)/8*7,   depth+height+depth+height+thickness+(depth-thickness*2)/16*7,
-                width2+thickness+(depth-thickness*2)/10*11, depth+height+depth+height+thickness,
-                width2+thickness+(depth-thickness*2)/2,     depth+height+depth+height+thickness,
-                width2+thickness,                           depth+height+depth+height+thickness
+                right_base_x+(bcorr+(thickness-bcorr))+depth/2,     (depth+bcorr*2)+(height+bcorr*2)+(depth+bcorr*2)+(height+thickness+bcorr*2)+depth,
+                right_base_x+(bcorr+(thickness-bcorr))+depth/8*6,   (depth+bcorr*2)+(height+bcorr*2)+(depth+bcorr*2)+(height+thickness+bcorr*2)+depth/16*11,
+                right_base_x+(bcorr+(thickness-bcorr))+depth/8*7,   (depth+bcorr*2)+(height+bcorr*2)+(depth+bcorr*2)+(height+thickness+bcorr*2)+depth/16*7,
+                right_base_x+(bcorr+(thickness-bcorr))+depth/10*11, (depth+bcorr*2)+(height+bcorr*2)+(depth+bcorr*2)+(height+thickness+bcorr*2),
+                right_base_x+(bcorr+(thickness-bcorr))+depth/2,     (depth+bcorr*2)+(height+bcorr*2)+(depth+bcorr*2)+(height+thickness+bcorr*2),
+                right_base_x+(bcorr+(thickness-bcorr)),             (depth+bcorr*2)+(height+bcorr*2)+(depth+bcorr*2)+(height+thickness+bcorr*2)
             ] ],
             [ 'L', [
-                width2-thickness*2,depth+height+depth+height+thickness
+                right_base_x-(bcorr+thickness+(thickness-bcorr)),(depth+bcorr*2)+(height+bcorr*2)+(depth+bcorr*2)+(height+thickness+bcorr*2)
             ] ],
             # ear 7    
             [ 'L', right_points ],
@@ -189,32 +234,32 @@ class RobotBox(inkex.Effect):
         # render slots for cramp ears
         # slot for left cramp ear1
         slot_l1 =  [ [ 'M', [
-                thickness,depth+cramp_width,    thickness+thickness,depth+cramp_width,
-                thickness+thickness,depth+cramp_width*2,    thickness,depth+cramp_width*2
+                bcorr,(depth+bcorr*2)+cramp_width,    bcorr+thickness,(depth+bcorr*2)+cramp_width,
+                bcorr+thickness,(depth+bcorr*2)+cramp_width*2,    bcorr,(depth+bcorr*2)+cramp_width*2
                 ] ],
                 [ 'Z', [] ] 
         ]
 
         # slot for left cramp ear2
         slot_l2 =  [ [ 'M', [
-                thickness,depth+cramp_width*3,    thickness+thickness,depth+cramp_width*3,
-                thickness+thickness,depth+cramp_width*4,    thickness,depth+cramp_width*4
+                bcorr,(depth+bcorr*2)+cramp_width*3,    bcorr+thickness,(depth+bcorr*2)+cramp_width*3,
+                bcorr+thickness,(depth+bcorr*2)+cramp_width*4,    bcorr,(depth+bcorr*2)+cramp_width*4
                 ] ],
                 [ 'Z', [] ] 
         ]
 
         # slot for right cramp ear1
         slot_r1 =  [ [ 'M', [
-                width2-thickness,depth+height-thickness*2-cramp_width,    width2-thickness-thickness,depth+height-thickness*2-cramp_width,
-                width2-thickness-thickness,depth+height-thickness*2-cramp_width*2,    width2-thickness,depth+height-thickness*2-cramp_width*2    
+                right_base_x-bcorr,(depth+bcorr*2)+height-cramp_width,    right_base_x-(bcorr+thickness),(depth+bcorr*2)+height-cramp_width,
+                right_base_x-(bcorr+thickness),(depth+bcorr*2)+height-cramp_width*2,    right_base_x-bcorr,(depth+bcorr*2)+height-cramp_width*2    
                 ] ],
                 [ 'Z', [] ] 
         ]
 
         # slot for right cramp ear2
         slot_r2 =  [ [ 'M', [
-                width2-thickness,depth+height-thickness*2-cramp_width*3,    width2-thickness-thickness,depth+height-thickness*2-cramp_width*3,
-                width2-thickness-thickness,depth+height-thickness*2-cramp_width*4,    width2-thickness,depth+height-thickness*2-cramp_width*4
+                right_base_x-bcorr,(depth+bcorr*2)+height-cramp_width*3,    right_base_x-(bcorr+thickness),(depth+bcorr*2)+height-cramp_width*3,
+                right_base_x-(bcorr+thickness),(depth+bcorr*2)+height-cramp_width*4,    right_base_x-bcorr,(depth+bcorr*2)+height-cramp_width*4
                 ] ],
                 [ 'Z', [] ] 
         ]
@@ -222,49 +267,64 @@ class RobotBox(inkex.Effect):
         # vertical bends
         # left
         bend_line_vl1 = [ [ 'M', [ 0, 0, 
-            0, depth-thickness*2 ] ] ]
-        bend_line_vl2 = [ [ 'M', [ -thickness*2, depth, 
-            -thickness*2, depth+height-thickness*2 ] ] ]
-        bend_line_vl3 = [ [ 'M', [ 0, depth+height, 
-            0, depth+height+depth-thickness*2 ] ] ]
-        bend_line_vl4 = [ [ 'M', [ thickness*2, depth+height+depth, 
-            thickness*2, depth+height+depth+height-thickness*2 ] ] ]
-        bend_line_vl5 = [ [ 'M', [ -thickness, depth+height+depth+height+thickness, 
-            -thickness, depth+height+depth+height+thickness+depth-thickness*2 ] ] ]
+            0, depth ] ] ]
+        bend_line_vl2 = [ [ 'M', [ 
+            -((thickness-bcorr)+slot_width+bcorr),(depth+bcorr*2), 
+            -((thickness-bcorr)+slot_width+bcorr),(depth+bcorr*2)+height ] ] ]
+        bend_line_vl3 = [ [ 'M', [ 
+            0, (depth+bcorr*2)+(height+bcorr*2), 
+            0, (depth+bcorr*2)+(height+bcorr*2)+depth ] ] ]
+        bend_line_vl4 = [ [ 'M', [ 
+            (bcorr+thickness+(thickness-bcorr)),(depth+bcorr*2)+(height+bcorr*2)+(depth+bcorr*2), 
+            (bcorr+thickness+(thickness-bcorr)),(depth+bcorr*2)+(height+bcorr*2)+(depth+bcorr*2)+height ] ] ]
+        bend_line_vl5 = [ [ 'M', [ 
+            -(bcorr+(thickness-bcorr)), (depth+bcorr*2)+(height+bcorr*2)+(depth+bcorr*2)+(height+thickness+bcorr*2), 
+            -(bcorr+(thickness-bcorr)), (depth+bcorr*2)+(height+bcorr*2)+(depth+bcorr*2)+(height+thickness+bcorr*2)+depth ] ] ]
 
             
-        bend_line_vl6 = [ [ 'M', [ -thickness*2-depth, depth, 
-            -thickness*2-depth, depth+height-thickness*2 ] ] ]
-        bend_line_vl7 = [ [ 'M', [ -thickness*2-depth-thickness*4, depth, 
-            -thickness*2-depth-thickness*4, depth+height-thickness*2 ] ] ]
+        bend_line_vl6 = [ [ 'M', [ -((thickness-bcorr)+slot_width+bcorr)-(depth+bcorr*2), (depth+bcorr*2), 
+            -((thickness-bcorr)+slot_width+bcorr)-(depth+bcorr*2), (depth+bcorr*2)+height ] ] ]
+        bend_line_vl7 = [ [ 'M', [ -((thickness-bcorr)+slot_width+bcorr)-(depth+bcorr*2)-(bcorr+slot_width+thickness+bcorr), (depth+bcorr*2), 
+            -((thickness-bcorr)+slot_width+bcorr)-(depth+bcorr*2)-(bcorr+slot_width+thickness+bcorr), (depth+bcorr*2)+height ] ] ]
             
         # right
-        bend_line_vr1 = [ [ 'M', [ width2, 0, 
-            width2, depth-thickness*2 ] ] ]
-        bend_line_vr2 = [ [ 'M', [ width2+thickness*2, depth, 
-            width2+thickness*2, depth+height-thickness*2 ] ] ]
-        bend_line_vr3 = [ [ 'M', [ width2, depth+height, 
-            width2, depth+height+depth-thickness*2 ] ] ]
-        bend_line_vr4 = [ [ 'M', [ width2-thickness*2, depth+height+depth, 
-            width2-thickness*2, depth+height+depth+height-thickness*2 ] ] ]
-        bend_line_vr5 = [ [ 'M', [ width2+thickness, depth+height+depth+height+thickness, 
-            width2+thickness, depth+height+depth+height+thickness+depth-thickness*2 ] ] ]
+        bend_line_vr1 = [ [ 'M', [ 
+            right_base_x, 0, 
+            right_base_x, depth ] ] ]
+        bend_line_vr2 = [ [ 'M', [ 
+            right_base_x+((thickness-bcorr)+slot_width+bcorr),(depth+bcorr*2),
+            right_base_x+((thickness-bcorr)+slot_width+bcorr),(depth+bcorr*2)+height ] ] ]
+        bend_line_vr3 = [ [ 'M', [ 
+            right_base_x, (depth+bcorr*2)+(height+bcorr*2), 
+            right_base_x, (depth+bcorr*2)+(height+bcorr*2)+depth ] ] ]
+        bend_line_vr4 = [ [ 'M', [ 
+            right_base_x-(bcorr+thickness+(thickness-bcorr)),(depth+bcorr*2)+(height+bcorr*2)+(depth+bcorr*2), 
+            right_base_x-(bcorr+thickness+(thickness-bcorr)),(depth+bcorr*2)+(height+bcorr*2)+(depth+bcorr*2)+height ] ] ]
+        bend_line_vr5 = [ [ 'M', [ 
+            right_base_x+(bcorr+(thickness-bcorr)), (depth+bcorr*2)+(height+bcorr*2)+(depth+bcorr*2)+(height+thickness+bcorr*2), 
+            right_base_x+(bcorr+(thickness-bcorr)), (depth+bcorr*2)+(height+bcorr*2)+(depth+bcorr*2)+(height+thickness+bcorr*2)+depth ] ] ]
         
 
-        bend_line_vr6 = [ [ 'M', [ width2+thickness*2+depth, depth, 
-            width2+thickness*2+depth, depth+height-thickness*2 ] ] ]
-        bend_line_vr7 = [ [ 'M', [ width2+thickness*2+depth+thickness*4, depth, 
-            width2+thickness*2+depth+thickness*4, depth+height-thickness*2 ] ] ]
+        bend_line_vr6 = [ [ 'M', [ 
+            right_base_x+((thickness-bcorr)+slot_width+bcorr)+(depth+bcorr*2), (depth+bcorr*2), 
+            right_base_x+((thickness-bcorr)+slot_width+bcorr)+(depth+bcorr*2), (depth+bcorr*2)+height ] ] ]
+        bend_line_vr7 = [ [ 'M', [ 
+            right_base_x+((thickness-bcorr)+slot_width+bcorr)+(depth+bcorr*2)+(bcorr+slot_width+thickness+bcorr), (depth+bcorr*2), 
+            right_base_x+((thickness-bcorr)+slot_width+bcorr)+(depth+bcorr*2)+(bcorr+slot_width+thickness+bcorr), (depth+bcorr*2)+height ] ] ]
         
         # horizontal bends
-        bend_line_h1 = [ [ 'M', [ 0, depth-thickness, 
-            width2, depth-thickness ] ] ]
-        bend_line_h2 = [ [ 'M', [ 0, depth+height-thickness, 
-            width2, depth+height-thickness ] ] ]
-        bend_line_h3 = [ [ 'M', [ thickness*2, depth+height+depth-thickness, 
-            width2-thickness*2, depth+height+depth-thickness ] ] ]
-        bend_line_h4 = [ [ 'M', [ thickness*2, depth+height+depth+height, 
-            width2-thickness*2, depth+height+depth+height ] ] ]
+        bend_line_h1 = [ [ 'M', [ 
+            0,depth+bcorr, 
+            right_base_x, depth+bcorr ] ] ]
+        bend_line_h2 = [ [ 'M', [ 
+            0,(depth+bcorr*2)+height+bcorr, 
+            right_base_x, (depth+bcorr*2)+height+bcorr ] ] ]
+        bend_line_h3 = [ [ 'M', [ 
+            (bcorr+thickness+(thickness-bcorr)), (depth+bcorr*2)+(height+bcorr*2)+depth+bcorr, 
+            right_base_x-(bcorr+thickness+(thickness-bcorr)), (depth+bcorr*2)+(height+bcorr*2)+depth+bcorr ] ] ]
+        bend_line_h4 = [ [ 'M', [ 
+            (bcorr+thickness+(thickness-bcorr)), (depth+bcorr*2)+(height+bcorr*2)+(depth+bcorr*2)+height+thickness+bcorr, 
+            right_base_x-(bcorr+thickness+(thickness-bcorr)), (depth+bcorr*2)+(height+bcorr*2)+(depth+bcorr*2)+height+thickness+bcorr ] ] ]
 
 
         # Embed drawing in group to make animation easier:
