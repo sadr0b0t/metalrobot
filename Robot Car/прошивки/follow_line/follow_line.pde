@@ -10,7 +10,7 @@
 #define LINE_SENSOR_R 28
 
 // Ножки для моторов
-#define MOTOR_LEFT_1 8
+#define MO+TOR_LEFT_1 8
 #define MOTOR_LEFT_2 9
 #define MOTOR_LEFT_EN 11
 #define MOTOR_RIGHT_1 4
@@ -97,11 +97,11 @@ void loop() {
       
       Serial.println("linia na odnom is datchikov");
       
-      // недалго остановимся, чтобы собраться с мыслями
+      // ненадолго остановимся, чтобы собраться с мыслями
       mleft_stop();
       mright_stop();
       
-      if( digitalRead(LINE_SENSOR_R) ) {
+      if( digitalRead(LINE_SENSOR_R) == 1 ) {
         // линия под правым датчиком
         
         Serial.println("praviy datchik -> povorot napravo");
