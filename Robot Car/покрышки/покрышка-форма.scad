@@ -87,7 +87,7 @@ module outer_box(hoop_width=2) {
 
     // паз для выступающего вниз обода
     difference() {
-      translate([0, 0, -5])
+      translate([0, 0, -5.5])
         cylinder(h=10, r=20+hoop_width/2, $fn=100);
 
       translate([0, 0, -6])
@@ -95,9 +95,9 @@ module outer_box(hoop_width=2) {
     }
       
     // пазы для фиксаторов
-    translate([14, -2, -5])
+    translate([14, -2, -5.5])
       cube([6, 4, 6]);
-    translate([-20, -2, -5])
+    translate([-20, -2, -5.5])
       cube([6, 4, 6]);
 
     // внутренняя дырка для экономии пластика
