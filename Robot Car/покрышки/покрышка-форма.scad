@@ -3,8 +3,8 @@
 // с ободом внутренней формы, чтобы учесть
 // погрешность при печати для FDM-принтере
 //outer_box_half1(4);
-outer_box_half2(4);
-//inner_surface(2);
+//outer_box_half2(4);
+inner_surface(2);
 
 /**
  * Внутренняя поверхность покрышки, должна совпадать 
@@ -29,12 +29,18 @@ module inner_surface(hoop_width=2) {
 
   // выступающий вниз обод для фиксации на площадке
   difference() {
-    translate([0, 0, -2])
+    translate([0, 0, -5])
       cylinder(h=10, r=20+hoop_width/2, $fn=100);
 
-    translate([0, 0, -3])
+    translate([0, 0, -6])
       cylinder(h=12, r=20-hoop_width/2, $fn=100);
   }
+
+  // фиксторы вращения
+  translate([14.5, -1.5, -5])
+    cube([6, 3, 6]);
+  translate([-20.5, -1.5, -5])
+    cube([6, 3, 6]);
 }
 
 /**
@@ -46,8 +52,8 @@ module outer_box_half1(hoop_width=2) {
   difference() {
     outer_box(hoop_width);
 
-    translate([0, -32, -5])
-        cube([32, 64, 26]);
+    translate([0, -32, -8])
+        cube([32, 64, 29]);
   }
 }
 
@@ -60,8 +66,8 @@ module outer_box_half2(hoop_width=2) {
   difference() {
     outer_box(hoop_width);
 
-    translate([-32, -32, -5])
-        cube([32, 64, 26]);
+    translate([-32, -32, -8])
+        cube([32, 64, 29]);
   }
 }
 
@@ -73,22 +79,30 @@ module outer_box_half2(hoop_width=2) {
 module outer_box(hoop_width=2) {
   difference() {
     // матрица для рисунка протектора
-    difference() {
-      translate([0, 0, -4])
-        cylinder(h=24, r=31, $fn=100);
+    translate([0, 0, -7])
+      cylinder(h=27, r=31, $fn=100);
     
-      // рельефный протектор
-      tyre_pattern();
-    }
+    // рельефный протектор
+    tyre_pattern();
 
     // паз для выступающего вниз обода
     difference() {
-      translate([0, 0, -2])
+      translate([0, 0, -5])
         cylinder(h=10, r=20+hoop_width/2, $fn=100);
 
-      translate([0, 0, -3])
+      translate([0, 0, -6])
         cylinder(h=12, r=20-hoop_width/2, $fn=100);
     }
+      
+    // пазы для фиксаторов
+    translate([14, -2, -5])
+      cube([6, 4, 6]);
+    translate([-20, -2, -5])
+      cube([6, 4, 6]);
+
+    // внутренняя дырка для экономии пластика
+    translate([0, 0, -10])
+      cylinder(h=20, r=13, $fn=100);
   }
 }
 
