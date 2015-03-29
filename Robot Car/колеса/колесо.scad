@@ -2,9 +2,12 @@
 wheel_with_axis();
 // правое колесо
 //mirror([0, 0, -1]) wheel_with_axis();
+// зажим для оси, блокирующий колесо
+//axis_jam();
 
-
-/** Колесо с отверстием под ось */
+/** 
+ * Колесо с отверстием под ось.
+ */
 module wheel_with_axis() {
   difference() {
     wheel();
@@ -14,7 +17,9 @@ module wheel_with_axis() {
   }
 }
 
-/** Колесо */
+/** 
+ * Колесо.
+ */
 module wheel() {
 
   // внешний обод
@@ -52,13 +57,31 @@ module rundle() {
   
   // спица покрасивше
   translate([0, -1.5, 0]) 
-  
-  // вычтем из параллелепипеда часть цилиндра, 
-  // чтобы получилось скругленное ребро
+    // вычтем из параллелепипеда часть цилиндра, 
+    // чтобы получилось скругленное ребро
+    difference() {
+      cube([22, 3, 20]);
+      translate([0, -1, 36]) rotate([270,0,0])
+        cylinder(h=5, r=27, $fn=100);
+    }
+}
+
+/**
+ * Зажим для оси с отверстием под стягивающий винт.
+ */
+module axis_jam(screw_diam=3) {
   difference() {
-    cube([22, 3, 20]);
-    translate([0, -1, 36]) rotate([270,0,0])
-      cylinder(h=5, r=27, $fn=100);
+    // внутренний вал
+    cylinder(h=9, r=5, $fn=100);
+
+    // ось
+    generic_axis();
+    //motor1_axis();
+    //motor2_axis();
+
+    // отверстие под винт
+    translate([0, 0, 3.5]) rotate([70, 0, 0]) 
+      cylinder(h=6, r=screw_diam/2, $fn=100);
   }
 }
 
@@ -100,4 +123,3 @@ module motor2_axis(length=22) {
       cube([2, 3, length]);
   }
 }
-
