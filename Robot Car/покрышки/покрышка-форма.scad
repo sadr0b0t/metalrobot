@@ -52,8 +52,8 @@ module outer_box_half1(hoop_width=2) {
   difference() {
     outer_box(hoop_width);
 
-    translate([0, -32, -8])
-        cube([32, 64, 29]);
+    translate([0, -34, -8])
+        cube([34, 68, 29]);
   }
 }
 
@@ -66,8 +66,8 @@ module outer_box_half2(hoop_width=2) {
   difference() {
     outer_box(hoop_width);
 
-    translate([-32, -32, -8])
-        cube([32, 64, 29]);
+    translate([-34, -34, -8])
+        cube([34, 68, 29]);
   }
 }
 
@@ -80,7 +80,7 @@ module outer_box(hoop_width=2) {
   difference() {
     // матрица для рисунка протектора
     translate([0, 0, -7])
-      cylinder(h=27, r=31, $fn=100);
+      cylinder(h=27, r=33, $fn=100);
     
     // рельефный протектор
     tyre_pattern();
