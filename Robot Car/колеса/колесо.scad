@@ -3,7 +3,7 @@ wheel_with_axis();
 // правое колесо
 //mirror([0, 0, -1]) wheel_with_axis();
 // зажим для оси, блокирующий колесо
-//axis_jam();
+//axis_jam(3.2);
 
 /** 
  * Колесо с отверстием под ось.
@@ -80,8 +80,12 @@ module axis_jam(screw_diam=3) {
     //motor2_axis();
 
     // отверстие под винт
-    translate([0, 0, 3.5]) rotate([70, 0, 0]) 
-      cylinder(h=6, r=screw_diam/2, $fn=100);
+    translate([0, 0, 3]) rotate([60, 0, 0])
+      // винт должен прорезать не только
+      // внешнюю стенку, но и внутреннюю 
+      // поверхность трубы
+      translate([0, 0, -1])
+      cylinder(h=10, r=screw_diam/2, $fn=100);
   }
 }
 
