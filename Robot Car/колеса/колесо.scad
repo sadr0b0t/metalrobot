@@ -12,7 +12,9 @@ module wheel_with_axis() {
   difference() {
     wheel();
     generic_axis();
+    // белый с круглой осью
     //motor1_axis();
+    // желтый со срезанной осью
     //motor2_axis();
   }
 }
