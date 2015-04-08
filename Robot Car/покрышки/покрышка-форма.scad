@@ -2,10 +2,10 @@
 // увеличим ширину фиксирующего обода для внешней формы по сравнению
 // с пазом под обод на внутренней форме, чтобы учесть
 // погрешность при печати на FDM-принтере
-//outer_box_half1(4);
+outer_box_half1(4);
 //outer_box_half2(4);
 
-inner_surface(2);
+//inner_surface(2);
 
 /**
  * Внутренняя поверхность покрышки, должна совпадать 
@@ -17,7 +17,7 @@ module inner_surface(hoop_width=2) {
   difference() {
     union() {
       // рельеф колеса
-      rotate([0, 0, 9]) translate([0, 0, 10]) {
+      translate([0, 0, 10]) {
         linear_extrude(height=10, twist=10) 
             import(file = "покрышка-внутр.dxf");
         mirror([0, 0, -1]) 
@@ -25,7 +25,7 @@ module inner_surface(hoop_width=2) {
             import(file = "покрышка-внутр.dxf");
       }
       // выступаящая вверх стенка, чтобы не разливался силикон
-      cylinder(h=23, r=21, $fn=100);
+      cylinder(h=21, r=22, $fn=100);
     }
 
 
@@ -87,14 +87,14 @@ module outer_box(hoop_width=2) {
   difference() {
     // матрица для рисунка протектора
     translate([0, 0, -7])
-      cylinder(h=30, r=33, $fn=100);
+      cylinder(h=28, r=33, $fn=100);
     
     // рельефный протектор
-    rotate([0, 0, 9]) tyre_pattern();
+    tyre_pattern();
 
     // стенка наверху, чтобы не разливался силикон
-    translate([0, 0, 19])
-      cylinder(h=5, r=32, $fn=100);
+    translate([0, 0, 20])
+      cylinder(h=5, r=31, $fn=100);
 
     // паз для выступающего вниз обода
     difference() {
