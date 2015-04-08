@@ -1,9 +1,11 @@
 // левое колесо
 wheel_with_axis();
 // правое колесо
-//mirror([0, 0, -1]) wheel_with_axis();
+//rotate([180, 0, 0]) mirror([0, 0, 1]) wheel_with_axis();
 // зажим для оси, блокирующий колесо
-//axis_jam(3.2);
+//axis_jam(3.1);
+// прокладка между задним колесом и платформой
+//wheel_shim();
 
 /** 
  * Колесо с отверстием под ось.
@@ -87,7 +89,23 @@ module axis_jam(screw_diam=3) {
       // внешнюю стенку, но и внутреннюю 
       // поверхность трубы
       translate([0, 0, -1])
-      cylinder(h=10, r=screw_diam/2, $fn=100);
+      cylinder(h=10, r=screw_diam/2, $fn=6);
+  }
+}
+
+/**
+ * Небольшая прокладка между задним колесом и платформой,
+ * чтобы клесо при вращении не зацеплялось за платформу.
+ */
+module wheel_shim(height=3) {
+  difference() {
+    // внутренний вал
+    cylinder(h=height, r=5, $fn=100);
+
+    // ось
+    generic_axis();
+    //motor1_axis();
+    //motor2_axis();
   }
 }
 
@@ -116,16 +134,16 @@ module motor1_axis(length=22) {
  * Pololu 4.5V, 80rpm Right Angle (прямой, желтый)
  * www.robotshop.com/en/solarbotics-gm7-gear-motor-7.html
  *
- * Диаметр оси мотора 3мм, срез с одного бока 0.4мм.
+ * Диаметр оси мотора 3мм, срез с одного бока cut=0.3мм.
  */
-module motor2_axis(length=22) {
-  // диаметр 3мм, срез с одного бока 0.4мм
+module motor2_axis(length=22, cut=0.3) {
+  // диаметр 3мм, срез с одного бока 0.3мм
   translate([0,0,-1])
   difference() {
     cylinder(h=length, r=1.5, $fn=20);
     // 1.5 мм "вниз" по y (совместить куб с цилиндром), 
-    // 1.1 "вправо" по x (срезать справа 0.4мм: 1.5-0.4=1.1)
-    translate([1.1, -1.5, 0]) 
+    // 1.1 "вправо" по x (срезать справа, для cut=0.3мм: 1.5-0.3=1.2)
+    translate([1.5-cut, -1.5, 0]) 
       cube([2, 3, length]);
   }
 }
