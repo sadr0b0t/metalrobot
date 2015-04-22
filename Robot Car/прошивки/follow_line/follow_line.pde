@@ -10,7 +10,7 @@
 #define LINE_SENSOR_R 28
 
 // Ножки для моторов
-#define MO+TOR_LEFT_1 8
+#define MOTOR_LEFT_1 8
 #define MOTOR_LEFT_2 9
 #define MOTOR_LEFT_EN 11
 #define MOTOR_RIGHT_1 4
