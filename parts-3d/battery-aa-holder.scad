@@ -17,7 +17,31 @@ module holder() {
     translate([51, -3, 5]) cube([1, 6, 14]);
   }
   // рейка с отверстиями для крепления
-  translate([14.5, 1, 0]) rotate([0,0,-90]) plank_with_holes(3);
+  translate([14.5, 0, 0]) rotate([0,0,-90]) plank_with_holes(3);
+  // "подклеить" рейку к корпусу (без этого не экспортнется в stl)
+  translate([14.5, -1, 0]) cube([32, 2, 2]);
+
+  translate([13, -10, 0]) cube([2, 11, 2]);
+  translate([46, -10, 0]) cube([2, 11, 2]);
+
+  // еще рейка с отверстиями
+  translate([4.5, 70, 0]) rotate([0,0,-90]) plank_with_holes(5);
+  // "подклеить" рейку к корпусу (без этого не экспортнется в stl)
+  translate([4.5, 59, 0]) cube([52, 2, 2]);
+
+  // скругленные уголки слева
+  translate([3, 67, 0]) cylinder(h=2, r=3, $fn=100);
+  translate([0, 56, 0]) cube([6, 11, 2]);
+  translate([3, 59, 0]) cube([4, 11, 2]);
+
+  // справа
+  translate([58, 67, 0]) cylinder(h=2, r=3, $fn=100);
+  translate([55, 56, 0]) cube([6, 11, 2]);
+  translate([54, 59, 0]) cube([4, 11, 2]);
+  
+  
+  // планка для проверки 
+  //translate([16.5, -12, 1]) plank_with_holes(10);
 }
 
 module holder_aa() {
@@ -101,13 +125,14 @@ module wire_jam() {
     // нижняя шайба
     // шайба m4 (9мм, 10мм на печать)
     /*translate([0, 3, 6]) union() {
-      //translate([-1, -1, 0]) cube([5, 10, 2]);
       translate([5, 4, 0]) cylinder(h=2, r=5, $fn=100);
+      //translate([-1, -1, 0]) cube([5, 10, 2]);
     }*/
     // шайба m3 (7мм, 8мм на печать)
     translate([0, 3, 6]) union() {
-      translate([-1, 0, 0]) cube([6, 8, 2]);
       translate([5, 4, 0]) cylinder(h=2, r=4, $fn=100);
+      // срезать "выход" для шайбы
+      //translate([-1, 0, 0]) cube([6, 8, 2]);
     }
 
     // верхняя шайба
