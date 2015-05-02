@@ -7,9 +7,15 @@ holder();
 
 
 module holder() {
-  holder_aa();
-  translate([0, 1, 12]) rotate([0, 90, -90]) wire_jam();
-  translate([47, 1, 12]) rotate([0, 90, -90]) wire_jam();
+  difference() {
+    union() {
+      holder_aa();
+      translate([0, 1, 12]) rotate([0, 90, -90]) wire_jam();
+      translate([47, 1, 12]) rotate([0, 90, -90]) wire_jam();
+    }
+    translate([9, -3, 5]) cube([1, 6, 14]);
+    translate([51, -3, 5]) cube([1, 6, 14]);
+  }
 }
 
 module holder_aa() {
