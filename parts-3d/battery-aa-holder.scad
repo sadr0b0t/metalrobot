@@ -16,6 +16,8 @@ module holder() {
     translate([9, -3, 5]) cube([1, 6, 14]);
     translate([51, -3, 5]) cube([1, 6, 14]);
   }
+  // рейка с отверстиями для крепления
+  translate([14.5, 1, 0]) rotate([0,0,-90]) plank_with_holes(3);
 }
 
 module holder_aa() {
@@ -122,6 +124,29 @@ module wire_jam() {
 
     // винт
     translate([5, 7, -1]) cylinder(h=9, r=1.6, $fn=100);
+  }
+}
+
+/** 
+ * Рейка с отверстиями.
+ */
+module plank_with_holes(holes=1) {
+  // отверстие=4мм
+  // расстояние между отверстиями=6мм
+  // расстояние от отверстия до края=3мм
+  // толщина=2мм
+
+  difference() {
+    // в длину по Y
+    cube([3+4+3, 2+(6+4)*holes, 2]);
+
+    // дырки по Z
+    translate([5, 3, 2+3+2]) rotate ([90, 0, 0]) cylinder(h=4, r=2, $fn=100);
+
+    // дырки по Y
+    for(hole=[1 : holes]) {
+      translate([5, 2-3+(6+4)*hole-2, -1]) cylinder(h=4, r=2, $fn=100);
+    }   
   }
 }
 
