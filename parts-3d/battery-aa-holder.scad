@@ -1,8 +1,9 @@
 
-holder();
+//holder();
 //holder_aa();
 //battery_aa_bed();
-//rotate([0, 90, 0]) wire_jam();
+rotate([0, 90, 0]) wire_jam();
+//wire_jam();
 //contact_gap();
 
 
@@ -149,6 +150,15 @@ module wire_jam() {
 
     // винт
     translate([5, 7, -1]) cylinder(h=9, r=1.6, $fn=100);
+  }
+
+  // ушки для проводов
+  difference() {
+    union() {
+      translate([-5, 0, 0]) cube([6, 3, 9]);
+      translate([-5, 11, 0]) cube([6, 3, 9]);
+    }
+    translate([-3, -1, 0]) cube([3, 16, 7]);
   }
 }
 
