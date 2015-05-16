@@ -1,8 +1,8 @@
 
-//holder();
+holder();
 //holder_aa();
 //battery_aa_bed();
-rotate([0, 90, 0]) wire_jam();
+//rotate([0, 90, 0]) wire_jam();
 //wire_jam();
 //contact_gap();
 
@@ -155,10 +155,10 @@ module wire_jam() {
   // ушки для проводов
   difference() {
     union() {
-      translate([-5, 0, 0]) cube([6, 3, 9]);
-      translate([-5, 11, 0]) cube([6, 3, 9]);
+      translate([-4, 0, 0]) cube([5, 3, 9]);
+      translate([-4, 11, 0]) cube([5, 3, 9]);
     }
-    translate([-3, -1, 0]) cube([3, 16, 7]);
+    translate([-2, -1, 0]) cube([2, 16, 7]);
   }
 }
 
