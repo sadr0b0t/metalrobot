@@ -120,7 +120,7 @@ module wire_jam() {
     translate([0, 4, 2]) union() {
       translate([-2, 0, 0]) cube([8, 6, 3]);
       translate([2, 0, 0]) linear_extrude(height=3) 
-        import(file = "гайка-m3.dxf");
+        import(file = "screw-nut-m3.dxf");
     }
     
     // нижняя шайба
