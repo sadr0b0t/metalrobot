@@ -1,9 +1,9 @@
 // левое колесо
-wheel_with_axis();
+//wheel_with_axis();
 // правое колесо
 //rotate([180, 0, 0]) mirror([0, 0, 1]) wheel_with_axis();
 // зажим для оси, блокирующий колесо
-//axis_jam(3.1);
+axis_jam(3.1);
 // прокладка между задним колесом и платформой
 //wheel_shim();
 
@@ -75,7 +75,7 @@ module rundle() {
  */
 module axis_jam(screw_diam=3) {
   difference() {
-    // внутренний вал
+    // главный вал
     cylinder(h=9, r=5, $fn=100);
 
     // ось
@@ -83,13 +83,20 @@ module axis_jam(screw_diam=3) {
     //motor1_axis();
     //motor2_axis();
 
-    // отверстие под винт
+    // отверстие под винт m3x6
     translate([0, 0, 3]) rotate([60, 0, 0])
       // винт должен прорезать не только
       // внешнюю стенку, но и внутреннюю 
       // поверхность трубы
       translate([0, 0, -1])
       cylinder(h=10, r=screw_diam/2, $fn=6);
+
+    // полость внутри кольца, чтобы винт легче вкручивался
+    translate([0, 0, 1]) difference() {
+      cylinder(h=7, r=4, $fn=100);
+      // для оси с r=1.5 мм
+      cylinder(h=7, r=2.5, $fn=100);      
+    }
   }
 }
 
