@@ -1,8 +1,8 @@
 
 //holder(2, 0);
-holder(4, 3);
+//holder(4, 3);
 //holder(6, 6);
-//holder_aa(4);
+holder_aa(4);
 //holder_aa(6);
 //battery_aa_bed();
 //rotate([0, 90, 0]) wire_jam();
@@ -103,6 +103,8 @@ module holder_aa(count=4) {
 module contact_plate_minus() {
   cube([4, 1, 15]);
   translate([0, 0, 11]) cube([4, 3, 4]);
+  // для защелки
+  translate([1, 0, 0]) cube([2, 3, 2]);
 }
 
 /**
@@ -111,6 +113,8 @@ module contact_plate_minus() {
 module contact_plate_plus() {
   cube([4, 1, 15]);
   translate([0, 0, 11]) cube([4, 3, 4]);
+  // для защелки
+  translate([1, 0, 0]) cube([2, 3, 2]);
 }
 
 /**
@@ -119,10 +123,12 @@ module contact_plate_plus() {
 module contact_gap() {
   // внутри стенки
   cube([19, 1, 15]);
+
   // для пипки
-  translate([0, 0, 11]) cube([4, 3, 4]);
+  contact_plate_plus();
+
   // для пружинки
-  translate([15, 0, 11]) cube([4, 3, 4]);
+  translate([15, 0, 0]) contact_plate_minus();
 }
 
 /**
