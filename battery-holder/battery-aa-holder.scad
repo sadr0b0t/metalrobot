@@ -76,9 +76,11 @@ module holder_aa(count=4) {
 
     // ячейки для контактов 
     // внизу
-    for(i = [1 : count/2-1]) {
-      translate([6+15+30*(i-1), 2, 2])
-        contact_gap();
+    if(count > 2) {
+      for(i = [1 : count/2-1]) {
+        translate([6+15+30*(i-1), 2, 2])
+          contact_gap();
+      }
     }
 
     // наверху
