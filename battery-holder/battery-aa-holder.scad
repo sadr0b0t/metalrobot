@@ -1,7 +1,8 @@
 
 //holder(2, 0);
-holder(4, 3);
+//holder(4, 3);
 //holder(6, 6);
+holder1(6, 6);
 //holder_aa(4);
 //holder_aa(6);
 //battery_aa_bed();
@@ -52,6 +53,34 @@ module holder(count=4, holes1=3) {
   
   // планка для проверки 
   //translate([16.5, -12, 1]) plank_with_holes(10);
+}
+
+/**
+ * Отсек для батареек с контактами и отверстиями для креплений.
+ * @param count - количество батареек (четное число)
+ * @param holes1 - количество отверстий на рейке между контактами
+ */
+module holder1(count=4, holes1=3) {
+  difference() {
+    union() {
+      holder_aa(count);
+      translate([0, 1, 12]) rotate([0, 90, -90]) wire_jam();
+      translate([15*(count-1)+2, 1, 12]) rotate([0, 90, -90]) wire_jam();
+    }
+    translate([9, -3, 5]) cube([1, 6, 14]);
+    translate([15*count-9, -3, 5]) cube([1, 6, 14]);
+  }
+
+  // рейка с отверстиями для крепления
+  translate([-10, -5, 0]) plank_with_holes(6);
+  // "подклеить" рейку к корпусу (без этого не экспортнется в stl)
+  translate([-1, -5, 0]) cube([2, 62, 2]);
+
+  // еще рейка с отверстиями
+  translate([15*count, -5, 0]) plank_with_holes(6);
+  
+  // планка для проверки 
+  //translate([-12, 7, -1]) rotate([0,0,-90])  plank_with_holes(14);
 }
 
 /**
