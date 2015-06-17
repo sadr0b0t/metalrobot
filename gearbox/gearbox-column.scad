@@ -6,13 +6,14 @@ motor_fix();
 /**
  * Стойки для коробки: 
  * высота=6мм
- * внутреннее отверстие для винта=4мм
+ * внутреннее отверстие для винта=4мм 
+ * (+зазор 1мм для погрешлости печати)
  */
 module box_column() {
   difference(){
-    cylinder(h=6, r=5, $fn=100);
+    cylinder(h=6, r=3.5, $fn=100);
     translate([0,0,-1])
-      cylinder(h=8, r=2.2, $fn=100);
+      cylinder(h=8, r=2.5, $fn=100);
   }
 }
 
@@ -43,19 +44,25 @@ module motor_fix() {
   difference() {
     translate([-18-11, 0, 0]) cube([18, 8, 2]);
     
-    translate([-25, 4, -1]) cylinder(h=4, r=2, $fn=100);
+    // в отверстие 5мм после печати (на Билдере) влезает
+    // винт 4мм
+    translate([-25, 4, -1]) cylinder(h=4, r=2.5, $fn=100);
   }
 
   difference() {
     translate([11, 0, 0]) cube([18, 8, 2]);
     
-    translate([25, 4, -1]) cylinder(h=4, r=2, $fn=100);
+    // в отверстие 5мм после печати (на Билдере) влезает
+    // винт 4мм
+    translate([25, 4, -1]) cylinder(h=4, r=2.5, $fn=100);
   }
 
   difference() {
     translate([-4, 16, 0]) cube([8, 12, 2]);
     
-    translate([0, 24, -1]) cylinder(h=4, r=2, $fn=100);
+    // в отверстие 5мм после печати (на Билдере) влезает
+    // винт 4мм
+    translate([0, 24, -1]) cylinder(h=4, r=2.5, $fn=100);
   }
 }
 
