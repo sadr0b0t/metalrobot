@@ -66,9 +66,9 @@ module holder1(count=4, holes1=3) {
   difference() {
     union() {
       holder_aa(count);
-      translate([1, 1.9, 12]) 
+      translate([1, 2, 12]) 
         rotate([0, 90, -90]) wire_jam();
-      translate([15*(count-1)+2-1, 1.9, 12]) 
+      translate([15*(count-1)+2-1, 2, 12]) 
         rotate([0, 90, -90]) wire_jam();
     }
     // путь до контактов
@@ -255,7 +255,7 @@ module wire_jam() {
       translate([-4, 0, 0]) cube([5, 3, 9]);
       translate([-4, 11, 0]) cube([5, 3, 9]);
     }
-    translate([-2, -1, 0]) cube([2, 16, 7]);
+    //translate([-2, -1, -1]) cube([2, 16, 8]);
   }
 }
 
