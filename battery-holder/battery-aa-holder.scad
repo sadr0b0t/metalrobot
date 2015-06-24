@@ -72,10 +72,10 @@ module holder1(count=4, holes1=3) {
         holder_aa(count);
         
         // освободить место для зажимов слева
-        translate([1, -11, 1])
+        translate([1, -12, 1])
           cube([14, 12, 19]);
         // освободить место для зажимов справа
-        translate([15*(count-1)+1, -11, 1])
+        translate([15*(count-1)+1, -12, 1])
           cube([14, 12, 19]);
       }
 
@@ -86,36 +86,32 @@ module holder1(count=4, holes1=3) {
       //  rotate([0, 90, -90]) wire_jam();
      
       // зажимы с макетками
-      translate([1, 2, 0])
+      translate([1, 1, 0])
         rotate([0, 0, -90]) wire_jam_with_breadboard();
 
-      translate([15*count +1-1, 2, 0]) 
+      translate([15*count +1-1, 1, 0]) 
         mirror([1, 0, 0]) rotate([0, 0, -90]) 
           wire_jam_with_breadboard();
     }
     // путь до контактов слева
     // скоба
-    translate([9, -2, 5]) cube([1, 5, 14]);
+    //translate([9, -2, 5]) cube([1, 5, 14]);
     // винт
     translate([8, 3, 7]) 
       rotate([0, 90, -90]) cylinder(h=4, r=1.6, $fn=100);
     // большое окно
     translate([6, -3, 13]) cube([4, 6, 4]);
+    translate([6, 1, 2]) cube([4, 1, 15]);
 
     // путь до контактов справа
     // скоба
-    translate([15*count-9, -2, 5]) cube([1, 5, 14]);
+    //translate([15*count-9, -2, 5]) cube([1, 5, 14]);
     // винт
     translate([15*(count-1)+8, 3, 7]) 
       rotate([0, 90, -90]) cylinder(h=4, r=1.6, $fn=100);
     // большое окно
     translate([15*(count-1)+6, -3, 13]) cube([4, 6, 4]);
-
-    // путь до макетки слева
-    translate([10, -1.95, 5]) cube([6, 2, 13]);
-
-    // путь до макетки справа
-    translate([15*count-15, -1.95, 5]) cube([6, 2, 13]);
+    translate([6+15*(count-1), 1, 2]) cube([4, 1, 15]);
   }
 
   // рейка с отверстиями для крепления
@@ -296,8 +292,19 @@ module wire_jam() {
  * Зажим для проводов с блоком макетной платы.
  */
 module wire_jam_with_breadboard() {
-  translate([0, 0, 12]) rotate([0, 90, 0]) wire_jam();
-  translate([1.8, 13, 0]) breadboard_half(lines=2);
+  difference() {
+    union() {
+      translate([0, 0, 12]) rotate([0, 90, 0]) wire_jam();
+      translate([1, 13, 1]) breadboard_half(lines=2);
+  
+      // стенки по бокам потолще
+      translate([0, 13, 0]) cube([1, 17, 8]);
+      translate([7, 13, 0]) cube([1, 17, 8]);
+    }
+    
+    // путь до контактов макетки
+    translate([2, 10, -1]) cube([1.5, 5, 18]);
+  }
 }
 
 /** 
