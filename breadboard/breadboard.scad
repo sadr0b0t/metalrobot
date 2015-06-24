@@ -23,6 +23,12 @@ module breadboard_line(holes=5) {
       //  cylinder(r1=0.5, r2=0.75, h=1.2, $fn=10);
     }
   }
+
+  // добавим ножки снизу
+  for(hole=[1 : holes+2]) {
+      translate([0.2, 1.5+1+0.5+2.5*(hole-2), -1]) cube([.6, 1, 1]);
+      translate([2.7, 1.5+1+0.5+2.5*(hole-2), -1]) cube([.6, 1, 1]);
+  }
 }
 
 /**
@@ -31,7 +37,13 @@ module breadboard_line(holes=5) {
  * @param holes количество отверстий на каждой линии
  */
 module breadboard_half(lines=10, holes=5) {
-  for(hole=[1 : lines]) {
-    translate([2.5*(hole-1), 0, 0]) breadboard_line(holes);
+  // добавить толщины по бокам
+  cube([.4, 1.5+1+2*holes+0.5*(holes-1)+1+1.5, 8]);
+  translate([.2 + 2.5*(lines-1) + 3.3, 0, 0])
+    cube([.4, 1.5+1+2*holes+0.5*(holes-1)+1+1.5, 8]);
+
+  for(line=[1 : lines]) {
+    translate([.2 + 2.5*(line-1), 0, 0]) 
+      breadboard_line(holes);
   }
 }
