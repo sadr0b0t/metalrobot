@@ -26,8 +26,8 @@ module breadboard_line(holes=5) {
 
   // добавим ножки снизу
   for(hole=[1 : holes+2]) {
-      translate([0.2, 1.5+1+0.5+2.5*(hole-2), -1]) cube([.6, 1, 1]);
-      translate([2.7, 1.5+1+0.5+2.5*(hole-2), -1]) cube([.6, 1, 1]);
+      translate([0.2, 1.5+1+0.5+2.5*(hole-2), -1]) cube([.6, 1, 2]);
+      translate([2.7, 1.5+1+0.5+2.5*(hole-2), -1]) cube([.6, 1, 2]);
   }
 }
 
