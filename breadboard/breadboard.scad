@@ -1,6 +1,7 @@
 //breadboard_line();
 //breadboard_half(lines=7);
-breadboard_half(lines=2);
+//breadboard_half(lines=2);
+breadboard();
 
 /**
  * Элемент макетной платы - линия, соединенная контактами.
@@ -36,7 +37,7 @@ module breadboard_line(holes=5) {
  * @param lines количество линий
  * @param holes количество отверстий на каждой линии
  */
-module breadboard_half(lines=10, holes=5) {
+module breadboard_half(lines=17, holes=5) {
   // добавить толщины по бокам
   cube([.4, 1.5+1+2*holes+0.5*(holes-1)+1+1.5, 8]);
   translate([.2 + 2.5*(lines-1) + 3.3, 0, 0])
@@ -45,5 +46,18 @@ module breadboard_half(lines=10, holes=5) {
   for(line=[1 : lines]) {
     translate([.2 + 2.5*(line-1), 0, 0]) 
       breadboard_line(holes);
+  }
+}
+
+/**
+ * Простая макетная плата из двух половинок.
+ */
+module breadboard(lines=17, holes=5) {
+  difference() {
+    union() {
+      breadboard_half(lines=lines, holes=holes);
+      mirror([0, 1, 0]) breadboard_half(lines=lines, holes=holes);
+    }
+    translate([4, -2, 5]) cube([2.5*(lines-3), 4, 4]);
   }
 }
