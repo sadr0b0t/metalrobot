@@ -10,6 +10,7 @@ holder1(6, 6);
 //battery_aa_bed();
 //rotate([0, 90, 0]) wire_jam();
 //wire_jam();
+//wire_jam2();
 //wire_jam_with_breadboard();
 //contact_gap();
 
@@ -72,10 +73,10 @@ module holder1(count=4, holes1=3) {
         holder_aa(count);
         
         // освободить место для зажимов слева
-        translate([1, -12, 1])
+        translate([1, -10, 1])
           cube([14, 12, 19]);
         // освободить место для зажимов справа
-        translate([15*(count-1)+1, -12, 1])
+        translate([15*(count-1)+1, -10, 1])
           cube([14, 12, 19]);
       }
 
@@ -86,10 +87,10 @@ module holder1(count=4, holes1=3) {
       //  rotate([0, 90, -90]) wire_jam();
      
       // зажимы с макетками
-      translate([1, 1, 0])
+      translate([1, 2.1, 0])
         rotate([0, 0, -90]) wire_jam_with_breadboard();
 
-      translate([15*count +1-1, 1, 0]) 
+      translate([15*count +1-1, 2.1, 0]) 
         mirror([1, 0, 0]) rotate([0, 0, -90]) 
           wire_jam_with_breadboard();
     }
@@ -100,8 +101,8 @@ module holder1(count=4, holes1=3) {
     translate([8, 3, 7]) 
       rotate([0, 90, -90]) cylinder(h=4, r=1.6, $fn=100);
     // большое окно
-    translate([6, -3, 13]) cube([4, 6, 4]);
-    translate([6, 1, 2]) cube([4, 1, 15]);
+    //translate([6, -3, 13]) cube([4, 6, 4]);
+    translate([6, -2, 3]) cube([4, 5, 15]);
 
     // путь до контактов справа
     // скоба
@@ -110,8 +111,8 @@ module holder1(count=4, holes1=3) {
     translate([15*(count-1)+8, 3, 7]) 
       rotate([0, 90, -90]) cylinder(h=4, r=1.6, $fn=100);
     // большое окно
-    translate([15*(count-1)+6, -3, 13]) cube([4, 6, 4]);
-    translate([6+15*(count-1), 1, 2]) cube([4, 1, 15]);
+    //translate([15*(count-1)+6, -3, 13]) cube([4, 6, 4]);
+    translate([6+15*(count-1), -2, 3]) cube([4, 5, 15]);
   }
 
   // рейка с отверстиями для крепления
@@ -178,7 +179,11 @@ module contact_plate_minus() {
   cube([4, 1, 15]);
   translate([0, 0, 11]) cube([4, 3, 4]);
   // для защелки
+  // дырка вбок
   translate([1, 0, 0]) cube([2, 3, 2]);
+  // дырка вниз
+  translate([1, 0, -3]) cube([2, 1, 4]);
+  translate([1, 0, -3]) cube([2, 3, 2]);
 }
 
 /**
@@ -188,7 +193,11 @@ module contact_plate_plus() {
   cube([4, 1, 15]);
   translate([0, 0, 11]) cube([4, 3, 4]);
   // для защелки
+  // дырка вбок
   translate([1, 0, 0]) cube([2, 3, 2]);
+  // дырка вниз
+  translate([1, 0, -3]) cube([2, 1, 4]);
+  translate([1, 0, -3]) cube([2, 3, 2]);
 }
 
 /**
@@ -238,13 +247,15 @@ module wire_jam() {
   // потайная (на скос) - 2мм
   // обычная крестовая - 2мм
 
+  nut_width = 7;
+
   difference() {
     cube([12, 14, 8]);
     
     // гайка
-    translate([0, 4, 1]) union() {
-      translate([-2, 0, 0]) cube([8, 6, 3]);
-      translate([2, 0, 0]) linear_extrude(height=3) 
+    translate([0, 3, 0]) union() {
+      translate([-3, -nut_width/2+4, -1]) cube([8, nut_width, 5]);
+      translate([5, 4, -1]) rotate([0, 0, 90]) linear_extrude(height=5) 
         import(file = "screw-nut-m3.dxf");
     }
     
@@ -257,20 +268,20 @@ module wire_jam() {
     // шайба m3 (7мм, 8мм на печать)
     translate([0, 3, 5]) union() {
       translate([5, 4, 0]) cylinder(h=2, r=4, $fn=100);
-      // срезать "выход" для шайбы
       //translate([-1, 0, 0]) cube([6, 8, 2]);
     }
 
     // верхняя шайба
     // шайба m3 (7мм, 8мм на печать)
     translate([0, 3, 6]) union() {
-      translate([-1, 0, 0]) cube([6, 8, 3]);
       translate([5, 4, 0]) cylinder(h=3, r=4, $fn=100);
+      // срезать "выход" для шайбы
+      translate([-1, 0, 0]) cube([6, 8, 3]);
     }
     //шайба m4 (9мм, 10мм на печать)
     /*translate([0, 3, 6]) union() {
-      translate([-1, -1, 0]) cube([5, 10, 3]);
       translate([5, 4, 0]) cylinder(h=3, r=5.5, $fn=100);
+      translate([-1, -1, 0]) cube([5, 10, 3]);
     }*/
 
     // винт
@@ -295,15 +306,15 @@ module wire_jam_with_breadboard() {
   difference() {
     union() {
       translate([0, 0, 12]) rotate([0, 90, 0]) wire_jam();
-      translate([1, 13, 1]) breadboard_half(lines=2);
+      translate([2, 13, 1]) breadboard_half(lines=2);
   
       // стенки по бокам потолще
       translate([0, 13, 0]) cube([1, 17, 8]);
-      translate([7, 13, 0]) cube([1, 17, 8]);
+      translate([8, 13, 0]) cube([1, 17, 8]);
     }
     
     // путь до контактов макетки
-    translate([2, 10, -1]) cube([1.5, 5, 18]);
+    translate([2.5, 10, -1]) cube([1.5, 5, 18]);
   }
 }
 
