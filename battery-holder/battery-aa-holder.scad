@@ -366,11 +366,13 @@ module wire_jam_with_breadboard() {
   difference() {
     union() {
       translate([0, 0, 12]) rotate([0, 90, 0]) wire_jam2();
-      translate([2, 13, 1]) breadboard_half(lines=2);
+      //translate([2, 13, 1]) breadboard_half(lines=2);
+      translate([2, 13, 1]) breadboard_half(lines=1);
   
       // стенки по бокам потолще
       translate([0, 13, 0]) cube([1, 17, 8]);
-      translate([8, 13, 0]) cube([1, 17, 8]);
+      //translate([8, 13, 0]) cube([1, 17, 8]);
+      translate([6, 13, 0]) cube([2, 17, 8]);
     }
     
     // путь до контактов макетки
