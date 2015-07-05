@@ -371,8 +371,8 @@ module wire_jam_with_breadboard() {
   
       // стенки по бокам потолще
       translate([0, 13, 0]) cube([1, 17, 8]);
-      //translate([8, 13, 0]) cube([1, 17, 8]);
-      translate([6, 13, 0]) cube([2, 17, 8]);
+      //translate([8, 13, 0]) cube([1, 17, 8]); // для двух линий
+      translate([6, 13, 0]) cube([2, 17, 8]); // для одной линии
     }
     
     // путь до контактов макетки
