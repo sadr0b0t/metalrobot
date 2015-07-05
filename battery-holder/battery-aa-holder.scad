@@ -376,7 +376,7 @@ module wire_jam_with_breadboard() {
     }
     
     // путь до контактов макетки
-    translate([2.5, 10, -1]) cube([1.5, 5, 18]);
+    translate([2.5, 10, -1]) cube([1.5, 5.2, 18]);
   }
 }
 
