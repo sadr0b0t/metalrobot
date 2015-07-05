@@ -15,7 +15,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="гайка-m3.svg">
+   sodipodi:docname="screw-nut-m3.svg">
   <defs
      id="defs4" />
   <sodipodi:namedview
@@ -26,7 +26,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="6.3356768"
-     inkscape:cx="65.03483"
+     inkscape:cx="41.675053"
      inkscape:cy="25.955627"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
@@ -39,7 +39,8 @@
      showguides="true"
      inkscape:guide-bbox="true"
      inkscape:snap-bbox="true"
-     inkscape:bbox-nodes="true">
+     inkscape:bbox-nodes="true"
+     inkscape:snap-bbox-midpoints="true">
     <sodipodi:guide
        position="0,307.14286"
        orientation="1,0"
@@ -61,7 +62,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -85,6 +86,6 @@
        inkscape:rounded="0"
        inkscape:randomized="0"
        d="M 361.4212,1003.6956 148.57143,1052.3622 4.1543299e-6,892.36219 64.278353,683.69556 277.12813,635.02893 l 148.57142,160 z"
-       transform="matrix(0.05480027,0.01253188,-0.01253188,0.05480027,11.182978,992.83013)" />
+       transform="matrix(0.05480027,0.01253188,-0.01253188,0.05480027,-1.0911338,1003.4601)" />
   </g>
 </svg>

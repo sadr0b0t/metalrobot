@@ -102,7 +102,7 @@ module holder1(count=4, holes1=3) {
       rotate([0, 90, -90]) cylinder(h=4, r=1.6, $fn=100);
     // большое окно
     //translate([6, -3, 13]) cube([4, 6, 4]);
-    translate([6, -2, 3]) cube([4, 5, 15]);
+    //translate([6, -2, 3]) cube([4, 5, 15]);
 
     // путь до контактов справа
     // скоба
@@ -112,7 +112,7 @@ module holder1(count=4, holes1=3) {
       rotate([0, 90, -90]) cylinder(h=4, r=1.6, $fn=100);
     // большое окно
     //translate([15*(count-1)+6, -3, 13]) cube([4, 6, 4]);
-    translate([6+15*(count-1), -2, 3]) cube([4, 5, 15]);
+    //translate([6+15*(count-1), -2, 3]) cube([4, 5, 15]);
   }
 
   // рейка с отверстиями для крепления
@@ -298,6 +298,66 @@ module wire_jam() {
   }
 }
 
+/**
+ * Зажим для проводов.
+ */
+module wire_jam2() {
+  // высота гайки m3 6мм, ширина 7мм, толщина 2мм,
+  // диаметр отверстия - 3мм
+  // головка винта:
+  // потайная (на скос) - 2мм
+  // обычная крестовая - 2мм
+
+  //nut_width = 7;
+  nut_width = 6;
+
+  difference() {
+    cube([12, 14, 8]);
+    
+    // гайка
+    translate([0, 3, 0]) union() {
+      translate([-3, -nut_width/2+4, -1]) cube([8, nut_width, 5]);
+      translate([5, 4, -1]) /*rotate([0, 0, 90])*/ linear_extrude(height=5) 
+        import(file = "screw-nut-m3.dxf");
+      
+      // 
+      translate([-1, 0, 3]) cube([10, 8, 1]);
+    }
+    
+    // внутренняя площадка для контакта
+    translate([0, 3, 5]) union() {
+      translate([5, 4, 0]) rotate([0, 0, 270]) linear_extrude(height=2) 
+        import(file = "wire-plate1.dxf");
+      //translate([5-9/2, 4-8/2, 0]) cube([9, 8, 2]);
+      // срезать "выход" для шайбы
+      //translate([-1, 0, 0]) cube([6, 8, 2]);
+    }
+
+    // внешняя площадка для контакта
+    translate([0, 3, 6]) union() {
+      translate([5, 4, 0]) rotate([0, 0, 270]) linear_extrude(height=3) 
+        import(file = "wire-plate1.dxf");
+
+      // срезать "выход"
+      translate([-1, 0, 0]) cube([6, 8, 3]);
+
+      //translate([5, 4, 0]) cylinder(h=3, r=4, $fn=100);
+      //translate([5-9/2, 4-8/2, 0]) cube([9, 8, 3]);
+    }
+
+    // винт
+    translate([5, 7, -2]) cylinder(h=9, r=1.6, $fn=100);
+  }
+
+  // ушки для проводов
+  difference() {
+    union() {
+      translate([-4, 0, 0]) cube([5, 3, 8]);
+      translate([-4, 11, 0]) cube([5, 3, 8]);
+    }
+    //translate([-2, -1, -1]) cube([2, 16, 8]);
+  }
+}
 
 /**
  * Зажим для проводов с блоком макетной платы.
@@ -305,7 +365,7 @@ module wire_jam() {
 module wire_jam_with_breadboard() {
   difference() {
     union() {
-      translate([0, 0, 12]) rotate([0, 90, 0]) wire_jam();
+      translate([0, 0, 12]) rotate([0, 90, 0]) wire_jam2();
       translate([2, 13, 1]) breadboard_half(lines=2);
   
       // стенки по бокам потолще
