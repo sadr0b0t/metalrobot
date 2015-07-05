@@ -180,7 +180,7 @@ module contact_plate_minus() {
   translate([0, 0, 11]) cube([4, 3, 4]);
   // для защелки
   // дырка вбок
-  translate([1, 0, 0]) cube([2, 3, 2]);
+  //translate([1, 0, 0]) cube([2, 3, 2]);
   // дырка вниз
   translate([1, 0, -3]) cube([2, 1, 4]);
   translate([1, 0, -3]) cube([2, 3, 2]);
@@ -194,7 +194,7 @@ module contact_plate_plus() {
   translate([0, 0, 11]) cube([4, 3, 4]);
   // для защелки
   // дырка вбок
-  translate([1, 0, 0]) cube([2, 3, 2]);
+  //translate([1, 0, 0]) cube([2, 3, 2]);
   // дырка вниз
   translate([1, 0, -3]) cube([2, 1, 4]);
   translate([1, 0, -3]) cube([2, 3, 2]);
