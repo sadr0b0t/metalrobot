@@ -5,6 +5,7 @@ use <../breadboard/breadboard.scad>;
 //holder(4, 3);
 //holder(6, 6);
 holder1(6, 6);
+//holder1(4, 4);
 //holder_aa(4);
 //holder_aa(6);
 //battery_aa_bed();
@@ -87,10 +88,10 @@ module holder1(count=4, holes1=3) {
       //  rotate([0, 90, -90]) wire_jam();
      
       // зажимы с макетками
-      translate([1, 2.1, 0])
+      translate([0.5, 2.1, 0])
         rotate([0, 0, -90]) wire_jam_with_breadboard();
 
-      translate([15*count +1-1, 2.1, 0]) 
+      translate([15*count+1-0.5, 2.1, 0]) 
         mirror([1, 0, 0]) rotate([0, 0, -90]) 
           wire_jam_with_breadboard();
     }
@@ -250,10 +251,10 @@ module wire_jam() {
   nut_width = 7;
 
   difference() {
-    cube([12, 14, 8]);
+    cube([12, 15, 8]);
     
     // гайка
-    translate([0, 3, 0]) union() {
+    translate([0, 3.5, 0]) union() {
       translate([-3, -nut_width/2+4, -1]) cube([8, nut_width, 5]);
       translate([5, 4, -1]) rotate([0, 0, 90]) linear_extrude(height=5) 
         import(file = "screw-nut-m3.dxf");
@@ -266,14 +267,14 @@ module wire_jam() {
       //translate([-1, -1, 0]) cube([5, 10, 2]);
     }*/
     // шайба m3 (7мм, 8мм на печать)
-    translate([0, 3, 5]) union() {
+    translate([0, 3.5, 5]) union() {
       translate([5, 4, 0]) cylinder(h=2, r=4, $fn=100);
       //translate([-1, 0, 0]) cube([6, 8, 2]);
     }
 
     // верхняя шайба
     // шайба m3 (7мм, 8мм на печать)
-    translate([0, 3, 6]) union() {
+    translate([0, 3.5, 6]) union() {
       translate([5, 4, 0]) cylinder(h=3, r=4, $fn=100);
       // срезать "выход" для шайбы
       translate([-1, 0, 0]) cube([6, 8, 3]);
@@ -285,14 +286,14 @@ module wire_jam() {
     }*/
 
     // винт
-    translate([5, 7, -2]) cylinder(h=9, r=1.6, $fn=100);
+    translate([5, 7.5, -2]) cylinder(h=9, r=1.6, $fn=100);
   }
 
   // ушки для проводов
   difference() {
     union() {
-      translate([-4, 0, 0]) cube([5, 3, 8]);
-      translate([-4, 11, 0]) cube([5, 3, 8]);
+      translate([-4, 0, 0]) cube([5, 3.5, 8]);
+      translate([-4, 11.5, 0]) cube([5, 3.5, 8]);
     }
     //translate([-2, -1, -1]) cube([2, 16, 8]);
   }
@@ -312,10 +313,10 @@ module wire_jam2() {
   nut_width = 6;
 
   difference() {
-    cube([12, 14, 8]);
+    cube([12, 15, 8]);
     
     // гайка
-    translate([0, 3, 0]) union() {
+    translate([0, 3.5, 0]) union() {
       translate([-3, -nut_width/2+4, -1]) cube([8, nut_width, 5]);
       translate([5, 4, -1]) /*rotate([0, 0, 90])*/ linear_extrude(height=5) 
         import(file = "screw-nut-m3.dxf");
@@ -325,18 +326,18 @@ module wire_jam2() {
     }
     
     // внутренняя площадка для контакта
-    translate([0, 3, 5]) union() {
+    translate([0, 3.5, 5]) union() {
       translate([5, 4, 0]) rotate([0, 0, 270]) linear_extrude(height=2) 
-        import(file = "wire-plate1.dxf");
+        import(file = "wire-plate1-43d.dxf");
       //translate([5-9/2, 4-8/2, 0]) cube([9, 8, 2]);
       // срезать "выход" для шайбы
       //translate([-1, 0, 0]) cube([6, 8, 2]);
     }
 
     // внешняя площадка для контакта
-    translate([0, 3, 6]) union() {
+    translate([0, 3.5, 6]) union() {
       translate([5, 4, 0]) rotate([0, 0, 270]) linear_extrude(height=3) 
-        import(file = "wire-plate1.dxf");
+        import(file = "wire-plate1-43d.dxf");
 
       // срезать "выход"
       translate([-1, 0, 0]) cube([6, 8, 3]);
@@ -346,14 +347,14 @@ module wire_jam2() {
     }
 
     // винт
-    translate([5, 7, -2]) cylinder(h=9, r=1.6, $fn=100);
+    translate([5, 7.5, -2]) cylinder(h=9, r=1.6, $fn=100);
   }
 
   // ушки для проводов
   difference() {
     union() {
-      translate([-4, 0, 0]) cube([5, 3, 8]);
-      translate([-4, 11, 0]) cube([5, 3, 8]);
+      translate([-4, 0, 0]) cube([5, 3.5, 8]);
+      translate([-4, 11.5, 0]) cube([5, 3.5, 8]);
     }
     //translate([-2, -1, -1]) cube([2, 16, 8]);
   }
@@ -366,17 +367,35 @@ module wire_jam_with_breadboard() {
   difference() {
     union() {
       translate([0, 0, 12]) rotate([0, 90, 0]) wire_jam2();
-      //translate([2, 13, 1]) breadboard_half(lines=2);
-      translate([2, 13, 1]) breadboard_half(lines=1);
+
+      // подправим макетку
+      difference() {
+        //translate([2, 13, 1]) breadboard_half(lines=2);
+        translate([2, 13, 2]) breadboard_half(lines=1);
+
+        // подрежем слева, чтобы не вылезала внутри зажима
+        translate([1.5, 12, 1]) cube([5, 2, 10]);
+
+        // вскрем стенку справа, чтобы засунуть контакты (снизу запаяли)
+        translate([3, 27, 1]) cube([2, 4, 8]);
+        // и немного срежем
+        translate([1.5, 29, 1]) cube([5, 2, 10]);
+      }
   
       // стенки по бокам потолще
-      translate([0, 13, 0]) cube([1, 17, 8]);
-      //translate([8, 13, 0]) cube([1, 17, 8]); // для двух линий
-      translate([5.9, 13, 0]) cube([2.1, 17, 8]); // для одной линии
+      // для двух линий
+      //translate([0, 13, 0]) cube([1, 17, 8]);
+      //translate([8, 13, 0]) cube([1, 17, 8]);  
+      // для одной линии
+      translate([0, 14, 0]) cube([2.1, 15, 8]);
+      translate([5.9, 14, 0]) cube([2.1, 15, 8]);
+
+      // дно снизу
+      translate([0, 14, 0]) cube([8, 15, 1]);
     }
     
     // путь до контактов макетки
-    translate([2.5, 10, -1]) cube([1.5, 5.2, 18]);
+    translate([2.5, 10.5, -1]) cube([1.5, 4.7, 18]);
   }
 }
 
