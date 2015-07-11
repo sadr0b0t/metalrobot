@@ -184,7 +184,7 @@ module contact_plate_minus() {
   //translate([1, 0, 0]) cube([2, 3, 2]);
   // дырка вниз
   translate([1, 0, -3]) cube([2, 1, 4]);
-  translate([1, 0, -3]) cube([2, 3, 2]);
+  translate([1, 0, -3]) cube([2, 5, 2]);
 }
 
 /**
@@ -198,7 +198,7 @@ module contact_plate_plus() {
   //translate([1, 0, 0]) cube([2, 3, 2]);
   // дырка вниз
   translate([1, 0, -3]) cube([2, 1, 4]);
-  translate([1, 0, -3]) cube([2, 3, 2]);
+  translate([1, 0, -3]) cube([2, 5, 2]);
 }
 
 /**

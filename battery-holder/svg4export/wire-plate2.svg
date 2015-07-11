@@ -23,9 +23,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="17.92"
+     inkscape:zoom="1.84"
      inkscape:cx="7.9712596"
-     inkscape:cy="-8.1740272"
+     inkscape:cy="1.9792101"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -90,7 +90,7 @@
     <path
        inkscape:connector-curvature="0"
        style="fill:#2b2200;fill-opacity:1;stroke:none;stroke-width:1.77165353;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:8;stroke-opacity:1"
-       d="m -14.17383,1034.6469 0,10.6289 -7.08594,0 0,10.6308 7.08594,0 0,10.6289 28.3457,0 0,-10.6289 7.08789,0 0,-10.6308 -7.08789,0 0,-10.6289 -28.3457,0 z M 0,1047.0472 a 5.3149605,5.3149605 0 0 1 5.31445,5.3165 A 5.3149605,5.3149605 0 0 1 0,1057.6781 5.3149605,5.3149605 0 0 1 -5.31641,1052.3637 5.3149605,5.3149605 0 0 1 0,1047.0472 Z"
+       d="m 7.08594,1020.4736 0,10.6289 -7.08594,0 0,10.6308 7.08594,0 0,10.6289 28.3457,0 0,-10.6289 7.08789,0 0,-10.6308 -7.08789,0 0,-10.6289 -28.3457,0 z m 14.17383,12.4003 a 5.3149605,5.3149605 0 0 1 5.31445,5.3165 5.3149605,5.3149605 0 0 1 -5.31445,5.3144 5.3149605,5.3149605 0 0 1 -5.31641,-5.3144 5.3149605,5.3149605 0 0 1 5.31641,-5.3165 z"
        id="rect4964" />
   </g>
 </svg>
