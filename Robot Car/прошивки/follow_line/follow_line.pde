@@ -94,17 +94,15 @@ void loop() {
       mright_forward();
     } else {
       // линия есть хотябы на одном из датчиков
-      
       Serial.println("linia na odnom is datchikov");
-      
-      // ненадолго остановимся, чтобы собраться с мыслями
-      mleft_stop();
-      mright_stop();
       
       if( digitalRead(LINE_SENSOR_R) == 1 ) {
         // линия под правым датчиком
         
         Serial.println("praviy datchik -> povorot napravo");
+        // ненадолго остановимся, чтобы собраться с мыслями
+        //mleft_stop();
+        //mright_stop();
         //delay(1000);
         
         // поворачиваем направо
@@ -117,6 +115,9 @@ void loop() {
         // линии нет под правым датчиком, значит она под левым датчиком
         
         Serial.println("leviy datchik -> povorot nalevo");
+        // ненадолго остановимся, чтобы собраться с мыслями
+        //mleft_stop();
+        //mright_stop();
         //delay(1000);
         
         // повернуть налево
