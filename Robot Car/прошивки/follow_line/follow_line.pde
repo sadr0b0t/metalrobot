@@ -86,9 +86,9 @@ void setup() {
 
 void loop() {
     if( digitalRead(LINE_SENSOR_L) == 0 && digitalRead(LINE_SENSOR_R) == 0 ) {
+      // линии нет на обоих датчиках
       //Serial.println("Proverka linii: linii net na 2x datchikah");
       
-      // линии нет на обоих датчиках
       // едем вперед
       mleft_forward();
       mright_forward();
@@ -98,8 +98,8 @@ void loop() {
       
       if( digitalRead(LINE_SENSOR_R) == 1 ) {
         // линия под правым датчиком
-        
         Serial.println("praviy datchik -> povorot napravo");
+        
         // ненадолго остановимся, чтобы собраться с мыслями
         //mleft_stop();
         //mright_stop();
@@ -112,9 +112,9 @@ void loop() {
         // поворачиваемся 350 миллисекунд, время получено эмпирически
         delay(350);
       } else {
-        // линии нет под правым датчиком, значит она под левым датчиком
-        
+        // линии нет под правым датчиком, значит она под левым датчиком        
         Serial.println("leviy datchik -> povorot nalevo");
+        
         // ненадолго остановимся, чтобы собраться с мыслями
         //mleft_stop();
         //mright_stop();
