@@ -1,7 +1,7 @@
 // левое колесо
-//wheel_with_axis(print_error=0.2);
+wheel_with_axis(print_error=0.2);
 // правое колесо
-rotate([180, 0, 0]) mirror([0, 0, 1]) wheel_with_axis(print_error=0.2);
+//rotate([180, 0, 0]) mirror([0, 0, 1]) wheel_with_axis(print_error=0.2);
 // зажим для оси, блокирующий колесо
 //axis_jam(3.1);
 // прокладка между задним колесом и платформой
@@ -163,14 +163,14 @@ module motor1_axis(length=22, print_error=0) {
  * внешними объектами (отверстие для вала при печати получится меньше
  * и в него без учета погрешности может быть будет сложно втиснуть ось)
  */
-module motor2_axis(length=22, radius=1.5, cut_radius=1, print_error=0) {
+module motor2_axis(length=22, radius=1.5, cut_radius=0.9, print_error=0) {
   // диаметр 3мм, срез с одного бока 0.3мм
   translate([0,0,-1])
   difference() {
     cylinder(h=length, r=radius+print_error, $fn=20);
     // 1.5 мм "вниз" по y (совместить куб с цилиндром), 
-    // 1.1 "вправо" по x (срезать справа, для cut=0.3мм: 1.5-0.3=1.2)
-    translate([cut_radius+print_error, -1.5, 0]) 
+    // 0.9 мм "вправо" по x (срезать справа, cut_radius=0.9мм)
+    translate([cut_radius+print_error, -1.5, 0])
       cube([2, 3, length]);
   }
 }
