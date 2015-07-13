@@ -1,7 +1,7 @@
 // левое колесо
-wheel_with_axis();
+//wheel_with_axis(print_error=0.2);
 // правое колесо
-//rotate([180, 0, 0]) mirror([0, 0, 1]) wheel_with_axis();
+rotate([180, 0, 0]) mirror([0, 0, 1]) wheel_with_axis(print_error=0.2);
 // зажим для оси, блокирующий колесо
 //axis_jam(3.1);
 // прокладка между задним колесом и платформой
@@ -9,15 +9,20 @@ wheel_with_axis();
 
 /** 
  * Колесо с отверстием под ось.
+ *
+ * @param 3dp_error погрешность при печати 3д-принтером (мм), стоит учитывать 
+ * для элементов (отверстий или штырей), стыкующихся с 
+ * внешними объектами (отверстие для вала при печати получится меньше
+ * и в него без учета погрешности может быть будет сложно втиснуть ось)
  */
-module wheel_with_axis() {
+module wheel_with_axis(print_error=0) {
   difference() {
     wheel();
-    generic_axis();
+    //generic_axis(print_error=print_error);
     // белый с круглой осью
-    //motor1_axis();
+    //motor1_axis(print_error=print_error);
     // желтый со срезанной осью
-    //motor2_axis();
+    motor2_axis(print_error=print_error);
   }
 }
 
@@ -118,10 +123,15 @@ module wheel_shim(height=3) {
 
 /**
  * Просто круглая ось, по умолчанию диаметр 3мм.
+ *
+ * @param print_error погрешность при печати 3д-принтером (мм), стоит учитывать 
+ * для элементов (отверстий или штырей), стыкующихся с 
+ * внешними объектами (отверстие для вала при печати получится меньше
+ * и в него без учета погрешности может быть будет сложно втиснуть ось)
  */
-module generic_axis(length=22, radius=1.5) {
+module generic_axis(length=22, radius=1.5, print_error=0) {
   translate([0,0,-1])
-    cylinder(h=length, r=radius, $fn=20);
+    cylinder(h=length, r=radius+print_error, $fn=20);
 }
 
 /** 
@@ -129,11 +139,16 @@ module generic_axis(length=22, radius=1.5) {
  * GM7 - Gear Motor 7 - Baby GM3 (прямой, белый)
  * www.robotshop.com/en/solarbotics-gm7-gear-motor-7.html
  *
- * Диаметр оси мотора 2мм, сделаем модель 1.5мм.
+ * Диаметр оси мотора 2мм, сделаем модель 1.5мм, чтобы одевалась враспор.
+ * 
+ * @param print_error погрешность при печати 3д-принтером (мм), стоит учитывать 
+ * для элементов (отверстий или штырей), стыкующихся с 
+ * внешними объектами (отверстие для вала при печати получится меньше
+ * и в него без учета погрешности может быть будет сложно втиснуть ось)
  */
-module motor1_axis(length=22) {
+module motor1_axis(length=22, print_error=0) {
   // 1.5мм диаметр
-  generic_axis(length, 0.75);
+  generic_axis(length, 0.75, print_error);
 }
 
 /** 
@@ -141,16 +156,21 @@ module motor1_axis(length=22) {
  * Pololu 4.5V, 80rpm Right Angle (прямой, желтый)
  * www.robotshop.com/en/solarbotics-gm7-gear-motor-7.html
  *
- * Диаметр оси мотора 3мм, срез с одного бока cut=0.3мм.
+ * @param radius радиус оси, диаметр оси мотора 3мм; 
+ * @param cut_radius расстояние от центра до среза 
+ * @param print_error погрешность при печати 3д-принтером (мм), стоит учитывать 
+ * для элементов (отверстий или штырей), стыкующихся с 
+ * внешними объектами (отверстие для вала при печати получится меньше
+ * и в него без учета погрешности может быть будет сложно втиснуть ось)
  */
-module motor2_axis(length=22, cut=0.3) {
+module motor2_axis(length=22, radius=1.5, cut_radius=1, print_error=0) {
   // диаметр 3мм, срез с одного бока 0.3мм
   translate([0,0,-1])
   difference() {
-    cylinder(h=length, r=1.5, $fn=20);
+    cylinder(h=length, r=radius+print_error, $fn=20);
     // 1.5 мм "вниз" по y (совместить куб с цилиндром), 
     // 1.1 "вправо" по x (срезать справа, для cut=0.3мм: 1.5-0.3=1.2)
-    translate([1.5-cut, -1.5, 0]) 
+    translate([cut_radius+print_error, -1.5, 0]) 
       cube([2, 3, length]);
   }
 }
