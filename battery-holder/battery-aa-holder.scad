@@ -74,11 +74,15 @@ module holder1(count=4, holes1=3) {
         holder_aa(count);
         
         // освободить место для зажимов слева
-        translate([1, -10, 1])
-          cube([14, 12, 19]);
+        translate([1, -10, 1]) cube([14, 12, 19]);
+        // дополнительно под макетку
+        translate([14, -11.5, 1]) cube([16, 12, 19]);
+
         // освободить место для зажимов справа
-        translate([15*(count-1)+1, -10, 1])
-          cube([14, 12, 19]);
+        translate([15*(count-1)+1, -10, 1]) cube([14, 12, 19]);
+        // дополнительно под макетку
+        translate([15*(count-1)-14, -11.5, 1]) cube([16, 12, 19]);
+        
       }
 
       // обычные зажимы
@@ -88,9 +92,11 @@ module holder1(count=4, holes1=3) {
       //  rotate([0, 90, -90]) wire_jam();
      
       // зажимы с макетками
+      // слева
       translate([0.5, 2.1, 0])
         rotate([0, 0, -90]) wire_jam_with_breadboard();
 
+      // справа
       translate([15*count+1-0.5, 2.1, 0]) 
         mirror([1, 0, 0]) rotate([0, 0, -90]) 
           wire_jam_with_breadboard();
@@ -371,15 +377,15 @@ module wire_jam_with_breadboard() {
       // подправим макетку
       difference() {
         //translate([2, 13, 1]) breadboard_half(lines=2);
-        translate([2, 13, 2]) breadboard_half(lines=1);
+        translate([1.55, 14, 2]) breadboard_half(lines=1);
 
         // подрежем слева, чтобы не вылезала внутри зажима
-        translate([1.5, 12, 1]) cube([5, 2, 10]);
+        translate([1.55, 12, 1]) cube([5, 2, 10]);
 
-        // вскрем стенку справа, чтобы засунуть контакты (снизу запаяли)
-        translate([3, 27, 1]) cube([2, 4, 8]);
+        // вскроем стенку справа, чтобы засунуть контакты (снизу запаяли)
+        translate([2.55, 28, 1]) cube([1.9, 4, 8]);
         // и немного срежем
-        translate([1.5, 29, 1]) cube([5, 2, 10]);
+        translate([1, 30, 1]) cube([5, 2, 10]);
       }
   
       // стенки по бокам потолще
@@ -387,15 +393,15 @@ module wire_jam_with_breadboard() {
       //translate([0, 13, 0]) cube([1, 17, 8]);
       //translate([8, 13, 0]) cube([1, 17, 8]);  
       // для одной линии
-      translate([0, 14, 0]) cube([2.1, 15, 8]);
-      translate([5.9, 14, 0]) cube([2.1, 15, 8]);
+      translate([0, 14, 0]) cube([2.1, 16, 8]);
+      translate([4.9, 14, 0]) cube([2.1, 16, 8]);
 
       // дно снизу
-      translate([0, 14, 0]) cube([8, 15, 1]);
+      translate([0, 14, 0]) cube([7, 16, 1]);
     }
     
     // путь до контактов макетки
-    translate([2.5, 10.5, -1]) cube([1.5, 4.7, 18]);
+    translate([3, 3.5, 1]) cube([1, 13.6, 18]);
   }
 }
 
