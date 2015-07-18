@@ -1,10 +1,11 @@
 use <../breadboard/breadboard.scad>;
 
+print_error = 0.2;
 
 //holder(2, 0);
 //holder(4, 3);
 //holder(6, 6);
-holder1(6, 6);
+holder1(6, 6, print_error);
 //holder1(4, 4);
 //holder_aa(4);
 //holder_aa(6);
@@ -67,11 +68,11 @@ module holder(count=4, holes1=3) {
  * @param count - количество батареек (четное число)
  * @param holes1 - количество отверстий на рейке между контактами
  */
-module holder1(count=4, holes1=3) {
+module holder1(count=4, holes1=3, print_error=0) {
   difference() {
     union() {
       difference() {
-        holder_aa(count);
+        holder_aa(count=count, print_error=print_error);
         
         // освободить место для зажимов слева
         translate([1, -10, 1]) cube([14, 12, 19]);
@@ -123,12 +124,12 @@ module holder1(count=4, holes1=3) {
   }
 
   // рейка с отверстиями для крепления
-  translate([-10, -5, 0]) plank_with_holes(6);
+  translate([-10, -5, 0]) plank_with_holes(holes=6, print_error=print_error);
   // "подклеить" рейку к корпусу (без этого не экспортнется в stl)
   translate([-1, -5, 0]) cube([2, 62, 2]);
 
   // еще рейка с отверстиями
-  translate([15*count, -5, 0]) plank_with_holes(6);
+  translate([15*count, -5, 0]) plank_with_holes(holes=6, print_error=print_error);
   
   // планка для проверки 
   //translate([-12, 7, -1]) rotate([0,0,-90])  plank_with_holes(14);
@@ -138,7 +139,7 @@ module holder1(count=4, holes1=3) {
  * Отсек для батареек.
  * @param count - количество батареек (четное число)
  */
-module holder_aa(count=4) {
+module holder_aa(count=4, print_error=0) {
   difference() {
     cube([15*count+1, 60, 14+2]);
     
@@ -159,66 +160,66 @@ module holder_aa(count=4) {
     if(count > 2) {
       for(i = [1 : count/2-1]) {
         translate([6+15+30*(i-1), 2, 2])
-          contact_gap();
+          contact_gap(print_error=print_error);
       }
     }
 
     // наверху
     for(i = [1 : count/2]) {
       translate([6+30*(i-1), 58, 2]) 
-        mirror([0, 1, 0]) contact_gap();
+        mirror([0, 1, 0]) contact_gap(print_error=print_error);
     }
 
     // одинокая пружинка
     translate([6, 2, 2])
-      contact_plate_plus();
+      contact_plate_minus(print_error=print_error);
 
     // одинокая пипка
     translate([6+15*(count-1), 2, 2])
-      contact_plate_minus();
+      contact_plate_plus(print_error=print_error);
   }
 }
 
 /**
  * Пружинка для минуса.
  */
-module contact_plate_minus() {
-  cube([4, 1, 15]);
-  translate([0, 0, 11]) cube([4, 3, 4]);
+module contact_plate_minus(print_error=0) {
+  translate([-print_error, 0, 0]) cube([4+print_error*2, 1, 15]);
+  translate([-print_error, 0, 11]) cube([4+print_error*2, 3, 4]);
   // для защелки
   // дырка вбок
   //translate([1, 0, 0]) cube([2, 3, 2]);
   // дырка вниз
-  translate([1, 0, -3]) cube([2, 1, 4]);
-  translate([1, 0, -3]) cube([2, 5, 2]);
+  translate([1-print_error, 0, -3]) cube([2+print_error*2, 1, 4]);
+  translate([1-print_error, 0, -3]) cube([2+print_error*2, 5, 2]);
 }
 
 /**
  * Пипка для плюса.
  */
-module contact_plate_plus() {
-  cube([4, 1, 15]);
-  translate([0, 0, 11]) cube([4, 3, 4]);
+module contact_plate_plus(print_error=0) {
+  translate([-print_error, 0, 0]) cube([4+print_error*2, 1, 15]);
+  translate([-print_error, 0, 11]) cube([4+print_error*2, 3, 4]);
   // для защелки
   // дырка вбок
   //translate([1, 0, 0]) cube([2, 3, 2]);
   // дырка вниз
-  translate([1, 0, -3]) cube([2, 1, 4]);
-  translate([1, 0, -3]) cube([2, 5, 2]);
+  translate([1-print_error, 0, -3]) cube([2+print_error*2, 1, 4]);
+  translate([1-print_error, 0, -3]) cube([2+print_error*2, 5, 2]);
 }
 
 /**
- * Щеля для контактов в стенке отсека.
+ * Щель для контактов в стенке отсека.
  */
-module contact_gap() {
+module contact_gap(print_error=0) {
   // внутри стенки
   cube([19, 1, 15]);
 
   // для пипки
-  contact_plate_plus();
+  contact_plate_plus(print_error=print_error);
 
   // для пружинки
-  translate([15, 0, 0]) contact_plate_minus();
+  translate([15, 0, 0]) contact_plate_minus(print_error=print_error);
 }
 
 /**
@@ -408,7 +409,7 @@ module wire_jam_with_breadboard() {
 /** 
  * Рейка с отверстиями.
  */
-module plank_with_holes(holes=1) {
+module plank_with_holes(holes=1, print_error=0) {
   // отверстие=4мм
   // расстояние между отверстиями=6мм
   // расстояние от отверстия до края=3мм
@@ -418,14 +419,10 @@ module plank_with_holes(holes=1) {
     // в длину по Y
     cube([3+4+3, 2+(6+4)*holes, 2]);
 
-    // дырки по Z
-    translate([5, 3, 2+3+2]) 
-      rotate ([90, 0, 0]) cylinder(h=4, r=2, $fn=100);
-
     // дырки по Y
     for(hole=[1 : holes]) {
       translate([5, 2-3+(6+4)*hole-2, -1]) 
-        cylinder(h=4, r=2, $fn=100);
+        cylinder(h=4, r=2+print_error, $fn=100);
     }   
   }
 }
