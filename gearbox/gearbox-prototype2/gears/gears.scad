@@ -32,7 +32,7 @@ module gear_motor(print_error=0.2) {
   difference() {
     union() {
       // шестеренка
-      linear_extrude(height=3) import(file="gear-pa20-cp1.5-t9.dxf");
+      linear_extrude(height=5) import(file="gear-pa20-cp1.5-t9.dxf");
 
       // подсадка, чтобы не расплывались зубья
       // для cp1.5-t9
@@ -65,6 +65,9 @@ module gear_transmission() {
       translate([0, 0, 2]) 
         linear_extrude(height=6) import(file="gear-pa20-cp3-t13.dxf");
 
+      // кругляш на макушке вокруг оси, чтобы упираться в стенку
+      translate([0, 0, 7.9]) cylinder(h=0.6, r=3, $fn=100);
+
       // подсадка, чтобы не расплывались зубья
       translate([0, 0, -0.3]) cylinder(h=1, r=13.8, $fn=100);
     }
@@ -90,6 +93,9 @@ module gear_wheel() {
     union() {
       // шестеренка
       linear_extrude(height=3) import(file="gear-pa20-cp3-t27.dxf");
+
+      // кругляш на макушке вокруг оси, чтобы упираться в стенку
+      translate([0, 0, 2.9]) cylinder(h=1.1, r=3, $fn=100);
 
       // подсадка, чтобы не расплывались зубья
       translate([0, 0, -0.3]) cylinder(h=1, r=11.6, $fn=100);
