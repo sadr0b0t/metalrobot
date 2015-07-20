@@ -65,8 +65,8 @@ module gear_transmission() {
       translate([0, 0, 2]) 
         linear_extrude(height=6) import(file="gear-pa20-cp3-t13.dxf");
 
-      // кругляш на макушке вокруг оси, чтобы упираться в стенку
-      translate([0, 0, 7.9]) cylinder(h=0.6, r=3, $fn=100);
+      // кругляш на макушке вокруг оси, чтобы упираться в стенку 0.5
+      translate([0, 0, 8-0.1]) cylinder(h=0.5+0.1, r=3, $fn=100);
 
       // подсадка, чтобы не расплывались зубья
       translate([0, 0, -0.3]) cylinder(h=1, r=13.8, $fn=100);
