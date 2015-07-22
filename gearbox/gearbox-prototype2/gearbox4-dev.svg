@@ -23,11 +23,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.7919596"
-     inkscape:cx="171.08538"
-     inkscape:cy="25.912467"
+     inkscape:zoom="1.12"
+     inkscape:cx="231.97292"
+     inkscape:cy="-48.953388"
      inkscape:document-units="mm"
-     inkscape:current-layer="layer6"
+     inkscape:current-layer="layer5"
      showgrid="true"
      inkscape:window-width="1366"
      inkscape:window-height="705"
@@ -186,7 +186,7 @@
      inkscape:groupmode="layer"
      id="layer5"
      inkscape:label="колеса"
-     style="display:none">
+     style="display:inline">
     <ellipse
        ry="88.582672"
        rx="88.58268"
