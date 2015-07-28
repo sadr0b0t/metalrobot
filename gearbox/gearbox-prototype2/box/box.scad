@@ -121,7 +121,7 @@ module box_half_motor(print_error=0) {
       cylinder(r=screw_bar_r+print_error, h=3, $fn=100);
 
 
-    // для шестеренок на моторах 
+    // для шестеренок на колесах 
     // (см координаты в gearbox4-dev.svg в Inkscape)
     // слева
     translate([-35, -5.1, -1])
@@ -130,7 +130,7 @@ module box_half_motor(print_error=0) {
     translate([35, -5.1, -1])
       cylinder(r=1.5+print_error, h=4, $fn=100);
 
-    // небольшие выступы для шестеренок на передачах
+    // для шестеренок на передачах
     // слева
     translate([-15.9, -5.1, -1])
       cylinder(r=1+print_error, h=4, $fn=100);
@@ -195,7 +195,7 @@ module box_half_wheels(print_error=0) {
         box_column(height=0.1+screw_bar_height);
 
 
-      // стойки для шестеренок на моторах 
+      // стойки для шестеренок на колесах 
       // (см координаты в gearbox4-dev.svg в Inkscape)
       // слева
       translate([-35, -5.1, wheels_half_height-0.1])
@@ -251,7 +251,7 @@ module box_half_wheels(print_error=0) {
       cylinder(r=screw_head_radius+print_error, h=3, $fn=100);
 
 
-    // для шестеренок на моторах 
+    // для шестеренок на колесах 
     // (см координаты в gearbox4-dev.svg в Inkscape)
     // слева
     translate([-35, -5.1, -1])
