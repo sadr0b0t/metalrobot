@@ -221,6 +221,14 @@ module box_half_motor(print_error=0) {
     translate([gear_wheel_x, gear_wheel_y, -1])
       cylinder(r=1.5+print_error, h=4, $fn=100);
   }
+
+  // стойки для шестеренок на передаче 1
+  // слева
+  translate([-gear_transmission1_x, gear_transmission1_y, -3])
+    box_column(r2=1, height=3+0.1);
+  // справа
+  translate([gear_transmission1_x, gear_transmission1_y, -3])
+    box_column(r2=1, height=3+0.1);
 }
 
 /**
@@ -252,7 +260,7 @@ module box_half_wheels(print_error=0) {
 
   // для "рассверливания" дырок
   max_height=wheels_half_height
-    +gear_transmission1_height1+gear_transmission2_height1+3;
+    +gear_transmission1_height1+gear_transmission2_height+3;
 
   // (см координаты винтов и шестеренок в gearbox5-dev.svg в Inkscape)
   difference() {
@@ -291,10 +299,10 @@ module box_half_wheels(print_error=0) {
       // слева
       translate([-gear_transmission1_x, gear_transmission1_y, 
           wheels_half_height-0.1])
-        box_column(r2=1, height=1+0.1);
+        box_column(r2=1, height=0.5+0.1);
       // справа
       translate([gear_transmission1_x, gear_transmission1_y, wheels_half_height-0.1])
-        box_column(r2=1, height=1+0.1);
+        box_column(r2=1, height=0.5+0.1);
 
       // стойки для шестеренок на передаче 2
       // слева
@@ -312,7 +320,7 @@ module box_half_wheels(print_error=0) {
         box_column(height=
           0.5 // отступ от стенки до передачи 1
           +gear_transmission1_height1 // первая шестеренка передачи 1
-          +0.5 // отступ от первой шестеренки передачи 1
+          +1 // отступ от первой шестеренки передачи 1
           +gear_transmission2_height1 // первая шестеренка передачи 2
           +0.5 // отступ от первой шестеренки передачи 2
           +0.1 // утопить
@@ -322,7 +330,7 @@ module box_half_wheels(print_error=0) {
         box_column(height=
           0.5 // отступ от стенки до передачи 1
           +gear_transmission1_height1 // первая шестеренка передачи 1
-          +0.5 // отступ от первой шестеренки передачи 1
+          +1 // отступ от первой шестеренки передачи 1
           +gear_transmission2_height1 // первая шестеренка передачи 2
           +0.5 // отступ от первой шестеренки передачи 2
           +0.1 // утопить
@@ -339,33 +347,33 @@ module box_half_wheels(print_error=0) {
       cylinder(r=1.5+print_error, h=max_height+2, $fn=100);
     // головка винта
     translate([-hole1_x, hole1_y, -2])
-      cylinder(r=screw_head_radius+print_error, h=3, $fn=100);
+      cylinder(r=screw_head_radius+print_error, h=4, $fn=100);
     // левый нижний
     translate([-hole2_x, hole2_y, -1])
       cylinder(r=1.5+print_error, h=max_height+2, $fn=100);
     // головка винта
     translate([-hole2_x, hole2_y, -2])
-      cylinder(r=screw_head_radius+print_error, h=3, $fn=100);
+      cylinder(r=screw_head_radius+print_error, h=4, $fn=100);
 
     // правый верхний
     translate([hole1_x, hole1_y, -1])
       cylinder(r=1.5+print_error, h=max_height+2, $fn=100);
     // головка винта
     translate([hole1_x, hole1_y, -2])
-      cylinder(r=screw_head_radius+print_error, h=3, $fn=100);
+      cylinder(r=screw_head_radius+print_error, h=4, $fn=100);
     // правый нижний
     translate([hole2_x, hole2_y, -1])
       cylinder(r=1.5+print_error, h=max_height+2, $fn=100);
     // головка винта
     translate([hole2_x, hole2_y, -2])
-      cylinder(r=screw_head_radius+print_error, h=3, $fn=100);
+      cylinder(r=screw_head_radius+print_error, h=4, $fn=100);
 
     // винт по центру
     translate([0, hole_center1_y, -1])
       cylinder(r=1.5+print_error, h=max_height+2, $fn=100);
     // головка винта
     translate([0, hole_center1_y, -2])
-      cylinder(r=screw_head_radius+print_error, h=3, $fn=100);
+      cylinder(r=screw_head_radius+print_error, h=4, $fn=100);
    
     // для шестеренок на передаче 1
     // слева
