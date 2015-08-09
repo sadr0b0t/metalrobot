@@ -8,6 +8,7 @@ import java.net.Socket;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -202,106 +203,263 @@ public class RobotCarPultActivity extends Activity {
         });
 
         btnCmdForward = (ImageButton) findViewById(R.id.btn_cmd_forward);
-        btnCmdForward.setOnClickListener(new View.OnClickListener() {
-
+        // btnCmdForward.setOnClickListener(new View.OnClickListener() {
+        btnCmdForward.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v) {
-                sendCommand(CMD_FORWARD, new CommandListener() {
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    sendCommand(CMD_FORWARD, new CommandListener() {
 
-                    @Override
-                    public void onCommandExecuted(final String cmd,
-                            final String reply) {
-                        handler.post(new Runnable() {
+                        @Override
+                        public void onCommandExecuted(final String cmd,
+                                final String reply) {
+                            handler.post(new Runnable() {
 
-                            @Override
-                            public void run() {
-                                Toast.makeText(
-                                        RobotCarPultActivity.this,
-                                        "Command: " + cmd + "\n" + "Reply: "
-                                                + reply, Toast.LENGTH_SHORT)
-                                        .show();
-                            }
-                        });
-                    }
-                });
+                                @Override
+                                public void run() {
+                                    Toast.makeText(
+                                            RobotCarPultActivity.this,
+                                            "Command: " + cmd + "\n"
+                                                    + "Reply: " + reply,
+                                            Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                    });
+                } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                    sendCommand(CMD_STOP, new CommandListener() {
+
+                        @Override
+                        public void onCommandExecuted(final String cmd,
+                                final String reply) {
+                            handler.post(new Runnable() {
+
+                                @Override
+                                public void run() {
+                                    Toast.makeText(
+                                            RobotCarPultActivity.this,
+                                            "Command: " + cmd + "\n"
+                                                    + "Reply: " + reply,
+                                            Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                    });
+                }
+                return false;
             }
         });
 
         btnCmdBackward = (ImageButton) findViewById(R.id.btn_cmd_backward);
-        btnCmdBackward.setOnClickListener(new View.OnClickListener() {
-
+        btnCmdBackward.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v) {
-                sendCommand(CMD_BACKWARD, new CommandListener() {
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    sendCommand(CMD_BACKWARD, new CommandListener() {
 
-                    @Override
-                    public void onCommandExecuted(final String cmd,
-                            final String reply) {
-                        handler.post(new Runnable() {
+                        @Override
+                        public void onCommandExecuted(final String cmd,
+                                final String reply) {
+                            handler.post(new Runnable() {
 
-                            @Override
-                            public void run() {
-                                Toast.makeText(
-                                        RobotCarPultActivity.this,
-                                        "Command: " + cmd + "\n" + "Reply: "
-                                                + reply, Toast.LENGTH_SHORT)
-                                        .show();
-                            }
-                        });
-                    }
-                });
+                                @Override
+                                public void run() {
+                                    Toast.makeText(
+                                            RobotCarPultActivity.this,
+                                            "Command: " + cmd + "\n"
+                                                    + "Reply: " + reply,
+                                            Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                    });
+                } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                    sendCommand(CMD_STOP, new CommandListener() {
+
+                        @Override
+                        public void onCommandExecuted(final String cmd,
+                                final String reply) {
+                            handler.post(new Runnable() {
+
+                                @Override
+                                public void run() {
+                                    Toast.makeText(
+                                            RobotCarPultActivity.this,
+                                            "Command: " + cmd + "\n"
+                                                    + "Reply: " + reply,
+                                            Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                    });
+                }
+                return false;
             }
         });
+        // btnCmdBackward.setOnClickListener(new View.OnClickListener() {
+        //
+        // @Override
+        // public void onClick(View v) {
+        // sendCommand(CMD_BACKWARD, new CommandListener() {
+        //
+        // @Override
+        // public void onCommandExecuted(final String cmd,
+        // final String reply) {
+        // handler.post(new Runnable() {
+        //
+        // @Override
+        // public void run() {
+        // Toast.makeText(
+        // RobotCarPultActivity.this,
+        // "Command: " + cmd + "\n" + "Reply: "
+        // + reply, Toast.LENGTH_SHORT)
+        // .show();
+        // }
+        // });
+        // }
+        // });
+        // }
+        // });
 
         btnCmdLeft = (ImageButton) findViewById(R.id.btn_cmd_left);
-        btnCmdLeft.setOnClickListener(new View.OnClickListener() {
-
+        // btnCmdLeft.setOnClickListener(new View.OnClickListener() {
+        //
+        // @Override
+        // public void onClick(View v) {
+        // sendCommand(CMD_LEFT, new CommandListener() {
+        //
+        // @Override
+        // public void onCommandExecuted(final String cmd,
+        // final String reply) {
+        // handler.post(new Runnable() {
+        //
+        // @Override
+        // public void run() {
+        // Toast.makeText(
+        // RobotCarPultActivity.this,
+        // "Command: " + cmd + "\n" + "Reply: "
+        // + reply, Toast.LENGTH_SHORT)
+        // .show();
+        // }
+        // });
+        // }
+        // });
+        // }
+        // });
+        btnCmdLeft.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v) {
-                sendCommand(CMD_LEFT, new CommandListener() {
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    sendCommand(CMD_LEFT, new CommandListener() {
 
-                    @Override
-                    public void onCommandExecuted(final String cmd,
-                            final String reply) {
-                        handler.post(new Runnable() {
+                        @Override
+                        public void onCommandExecuted(final String cmd,
+                                final String reply) {
+                            handler.post(new Runnable() {
 
-                            @Override
-                            public void run() {
-                                Toast.makeText(
-                                        RobotCarPultActivity.this,
-                                        "Command: " + cmd + "\n" + "Reply: "
-                                                + reply, Toast.LENGTH_SHORT)
-                                        .show();
-                            }
-                        });
-                    }
-                });
+                                @Override
+                                public void run() {
+                                    Toast.makeText(
+                                            RobotCarPultActivity.this,
+                                            "Command: " + cmd + "\n"
+                                                    + "Reply: " + reply,
+                                            Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                    });
+                } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                    sendCommand(CMD_STOP, new CommandListener() {
+
+                        @Override
+                        public void onCommandExecuted(final String cmd,
+                                final String reply) {
+                            handler.post(new Runnable() {
+
+                                @Override
+                                public void run() {
+                                    Toast.makeText(
+                                            RobotCarPultActivity.this,
+                                            "Command: " + cmd + "\n"
+                                                    + "Reply: " + reply,
+                                            Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                    });
+                }
+                return false;
             }
         });
 
         btnCmdRight = (ImageButton) findViewById(R.id.btn_cmd_right);
-        btnCmdRight.setOnClickListener(new View.OnClickListener() {
-
+        // btnCmdRight.setOnClickListener(new View.OnClickListener() {
+        //
+        // @Override
+        // public void onClick(View v) {
+        // sendCommand(CMD_RIGHT, new CommandListener() {
+        //
+        // @Override
+        // public void onCommandExecuted(final String cmd,
+        // final String reply) {
+        // handler.post(new Runnable() {
+        //
+        // @Override
+        // public void run() {
+        // Toast.makeText(
+        // RobotCarPultActivity.this,
+        // "Command: " + cmd + "\n" + "Reply: "
+        // + reply, Toast.LENGTH_SHORT)
+        // .show();
+        // }
+        // });
+        // }
+        // });
+        // }
+        // });
+        btnCmdRight.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v) {
-                sendCommand(CMD_RIGHT, new CommandListener() {
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    sendCommand(CMD_RIGHT, new CommandListener() {
 
-                    @Override
-                    public void onCommandExecuted(final String cmd,
-                            final String reply) {
-                        handler.post(new Runnable() {
+                        @Override
+                        public void onCommandExecuted(final String cmd,
+                                final String reply) {
+                            handler.post(new Runnable() {
 
-                            @Override
-                            public void run() {
-                                Toast.makeText(
-                                        RobotCarPultActivity.this,
-                                        "Command: " + cmd + "\n" + "Reply: "
-                                                + reply, Toast.LENGTH_SHORT)
-                                        .show();
-                            }
-                        });
-                    }
-                });
+                                @Override
+                                public void run() {
+                                    Toast.makeText(
+                                            RobotCarPultActivity.this,
+                                            "Command: " + cmd + "\n"
+                                                    + "Reply: " + reply,
+                                            Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                    });
+                } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                    sendCommand(CMD_STOP, new CommandListener() {
+
+                        @Override
+                        public void onCommandExecuted(final String cmd,
+                                final String reply) {
+                            handler.post(new Runnable() {
+
+                                @Override
+                                public void run() {
+                                    Toast.makeText(
+                                            RobotCarPultActivity.this,
+                                            "Command: " + cmd + "\n"
+                                                    + "Reply: " + reply,
+                                            Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                    });
+                }
+                return false;
             }
         });
 
