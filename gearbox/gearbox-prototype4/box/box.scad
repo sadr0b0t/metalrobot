@@ -6,10 +6,10 @@ print_error=0.2;
 //box_half_motor(print_error=print_error);
 
 // половинка с колесами
-//box_half_wheels(print_error=print_error);
+box_half_wheels(print_error=print_error);
 
 // в сборке
-gearbox();
+//gearbox();
 
 //motor_fix();
 
@@ -17,7 +17,7 @@ gear_transmission1_x=10.7;
 gear_transmission1_y=-5.6;
 
 gear_transmission2_x=22.8;
-gear_transmission2_y=-1.1;
+gear_transmission2_y=-1.2;
 
 gear_wheel_x=35;
 gear_wheel_y=-5.6;
