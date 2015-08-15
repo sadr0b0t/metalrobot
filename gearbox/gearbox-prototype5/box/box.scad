@@ -6,10 +6,13 @@ print_error=0.2;
 //box_half_motor(print_error=print_error);
 
 // половинка с колесами
-box_half_wheels(print_error=print_error);
+//box_half_wheels(print_error=print_error);
 
 // в сборке
-//gearbox();
+gearbox();
+
+//wheel_shim(print_error=print_error);
+//axis_jam(print_error=0);
 
 //motor_fix();
 
@@ -58,7 +61,7 @@ module gearbox() {
 
   gear_wheel_height = 0.3+3;
 
-  // стенки
+  // стенки (расстояние между стенками 13.1)
   box_half_wheels();
   translate([0, 0, 
     wheels_half_height // высота стенки с колесами
@@ -477,3 +480,52 @@ module box_column(height=6, r1=3.5, r2=1.5) {
       cylinder(h=height+2, r=r2, $fn=100);
   }
 }
+
+
+/**
+ * Зажим для оси с отверстием под стягивающий винт.
+ */
+module axis_jam(screw_diam=3, print_error=0) {
+  difference() {
+    // главный вал
+    cylinder(h=9, r=5, $fn=100);
+
+    // ось
+    //generic_axis(print_error=print_error);
+    //motor1_axis(print_error=print_error);
+    motor2_axis(print_error=print_error);
+
+    // отверстие под винт m3x6
+    translate([0, 0, 3]) rotate([0, 60, 0])
+      // винт должен прорезать не только
+      // внешнюю стенку, но и внутреннюю 
+      // поверхность трубы
+      translate([0, 0, -1])
+      cylinder(h=10, r=screw_diam/2, $fn=6);
+
+    // полость внутри кольца, чтобы винт легче вкручивался
+    translate([0, 0, 1]) difference() {
+      cylinder(h=7, r=4, $fn=100);
+      // для оси с r=1.5 мм
+      cylinder(h=7, r=2.5, $fn=100);      
+    }
+  }
+}
+
+/**
+ * Небольшая прокладка между колесом и стенкой редуктора,
+ * чтобы клесо при вращении не зацеплялось за стенку и 
+ * головки винтов.
+ */
+module wheel_shim(height=3, print_error=0) {
+  difference() {
+    // внутренний вал
+    cylinder(h=height, r=5, $fn=100);
+
+    // ось
+    //generic_axis(print_error=print_error);
+    //motor1_axis(print_error=print_error);
+    motor2_axis(print_error=print_error);
+  }
+}
+
