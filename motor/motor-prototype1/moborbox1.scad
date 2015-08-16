@@ -14,8 +14,8 @@ box(core_radius=7.3, rod_radius=1, print_error=print_error);
 //lid(core_radius=7.3, rod_radius=1, print_error=print_error);
 //collector(rod_radius=1, print_error=print_error);
 //collector_fix(print_error=print_error);
-//collector_lid(rod_radius=1, print_error=print_error);
-//bottom_fix(rod_radius=1, print_error=print_error);
+//rotate([180,0,0]) collector_lid(rod_radius=1, print_error=print_error);
+//bottom_fix(rod_radius=1, print_error=0.1);
 
 // остальное
 //brush_box();
@@ -170,9 +170,9 @@ module collector(rod_radius=1, print_error=0) {
       cylinder(r=2, h=9, $fn=100);
      
       // блок для ложа для щеток
-      translate([0, 0, 4]) cylinder(r=2.5, h=5, $fn=100);
+      translate([0, 0, 4]) cylinder(r=3, h=5, $fn=100);
       // ступенька под щетками
-      translate([0, 0, 2]) cylinder(r=3.5, h=2, $fn=100);
+      translate([0, 0, 2]) cylinder(r=4, h=2, $fn=100);
 
     }
     
@@ -181,7 +181,7 @@ module collector(rod_radius=1, print_error=0) {
 
     // ложа для щеток
     for(a=[0, 120, 240]) {
-      rotate([0, 0, a]) translate([-1.5, 1.5, 3]) cube([3, 5, 7]);
+      rotate([0, 0, a]) translate([-1.5, 2, 3]) cube([3, 5, 7]);
     }
   }
 }
@@ -192,10 +192,10 @@ module collector(rod_radius=1, print_error=0) {
 module collector_fix(print_error=0) {
   difference() {
     // как ступенька под щетками
-    cylinder(r=3.5, h=2, $fn=100);
+    cylinder(r=4, h=2, $fn=100);
 
     // как блок для ложа для щеток
-    translate([0, 0, -1]) cylinder(r=2.5+print_error, h=4, $fn=100);
+    translate([0, 0, -1]) cylinder(r=3+print_error, h=4, $fn=100);
   }
 }
 
@@ -205,10 +205,10 @@ module collector_fix(print_error=0) {
 module collector_lid(rod_radius=1, print_error=0) {
   difference() {
     // как ступенька под щетками
-    cylinder(r=3.5, h=3, $fn=100);
+    cylinder(r=4, h=3, $fn=100);
 
     // как блок для ложа для щеток
-    translate([0, 0, -1]) cylinder(r=2.5+print_error, h=3, $fn=100);
+    translate([0, 0, -1]) cylinder(r=3+print_error, h=3, $fn=100);
 
     // вал мотора
     translate([0, 0, -1]) cylinder(r=rod_radius+print_error, h=5, $fn=100);
@@ -221,10 +221,11 @@ module collector_lid(rod_radius=1, print_error=0) {
 module bottom_fix(rod_radius=1, print_error=0) {
   difference() {
     // основной цилиндр
-    cylinder(r=2.5, h=2, $fn=100);
+    cylinder(r=3, h=2, $fn=100);
     
     // вал мотора
-    translate([0, 0, -1]) cylinder(r=rod_radius+print_error, h=4, $fn=100);
+    translate([0, 0, -1]) 
+      cylinder(r=rod_radius+print_error, h=4, $fn=100);
   }
 }
 
