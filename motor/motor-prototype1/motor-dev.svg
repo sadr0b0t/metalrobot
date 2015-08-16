@@ -25,9 +25,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.12"
-     inkscape:cx="-197.13542"
-     inkscape:cy="797.3561"
+     inkscape:zoom="6.3356768"
+     inkscape:cx="66.086987"
+     inkscape:cy="838.79439"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -82,7 +82,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -303,13 +303,13 @@
     <path
        id="rect3372"
        style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:1;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:8;stroke-opacity:1"
-       d="m 44.291339,230.31496 -10e-7,5.66928 -1.771653,0 0,3.18898 1.771653,0 10e-7,1.77166 -7.086614,0 -1e-6,-1.77166 1.771654,0 0,-3.18898 -1.771654,0 1e-6,-5.66928 -1.771653,-1e-5 0,-21.25985 10.629923,0 0,21.25985 z"
+       d="m 44.291339,230.31496 -10e-7,8.85826 -1.771653,0 0,3.54331 1.771653,0 10e-7,1.77166 -7.086614,0 -1e-6,-1.77166 1.771654,0 0,-3.54331 -1.771654,0 1e-6,-8.85826 -1.771653,-1e-5 -3e-6,-28.34646 10.629923,0 3e-6,28.34646 z"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="ccccccccccccccccc" />
     <path
        id="rect3372-8"
        style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:1;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:8;stroke-opacity:1"
-       d="m 67.322834,230.31495 -10e-7,8.85828 1.771653,0 10e-7,1.77166 -7.086614,0 -10e-7,-1.77166 1.771655,-1e-5 0,-8.85827 -3.543307,1e-5 0,-21.25985 10.629923,0 0,21.25985 z"
+       d="m 67.322834,230.31495 0,12.40158 1.771653,0 10e-7,1.77166 -7.086614,0 -1e-6,-1.77166 1.771655,-1e-5 -10e-7,-12.40157 -3.543307,1e-5 -2e-6,-28.34647 10.629923,0 2e-6,28.34647 z"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="ccccccccccccc" />
     <path
@@ -328,13 +328,13 @@
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:15.9285202px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="26.899824"
-       y="198.65524"
+       y="193.17287"
        id="text3373"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan3375"
          x="26.899824"
-         y="198.65524">контакты коллектора</tspan></text>
+         y="193.17287">контакты коллектора</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
