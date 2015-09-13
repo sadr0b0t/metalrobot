@@ -29,10 +29,10 @@ gear_wheel_y=-6.1;
 gear_wheel_r=12;
 
 // левый/правый верхний
-hole1_x=49;
+hole1_x=50;
 hole1_y=2.3;
 // левый/правый нижний
-hole2_x=49;
+hole2_x=50;
 hole2_y=-14;
 
 // по центру
@@ -461,7 +461,7 @@ module motor_fix() {
 
     translate([0, 0, -1])
       linear_extrude(height=20)
-        import(file="motor_face-43d.dxf");
+        import(file="motor_face-f130-43d.dxf");
 
     // пазик для контактов
     translate([-15/2, size_y/2-2, 14]) cube([15, 3, 5]);
