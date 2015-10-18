@@ -124,12 +124,16 @@ module holder1(count=4, holes1=3, print_error=0) {
   }
 
   // рейка с отверстиями для крепления
-  translate([-10, -5, 0]) plank_with_holes(holes=6, print_error=print_error);
+  translate([-10+0.5, 0, 0]) 
+    plank_with_holes(holes=6, corner_radius=[2,0,2,0],
+      print_error=print_error);
   // "подклеить" рейку к корпусу (без этого не экспортнется в stl)
-  translate([-1, -5, 0]) cube([2, 62, 2]);
+  //translate([-1, -5, 0]) cube([2, 62, 2]);
 
   // еще рейка с отверстиями
-  translate([15*count, -5, 0]) plank_with_holes(holes=6, print_error=print_error);
+  translate([15*count+0.5, 0, 0]) 
+    plank_with_holes(holes=6, corner_radius=[0,2,0,2],
+      print_error=print_error);
   
   // планка для проверки 
   //translate([-12, 7, -1]) rotate([0,0,-90])  plank_with_holes(14);
@@ -408,22 +412,71 @@ module wire_jam_with_breadboard() {
 
 /** 
  * Рейка с отверстиями.
+ * @param holes - количество отверстий
+ * @param corner_radius - радиусы скругления углов:
+ *   corner_radius[0] - левый нижний угол
+ *   corner_radius[1] - правый нижний угол
+ *   corner_radius[2] - левый верхний угол
+ *   corner_radius[3] - правый нижний угол
+ * @param print_error - погрешность печати 3д-принтера
  */
-module plank_with_holes(holes=1, print_error=0) {
+module plank_with_holes(holes=1, corner_radius=[2,2,2,2], print_error=0) {
   // отверстие=4мм
   // расстояние между отверстиями=6мм
   // расстояние от отверстия до края=3мм
   // толщина=2мм
 
+  x_len = 3+4+3;
+  y_len = 3+(6+4)*holes-3;
+
+  corner_left_max = corner_radius[0]>corner_radius[2] ? corner_radius[0]:corner_radius[2];
+  corner_right_max = corner_radius[1]>corner_radius[3] ? corner_radius[1]:corner_radius[3];
+  corner_down_max = corner_radius[0]>corner_radius[1] ? corner_radius[0]:corner_radius[1];
+  corner_up_max = corner_radius[2]>corner_radius[3] ? corner_radius[2]:corner_radius[3];
+
   difference() {
     // в длину по Y
-    cube([3+4+3, 2+(6+4)*holes, 2]);
+    union() {
+      // оставим место для скругленных углов
+      translate([corner_left_max, corner_down_max, 0])
+        cube([x_len-corner_left_max-corner_right_max, 
+              y_len-corner_down_max-corner_up_max, 2]);
+
+      // скруглим углы
+      // левый нижний
+      translate([corner_radius[0], corner_radius[0], 0])
+        cylinder(h=2, r=corner_radius[0], $fn=100);
+      // правый нижний
+      translate([x_len-corner_radius[1], corner_radius[1], 0])
+        cylinder(h=2, r=corner_radius[1], $fn=100);
+      // левый верхний
+      translate([corner_radius[2], y_len-corner_radius[2], 0])
+        cylinder(h=2, r=corner_radius[2], $fn=100);
+      // правый верхний
+      translate([x_len-corner_radius[3], y_len-corner_radius[3], 0])
+        cylinder(h=2, r=corner_radius[3], $fn=100);
+
+      // добьем рейками по периметру
+      // слева
+      translate([0, corner_radius[0], 0])
+        cube([corner_left_max, y_len-corner_radius[0]-corner_radius[2], 2]);
+      // справа
+      translate([x_len-corner_right_max, corner_radius[1], 0])
+        cube([corner_right_max, y_len-corner_radius[1]-corner_radius[3], 2]);
+      // снизу
+      translate([corner_radius[0], 0, 0])
+        cube([x_len-corner_radius[0]-corner_radius[1], corner_down_max, 2]);
+      // сверху
+      translate([corner_radius[2], y_len-corner_up_max, 0])
+        cube([x_len-corner_radius[2]-corner_radius[3], corner_up_max, 2]);
+    }
 
     // дырки по Y
     for(hole=[1 : holes]) {
-      translate([5, 2-3+(6+4)*hole-2, -1]) 
+      // -2 - сдвинуть центр цилиндра
+      // -3=6/2 - половина расстояния между отверстиями
+      translate([5, (6+4)*hole-3-2, -1]) 
         cylinder(h=4, r=2+print_error, $fn=100);
     }   
   }
 }
-
