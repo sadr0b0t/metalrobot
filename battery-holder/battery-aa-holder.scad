@@ -1,5 +1,8 @@
 use <../breadboard/breadboard.scad>;
 
+// выставить в настройках Edit>Preferences>Advanced: 
+// Turn off rendering at=3000 (2000 не хватает)
+
 print_error = 0.2;
 
 //holder(2, 0);
@@ -13,8 +16,9 @@ holder1(6, 6, print_error);
 //rotate([0, 90, 0]) wire_jam();
 //wire_jam();
 //wire_jam2();
-//wire_jam_with_breadboard();
-//contact_gap();
+//wire_jam_with_breadboard(print_error=print_error);
+//contact_gap(print_error=print_error);
+//contact_plate_plus();
 
 
 /**
@@ -75,12 +79,12 @@ module holder1(count=4, holes1=3, print_error=0) {
         holder_aa(count=count, print_error=print_error);
         
         // освободить место для зажимов слева
-        translate([1, -10, 1]) cube([14, 12, 19]);
+        translate([5, -10, 1]) cube([6, 12, 19]);
         // дополнительно под макетку
         translate([14, -11.5, 1]) cube([16, 12, 19]);
 
         // освободить место для зажимов справа
-        translate([15*(count-1)+1, -10, 1]) cube([14, 12, 19]);
+        translate([15*(count-1)+5, -10, 1]) cube([6, 12, 19]);
         // дополнительно под макетку
         translate([15*(count-1)-14, -11.5, 1]) cube([16, 12, 19]);
         
@@ -121,17 +125,21 @@ module holder1(count=4, holes1=3, print_error=0) {
     // большое окно
     //translate([15*(count-1)+6, -3, 13]) cube([4, 6, 4]);
     //translate([6+15*(count-1), -2, 3]) cube([4, 5, 15]);
+
+    // логотип и ссылки на нижней стороне
+    translate([2, 15, -1])
+      linear_extrude(height=2) import(file="credits-43d.dxf");
   }
 
   // рейка с отверстиями для крепления
-  translate([-10+0.5, 0, 0]) 
+  translate([-10+0.5, -2, 0]) 
     plank_with_holes(holes=6, corner_radius=[2,0,2,0],
       print_error=print_error);
   // "подклеить" рейку к корпусу (без этого не экспортнется в stl)
   //translate([-1, -5, 0]) cube([2, 62, 2]);
 
   // еще рейка с отверстиями
-  translate([15*count+0.5, 0, 0]) 
+  translate([15*count+0.5, -2, 0]) 
     plank_with_holes(holes=6, corner_radius=[0,2,0,2],
       print_error=print_error);
   
@@ -159,18 +167,22 @@ module holder_aa(count=4, print_error=0) {
         rotate([0,0,180]) battery_aa_bed();
     }
 
+    // выемки по бокам
+    translate([-3, 30, 20]) rotate([0, 90, 0]) 
+      cylinder(h=15*(count+1), r=15, $fn=100);
+
     // ячейки для контактов 
     // внизу
     if(count > 2) {
       for(i = [1 : count/2-1]) {
-        translate([6+15+30*(i-1), 2, 2])
+        translate([6+15+30*(i-1), 2, -1])
           contact_gap(print_error=print_error);
       }
     }
 
     // наверху
     for(i = [1 : count/2]) {
-      translate([6+30*(i-1), 58, 2]) 
+      translate([6+30*(i-1), 58, -1]) 
         mirror([0, 1, 0]) contact_gap(print_error=print_error);
     }
 
@@ -184,18 +196,48 @@ module holder_aa(count=4, print_error=0) {
   }
 }
 
+
+/**
+ * Батарейка AA цилиндр 50x14мм плюс 2 мм в длину.
+ */
+module battery_aa_bed() {
+  difference() {
+    union() {
+      // 51мм длина батарейки минус 2мм на выступ под носик
+      // плюс 2мм на пружину
+      translate([0, 0, 7]) rotate([270, 0, 0]) 
+        cylinder(h=51-2+2, r=7, $fn=100);
+  
+      // вход сверху
+      translate([-7, 0, 7]) cube([14, 51, 7]);
+      
+      // выемка под носик
+      translate([-2.5, 50, 0]) cube([5, 2, 14]);
+    }
+
+    // "пружинистый" выступ на минусе
+    translate([-2, -6, 6]) rotate([0, 90, 0]) 
+      cylinder(h=4, r=7, $fn=100);
+
+    // "пружинистый" выступ на плюсе
+    translate([-2, 58.5, 6]) rotate([0, 90, 0]) 
+      cylinder(h=4, r=7, $fn=100);
+  }
+  
+  // метка минус
+  translate([-2, 6, -3]) cube([4, 2, 6]);
+
+  // метка плюс
+  translate([-2, 44, -3]) cube([4, 2, 6]);
+  translate([-1, 43, -3]) cube([2, 4, 6]);
+}
+
 /**
  * Пружинка для минуса.
  */
 module contact_plate_minus(print_error=0) {
   translate([-print_error, 0, 0]) cube([4+print_error*2, 1, 15]);
   translate([-print_error, 0, 11]) cube([4+print_error*2, 3, 4]);
-  // для защелки
-  // дырка вбок
-  //translate([1, 0, 0]) cube([2, 3, 2]);
-  // дырка вниз
-  translate([1-print_error, 0, -3]) cube([2+print_error*2, 1, 4]);
-  translate([1-print_error, 0, -3]) cube([2+print_error*2, 5, 2]);
 }
 
 /**
@@ -204,12 +246,6 @@ module contact_plate_minus(print_error=0) {
 module contact_plate_plus(print_error=0) {
   translate([-print_error, 0, 0]) cube([4+print_error*2, 1, 15]);
   translate([-print_error, 0, 11]) cube([4+print_error*2, 3, 4]);
-  // для защелки
-  // дырка вбок
-  //translate([1, 0, 0]) cube([2, 3, 2]);
-  // дырка вниз
-  translate([1-print_error, 0, -3]) cube([2+print_error*2, 1, 4]);
-  translate([1-print_error, 0, -3]) cube([2+print_error*2, 5, 2]);
 }
 
 /**
@@ -217,37 +253,15 @@ module contact_plate_plus(print_error=0) {
  */
 module contact_gap(print_error=0) {
   // внутри стенки
-  cube([19, 1, 15]);
+  translate([-print_error, 0, 0]) cube([19+print_error*2, 1, 14]);
 
-  // для пипки
-  contact_plate_plus(print_error=print_error);
+  // для пружинки (минус)
+  translate([-print_error, 0, 13.9]) cube([4+print_error*2, 3, 4]);
 
-  // для пружинки
-  translate([15, 0, 0]) contact_plate_minus(print_error=print_error);
+  // для пипки (плюс)
+  translate([15-print_error, 0, 13.9]) cube([4+print_error*2, 3, 4]);
 }
 
-/**
- * Батарейка AA цилиндр 50x14мм плюс 2 мм в длину.
- */
-module battery_aa_bed() {
-  difference() {
-    union() {
-      // 50мм длина батарейки минус 2мм на выступ под носик
-      // плюс 2мм на пружину
-      translate([0, 0, 7]) rotate([270, 0, 0]) 
-        cylinder(h=50-2+2, r=7, $fn=100);
-      translate([-7, 0, 7]) cube([14, 50, 7]);
-      translate([-2.5, 49, 0]) cube([5, 3, 14]);
-    }
-  }
-  
-  // минус
-  translate([-2, 6, -3]) cube([4, 2, 6]);
-
-  // плюс
-  translate([-2, 44, -3]) cube([4, 2, 6]);
-  translate([-1, 43, -3]) cube([2, 4, 6]);
-}
 
 /**
  * Зажим для проводов.
@@ -324,37 +338,25 @@ module wire_jam2() {
   nut_width = 6;
 
   difference() {
-    cube([12, 15, 8]);
+    translate([1, 0, 0]) union() cube([11, 15, 6]);
     
     // гайка
     translate([0, 3.5, 0]) union() {
-      translate([-3, -nut_width/2+4, -1]) cube([8, nut_width, 5]);
-      translate([5, 4, -1]) /*rotate([0, 0, 90])*/ linear_extrude(height=5) 
+      translate([-3, -nut_width/2+4, -1]) cube([8, nut_width, 4]);
+      translate([5, 4, -1]) /*rotate([0, 0, 90])*/ linear_extrude(height=4) 
         import(file = "screw-nut-m3.dxf");
       
-      // 
-      translate([-1, 0, 3]) cube([10, 8, 1]);
+      // еще щелка над гайкой
+      translate([-1, 0, 2]) cube([10, 8, 1]);
     }
     
-    // внутренняя площадка для контакта
-    translate([0, 3.5, 5]) union() {
-      translate([5, 4, 0]) rotate([0, 0, 270]) linear_extrude(height=2) 
+    // площадка для контакта
+    translate([0, 3.5, 4]) union() {
+      translate([5, 4, 0]) rotate([0, 0, 270]) linear_extrude(height=3) 
         import(file = "wire-plate1-43d.dxf");
       //translate([5-9/2, 4-8/2, 0]) cube([9, 8, 2]);
       // срезать "выход" для шайбы
       //translate([-1, 0, 0]) cube([6, 8, 2]);
-    }
-
-    // внешняя площадка для контакта
-    translate([0, 3.5, 6]) union() {
-      translate([5, 4, 0]) rotate([0, 0, 270]) linear_extrude(height=3) 
-        import(file = "wire-plate1-43d.dxf");
-
-      // срезать "выход"
-      translate([-1, 0, 0]) cube([6, 8, 3]);
-
-      //translate([5, 4, 0]) cylinder(h=3, r=4, $fn=100);
-      //translate([5-9/2, 4-8/2, 0]) cube([9, 8, 3]);
     }
 
     // винт
@@ -362,13 +364,13 @@ module wire_jam2() {
   }
 
   // ушки для проводов
-  difference() {
-    union() {
-      translate([-4, 0, 0]) cube([5, 3.5, 8]);
-      translate([-4, 11.5, 0]) cube([5, 3.5, 8]);
-    }
-    //translate([-2, -1, -1]) cube([2, 16, 8]);
-  }
+//  difference() {
+//    union() {
+//      translate([-4, 0, 0]) cube([5, 3.5, 7]);
+//      translate([-4, 11.5, 0]) cube([5, 3.5, 7]);
+//    }
+//    //translate([-2, -1, -1]) cube([2, 16, 7]);
+//  }
 }
 
 /**
@@ -382,13 +384,13 @@ module wire_jam_with_breadboard() {
       // подправим макетку
       difference() {
         //translate([2, 13, 1]) breadboard_half(lines=2);
-        translate([1.55, 14, 2]) breadboard_half(lines=1);
+        translate([1.05, 14, 2]) breadboard_half(lines=1);
 
         // подрежем слева, чтобы не вылезала внутри зажима
         translate([1.55, 12, 1]) cube([5, 2, 10]);
 
         // вскроем стенку справа, чтобы засунуть контакты (снизу запаяли)
-        translate([2.55, 28, 1]) cube([1.9, 4, 8]);
+        translate([2.05, 28, 1]) cube([1.9, 4, 8]);
         // и немного срежем
         translate([1, 30, 1]) cube([5, 2, 10]);
       }
@@ -398,15 +400,16 @@ module wire_jam_with_breadboard() {
       //translate([0, 13, 0]) cube([1, 17, 8]);
       //translate([8, 13, 0]) cube([1, 17, 8]);  
       // для одной линии
-      translate([0, 14, 0]) cube([2.1, 16, 8]);
-      translate([4.9, 14, 0]) cube([2.1, 16, 8]);
+      translate([0, 14, 0]) cube([1.1, 16, 8]);
+      translate([4.9, 14, 0]) cube([1.1, 16, 8]);
 
       // дно снизу
-      translate([0, 14, 0]) cube([7, 16, 1]);
+      translate([0, 14, 0]) cube([6, 16, 1]);
     }
     
     // путь до контактов макетки
-    translate([3, 3.5, 1]) cube([1, 13.6, 18]);
+    //translate([3, 3.5, 1]) cube([1, 13.6, 18]);
+    translate([2, 3.5, 1]) cube([1, 13.6, 8]);
   }
 }
 
