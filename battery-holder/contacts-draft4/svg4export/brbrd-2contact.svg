@@ -15,7 +15,9 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.4 r9939"
-   sodipodi:docname="wire-plate1-43d.svg">
+   sodipodi:docname="brbrd-2contact.svg">
+  <defs
+     id="defs4" />
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -23,9 +25,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="8.96"
-     inkscape:cx="36.322079"
-     inkscape:cy="-8.0420467"
+     inkscape:zoom="1.5839192"
+     inkscape:cx="197.40362"
+     inkscape:cy="27.542427"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -43,34 +45,20 @@
      inkscape:snap-midpoints="false"
      inkscape:snap-global="true">
     <inkscape:grid
-       empspacing="10"
-       dotted="true"
-       spacingy="1.7716536"
-       spacingx="1.7716536"
-       units="mm"
+       type="xygrid"
        id="grid3336"
-       type="xygrid" />
-    <inkscape:grid
-       spacingy="3.5433072"
-       spacingx="3.5433071"
        units="mm"
+       spacingx="1.7716536"
+       spacingy="1.7716536"
+       dotted="true"
+       empspacing="10" />
+    <inkscape:grid
+       type="xygrid"
        id="grid5100"
-       type="xygrid" />
-    <sodipodi:guide
-       id="guide4201"
-       orientation="1052.3622,0"
-       position="372.0472,0" />
-    <sodipodi:guide
-       id="guide4203"
-       orientation="0,744.0945"
-       position="0,350.7874" />
-    <sodipodi:guide
-       id="guide4205"
-       orientation="0,744.0945"
-       position="0,701.5748" />
+       units="mm"
+       spacingx="3.5433071"
+       spacingy="3.5433072" />
   </sodipodi:namedview>
-  <defs
-     id="defs4" />
   <metadata
      id="metadata7">
     <rdf:RDF>
@@ -84,14 +72,14 @@
     </rdf:RDF>
   </metadata>
   <g
-     id="layer1"
+     inkscape:label="Layer 1"
      inkscape:groupmode="layer"
-     inkscape:label="Layer 1">
+     id="layer1">
     <path
-       style="fill:#2b2200;fill-opacity:1;stroke:none"
-       d="m -17.716541,1034.6467 0,31.8887 35.433072,0 10e-6,-31.8887 -12.4015803,0 0,3.5433 -10.629922,0 0,-3.5434 z m 17.71719970524,12.4001 2.00424269476,0.4392 1.6963466,1.1746 1.1746649,1.6963 0.4391978,2.0043 -0.4386719,2.0048 -1.1745608,1.697 -1.6965575,1.1752 -2.00466179476,0.4394 -2.00524110524,-0.4389 -1.6972001,-1.175 -1.1750821,-1.6972 -0.4388867,-2.0053 0.4394127,-2.0046 1.1751861,-1.6966 1.6969892,-1.1745 z"
-       id="rect4962-4-3"
+       style="fill:#ff7f2a;fill-opacity:1;stroke:none"
+       d="M -4.9229925e-6,1052.3622 0.00799508,1039.9315 c 0.002,-4.1354 2.05024002,-7.8838 5.31250002,-10.1562 l 0,-12.8438 -0.0123,-86.81338 14.1874999,0 0.0123,95.65718 0,4 c 0.57162,0.3979 1.10102,0.8289 1.59375,1.3125 l 17.875,0 0,-5.3125 -3.53125,0 0,-3.5313 1.78125,0 0,-5.3125 -1.78125,0 0,-3.5312 3.53125,0 0,-23.03127 7.09375,0 0,7.0625 1.78125,0 0,-7.0625 7.0625,0 0,7.0625 1.78125,0 0,-7.0625 7.09375,0 0,7.0625 1.78125,0 0,-7.0625 7.0625,0 0,7.0625 1.78125,0 0,-7.0625 7.09375,0 0,23.03127 3.53125,0 0,3.5312 -1.75,0 0,5.3125 1.75,0 0,3.5313 -3.53125,0 0,23.0312 -7.09375,0 0,-7.0625 -1.78125,0 0,7.0625 -7.0625,0 0,-7.0625 -1.78125,0 0,7.0625 -7.09375,0 0,-7.0625 -1.78125,0 0,7.0625 -7.0625,0 0,-7.0625 -1.78125,0 0,7.0625 -7.09375,0 0,-7.0625 -14.15625,0 -0.01,10.6182 -7.09375,0 0.01,-12.4307 c -0.001,-2.9198 -2.35094,-5.2852 -5.3125,-5.2812 -2.9615499,0 -5.3114999,2.3675 -5.3124999,5.2812 l -0.008,12.4307 z"
+       id="rect4322-8-8-0-2"
        inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cccccccccccccccccccccccccc" />
+       sodipodi:nodetypes="cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccsccc" />
   </g>
 </svg>
