@@ -10,7 +10,7 @@ breadboard(print_error=print_error);
 /**
  * Элемент макетной платы - линия, соединенная контактами.
  * @param holes количество отверстий на линии
- * @param height высота всей макетки
+ * @param height высота стенок макетки
  * @param print_error - погрешность печати 3д-принтера
  */
 module breadboard_block(holes=5, height=8, print_error=0) {
@@ -18,6 +18,12 @@ module breadboard_block(holes=5, height=8, print_error=0) {
   // по 1мм на стенки, 1.5мм паз между стенками; 
   // 1мм - ширина (диаметр) отверстия
   block_base_width = 3.5;
+  
+  // толщина верхней стенки 1мм
+  cover_height=1;
+    
+  // высота металлического контакта 7мм
+  contact_height=7;
     
   difference() {
     // учитываем погрешность печати для толщины всей линии,
@@ -27,10 +33,12 @@ module breadboard_block(holes=5, height=8, print_error=0) {
 
     // 1.5мм - ширина отсека для контакта + print_error погрешность для печати
     translate([1-print_error*2, 2.2, -0.1])
-      cube([1.5+print_error*2, 0.3+2*holes+0.5*(holes-1)+0.3, height-1+0.1]);
-    // внутренние ступеньки 1.2мм
+      cube([1.5+print_error*2, 0.3+2*holes+0.5*(holes-1)+0.3, height-cover_height+0.1]);
+      
+    // внутренние ступеньки (7-1.2)мм до верхней стенки
+    stair_height=height-cover_height-contact_height+1.2;
     translate([1-print_error*2, 1, -0.1])
-      cube([1.5+print_error*2, 1.5+2*holes+0.5*(holes-1)+1.5, 1.2+0.1]);
+      cube([1.5+print_error*2, 1.5+2*holes+0.5*(holes-1)+1.5, stair_height+0.1]);
     
     for(hole=[1 : holes]) {
       // отверстие для штыря
@@ -46,7 +54,7 @@ module breadboard_block(holes=5, height=8, print_error=0) {
  * Половина макетной платы - ряд линий.
  * @param lines количество линий
  * @param holes количество отверстий на каждой линии
- * @param height высота всей макетки
+ * @param height высота стенок макетки
  * @param wall толщина боковых стенок (>=1)
  * @param print_error - погрешность печати 3д-принтера
  */
@@ -72,7 +80,7 @@ module breadboard_half(lines=17, holes=5, height=8, wall=1, print_error=0) {
  * Простая макетная плата из двух половинок.
  * @param lines количество линий
  * @param holes количество отверстий на каждой линии
- * @param height высота всей макетки
+ * @param height высота стенок макетки
  * @param wall толщина боковых стенок (>=1)
  * @param print_error - погрешность печати 3д-принтера
  */
