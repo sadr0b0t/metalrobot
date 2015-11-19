@@ -9,8 +9,8 @@ print_error = 0.2;
 //print_error = 0.6;
 
 //holder(2, 2, print_error);
-holder(4, 4, print_error);
-//holder(6, 6, print_error);
+//holder(4, 4, print_error);
+holder(6, 6, print_error);
 //holder_aa(2, print_error);
 //holder_aa(4, print_error);
 //holder_aa(6, print_error);
@@ -150,7 +150,7 @@ module holder_aa(count=4, print_error=0) {
  */
 module battery_aa_bed(print_error=0) {
   // длина выступающего носика на плюсе
-  noze_length = 2;
+  noze_length = 1.5;
   // 51мм длина батарейки минус 2мм на выступ под носик
   // плюс 1мм на пружину
   body_length = 51-noze_length+1;
@@ -161,14 +161,14 @@ module battery_aa_bed(print_error=0) {
         cylinder(h=body_length, r=7+print_error, $fn=100);
   
       // вход сверху
-      translate([-7-print_error, 0, 7]) cube([14+print_error*2, 50, 7]);
+      translate([-7-print_error, 0, 7]) cube([14+print_error*2, body_length, 7]);
       
       // выемка под носик 2мм (0.1мм для связности модели)
       translate([-2.5, body_length-0.1, 0]) cube([5, noze_length+0.1, 14]);
     }
 
     // "пружинистый" выступ на минусе
-    translate([-2, -5.5, 6]) rotate([0, 90, 0]) 
+    translate([-2, -6, 6]) rotate([0, 90, 0]) 
       cylinder(h=4, r=7, $fn=100);
 
     // "пружинистый" выступ на плюсе
@@ -197,7 +197,7 @@ module contact_plate_minus(print_error=0) {
   // расчистить путь для канавки под гайкой +
   // дополнительная выемка снизу, чтобы щель не заплывала
   // при печати
-  translate([-print_error, -3, 0]) cube([4+print_error*2, 5, 2]);
+  translate([-1-print_error, -3, 0]) cube([4+2+print_error*2, 5, 2]);
 }
 
 /**
@@ -213,7 +213,7 @@ module contact_plate_plus(print_error=0) {
   // расчистить путь для канавки под гайкой +
   // дополнительная выемка снизу, чтобы щель не заплывала
   // при печати
-  translate([-print_error, -3, 0]) cube([4+print_error*2, 5, 2]);
+  translate([-1-print_error, -3, 0]) cube([4+2+print_error*2, 5, 2]);
 }
 
 /**
@@ -231,7 +231,7 @@ module contact_gap(print_error=0) {
     
   // дополнительная выемка снизу, чтобы щель не заплывала
   // при печати
-  translate([-1-print_error, -1, 0]) cube([19+2, 3, 2]); 
+  translate([-1-print_error, -1, 0]) cube([19+2+print_error, 3, 2]); 
 }
 
 /**
