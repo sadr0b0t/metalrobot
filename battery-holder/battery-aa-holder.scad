@@ -10,8 +10,8 @@ print_error = 0.2;
 
 //holder(2, 2, print_error);
 //holder(4, 4, print_error);
-//holder(6, 6, print_error);
-holder_aa(2, print_error);
+holder(6, 6, print_error);
+//holder_aa(2, print_error);
 //holder_aa(4, print_error);
 //holder_aa(6, print_error);
 //battery_aa_bed();
@@ -29,8 +29,10 @@ holder_aa(2, print_error);
  * @param holes1 - количество отверстий на рейке между контактами
  */
 module holder(count=6, holes1=3, print_error=0) {
+  // 7*2мм - батарейка AA
+  body_width = 14;
   // 7*2мм - батарейка + 1мм - на боковые стенки по 1/2мм
-  bed_width = 15;
+  bed_width = body_width+1;
     
   difference() {
     union() {
@@ -92,8 +94,10 @@ module holder(count=6, holes1=3, print_error=0) {
  * @param count - количество батареек (четное число)
  */
 module holder_aa(count=4, print_error=0) {
+  // 7*2мм - батарейка AA
+  body_width = 14;
   // 7*2мм - батарейка + 1мм - на боковые стенки по 1/2мм
-  bed_width = 15;
+  bed_width = body_width+1;
   
   // длина пружинки
   spring_length = 3;  
@@ -108,10 +112,10 @@ module holder_aa(count=4, print_error=0) {
   difference() {
     // толщина боковых стенок и стенок между батарейками
     // 1/2 мм без учета погрешности
-    cube([bed_width*count+2, bed_length+8, 14+2]);
+    cube([bed_width*count+2, bed_length+8, body_width+2]);
     
     // срезать сверху
-    translate([-1, 2, 2+12]) cube([bed_width*count+4, bed_length+4, 4]);
+    translate([-1, 2, body_width]) cube([bed_width*count+4, bed_length+4, 4]);
       
     
     // ложа под батарейки
@@ -123,42 +127,46 @@ module holder_aa(count=4, print_error=0) {
     }
     
     // срезать сверху внутренние стенки между батарейками
-    translate([2, 4 + noze_length, 2+5]) cube([bed_width*count-3, body_length, 20]);
+    translate([2, 4 + noze_length, body_width/2]) 
+      cube([bed_width*count-3, spring_length+body_length-noze_length, body_width/2+1]);
 
     // выемки по бокам
     translate([-3, 30, 20]) rotate([0, 90, 0]) 
-      cylinder(h=15*(count+1), r=15, $fn=100);
+      cylinder(h=bed_width*(count+1), r=15, $fn=100);
 
     // ячейки для контактов 
     // внизу
     if(count > 2) {
       for(i = [1 : count/2-1]) {
-        translate([6.5+15+30*(i-1), 2, -1])
+        translate([body_width/2-0.5+bed_width+30*(i-1), 2, -1]) 
           contact_gap(print_error=print_error);
       }
     }
 
     // наверху
     for(i = [1 : count/2]) {
-      translate([6.5+30*(i-1), bed_length+6, -1]) 
+      translate([body_width/2-0.5+bed_width*2*(i-1), bed_length+6, -1]) 
         mirror([0, 1, 0]) contact_gap(print_error=print_error);
     }
 
     // одинокая пружинка
-    translate([6.5, 2, -1])
+    translate([body_width/2-0.5, 2, -1])
       contact_plate_minus(print_error=print_error);
 
     // одинокая пипка
-    translate([6.5+15*(count-1), 2, -1])
+    translate([body_width/2-0.5+bed_width*(count-1), 2, -1])
       contact_plate_plus(print_error=print_error);
   }
 }
 
 
 /**
- * Батарейка AA цилиндр 50x14мм плюс 2 мм в длину.
+ * Батарейка AA: цилиндр плюс пипка плюс место под пружинку.
  */
 module battery_aa_bed(print_error=0) {
+  // 7*2мм - батарейка AA
+  body_width = 14;
+    
   // длина пружинки
   spring_length = 3;  
   // длина батарейки без носика (взять максимум)
@@ -168,23 +176,25 @@ module battery_aa_bed(print_error=0) {
   
   difference() {
     union() {
-      translate([0, 0, 7]) rotate([270, 0, 0]) 
-        cylinder(h=spring_length+body_length, r=7+print_error, $fn=100);
+      translate([0, 0, body_width/2]) rotate([270, 0, 0]) 
+        cylinder(h=spring_length+body_length, r=body_width/2+print_error, $fn=100);
   
       // вход сверху
-      translate([-7-print_error, 0, 7]) cube([14+print_error*2, spring_length+body_length, 7]);
+      translate([-body_width/2-print_error, 0, body_width/2]) 
+        cube([body_width+print_error*2, spring_length+body_length, body_width/2]);
       
       // выемка под носик (притопим на 0.1мм)
-      translate([-2.5, spring_length+body_length-0.1, 0]) cube([5, noze_length+0.1, 14]);
+      translate([-2.5, spring_length+body_length-0.1, 0]) 
+        cube([5, noze_length+0.1, body_width]);
     }
 
     // "пружинистый" выступ на минусе
-    translate([-2, -6, 6]) rotate([0, 90, 0]) 
+    translate([-2, -6, body_width/2]) rotate([0, 90, 0]) 
       cylinder(h=4, r=7, $fn=100);    
 
     // "пружинистый" выступ на плюсе (0.5мм внутри выемки под носик)
-    translate([-2, spring_length+body_length+7+(noze_length-0.5), 6]) rotate([0, 90, 0]) 
-      cylinder(h=4, r=7, $fn=100);
+    translate([-2, spring_length+body_length+7+(noze_length-0.5), body_width/2]) 
+      rotate([0, 90, 0]) cylinder(h=4, r=7, $fn=100);
   }
   
   // метка минус
@@ -199,11 +209,14 @@ module battery_aa_bed(print_error=0) {
  * Пружинка для минуса.
  */
 module contact_plate_minus(print_error=0) {
+  // 7*2мм - батарейка AA
+  body_width = 14;
+    
   // в толще стенки
-  translate([-print_error, 0, 0]) cube([4+print_error*2, 1, 15]);
+  translate([-print_error, 0, 0]) cube([4+print_error*2, 1, body_width+1]);
     
   // щелка сверху
-  translate([-print_error, 0, 14]) cube([4+print_error*2, 3, 4]);
+  translate([-print_error, 0, body_width]) cube([4+print_error*2, 3, 4]);
     
   // расчистить путь для канавки под гайкой +
   // дополнительная выемка снизу, чтобы щель не заплывала
@@ -215,11 +228,14 @@ module contact_plate_minus(print_error=0) {
  * Пипка для плюса.
  */
 module contact_plate_plus(print_error=0) {
+  // 7*2мм - батарейка AA
+  body_width = 14;
+    
   // в толще стенки
-  translate([-print_error, 0, 0]) cube([4+print_error*2, 1, 15]);
+  translate([-print_error, 0, 0]) cube([4+print_error*2, 1, body_width+1]);
     
   // щелка сверху
-  translate([-print_error, 0, 14]) cube([4+print_error*2, 3, 4]);
+  translate([-print_error, 0, body_width]) cube([4+print_error*2, 3, 4]);
     
   // расчистить путь для канавки под гайкой +
   // дополнительная выемка снизу, чтобы щель не заплывала
@@ -231,18 +247,23 @@ module contact_plate_plus(print_error=0) {
  * Щель для контактов в стенке отсека.
  */
 module contact_gap(print_error=0) {
+  // 7*2мм - батарейка AA
+  body_width = 14;
+  // 7*2мм - батарейка + 1мм - на боковые стенки по 1/2мм
+  bed_width = body_width+1;
+    
   // внутри стенки
-  translate([-print_error, 0, 0]) cube([19+print_error*2, 1, 14]);
+  translate([-print_error, 0, 0]) cube([bed_width+4+print_error*2, 1, body_width]);
 
   // для пружинки (минус)
-  translate([-print_error, 0, 13.9]) cube([4+print_error*2, 3, 4]);
+  translate([-print_error, 0, body_width-0.1]) cube([4+print_error*2, 3, 4]);
 
   // для пипки (плюс)
-  translate([15-print_error, 0, 13.9]) cube([4+print_error*2, 3, 4]);
+  translate([bed_width-print_error, 0, body_width-0.1]) cube([4+print_error*2, 3, 4]);
     
   // дополнительная выемка снизу, чтобы щель не заплывала
   // при печати
-  translate([-1-print_error, -1, 0]) cube([19+2+print_error, 3, 2]); 
+  translate([-1-print_error, -1, 0]) cube([bed_width+4+2+print_error, 3, 2]); 
 }
 
 /**
