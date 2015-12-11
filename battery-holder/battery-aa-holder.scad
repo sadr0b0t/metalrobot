@@ -10,8 +10,8 @@ print_error = 0.2;
 
 //holder(2, 2, print_error);
 //holder(4, 4, print_error);
-holder(6, 6, print_error);
-//holder_aa(2, print_error);
+//holder(6, 6, print_error);
+holder_aa(2, print_error);
 //holder_aa(4, print_error);
 //holder_aa(6, print_error);
 //battery_aa_bed();
@@ -94,26 +94,36 @@ module holder(count=6, holes1=3, print_error=0) {
 module holder_aa(count=4, print_error=0) {
   // 7*2мм - батарейка + 1мм - на боковые стенки по 1/2мм
   bed_width = 15;
+  
+  // длина пружинки
+  spring_length = 3;  
+  // длина батарейки без носика (взять максимум)
+  body_length = 49;
+  // длина выступающего носика на плюсе (взять минимум)
+  noze_length = 1.5;
+    
+  // полная длина ложа: пружинка плюс длина батарейки плюс носик 
+  bed_length = body_length+noze_length+spring_length;
     
   difference() {
     // толщина боковых стенок и стенок между батарейками
     // 1/2 мм без учета погрешности
-    cube([bed_width*count+2, 60, 14+2]);
+    cube([bed_width*count+2, bed_length+8, 14+2]);
     
     // срезать сверху
-    translate([-1, 2, 2+12]) cube([bed_width*count+4, 56, 4]);
+    translate([-1, 2, 2+12]) cube([bed_width*count+4, bed_length+4, 4]);
       
     
     // ложа под батарейки
     for(i = [1 : count/2]) {
       translate([1+bed_width/2+bed_width*(i*2-2), 4, 2]) 
         battery_aa_bed(print_error=print_error);
-      translate([1+bed_width/2+bed_width*(i*2-1), 52+4, 2]) 
+      translate([1+bed_width/2+bed_width*(i*2-1), bed_length+4, 2]) 
         rotate([0,0,180]) battery_aa_bed(print_error=print_error);
     }
     
     // срезать сверху внутренние стенки между батарейками
-    translate([2, 6, 2+5]) cube([bed_width*count-3, 48, 20]);
+    translate([2, 4 + noze_length, 2+5]) cube([bed_width*count-3, body_length, 20]);
 
     // выемки по бокам
     translate([-3, 30, 20]) rotate([0, 90, 0]) 
@@ -130,7 +140,7 @@ module holder_aa(count=4, print_error=0) {
 
     // наверху
     for(i = [1 : count/2]) {
-      translate([6.5+30*(i-1), 58, -1]) 
+      translate([6.5+30*(i-1), bed_length+6, -1]) 
         mirror([0, 1, 0]) contact_gap(print_error=print_error);
     }
 
@@ -149,30 +159,31 @@ module holder_aa(count=4, print_error=0) {
  * Батарейка AA цилиндр 50x14мм плюс 2 мм в длину.
  */
 module battery_aa_bed(print_error=0) {
-  // длина выступающего носика на плюсе
+  // длина пружинки
+  spring_length = 3;  
+  // длина батарейки без носика (взять максимум)
+  body_length = 49;
+  // длина выступающего носика на плюсе (взять минимум)
   noze_length = 1.5;
-  // 51мм длина батарейки минус 2мм на выступ под носик
-  // плюс 1мм на пружину
-  body_length = 51-noze_length+1;
   
   difference() {
     union() {
       translate([0, 0, 7]) rotate([270, 0, 0]) 
-        cylinder(h=body_length, r=7+print_error, $fn=100);
+        cylinder(h=spring_length+body_length, r=7+print_error, $fn=100);
   
       // вход сверху
-      translate([-7-print_error, 0, 7]) cube([14+print_error*2, body_length, 7]);
+      translate([-7-print_error, 0, 7]) cube([14+print_error*2, spring_length+body_length, 7]);
       
-      // выемка под носик 2мм (0.1мм для связности модели)
-      translate([-2.5, body_length-0.1, 0]) cube([5, noze_length+0.1, 14]);
+      // выемка под носик (притопим на 0.1мм)
+      translate([-2.5, spring_length+body_length-0.1, 0]) cube([5, noze_length+0.1, 14]);
     }
 
     // "пружинистый" выступ на минусе
     translate([-2, -6, 6]) rotate([0, 90, 0]) 
-      cylinder(h=4, r=7, $fn=100);
+      cylinder(h=4, r=7, $fn=100);    
 
-    // "пружинистый" выступ на плюсе
-    translate([-2, 58.5, 6]) rotate([0, 90, 0]) 
+    // "пружинистый" выступ на плюсе (0.5мм внутри выемки под носик)
+    translate([-2, spring_length+body_length+7+(noze_length-0.5), 6]) rotate([0, 90, 0]) 
       cylinder(h=4, r=7, $fn=100);
   }
   
@@ -180,8 +191,8 @@ module battery_aa_bed(print_error=0) {
   translate([-2, 6, -3]) cube([4, 2, 6]);
 
   // метка плюс
-  translate([-2, 44, -3]) cube([4, 2, 6]);
-  translate([-1, 43, -3]) cube([2, 4, 6]);
+  translate([-2, spring_length+body_length-8, -3]) cube([4, 2, 6]);
+  translate([-1, spring_length+body_length-9, -3]) cube([2, 4, 6]);
 }
 
 /**
