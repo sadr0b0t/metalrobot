@@ -38,7 +38,7 @@ module helix(print_error=0) {
       //translate([0, 0, helix_height]) cylinder(h=10, r=2);
         
       // спиралька
-      linear_extrude(height=20, twist=-360*5, center=false, scale=.65) 
+      linear_extrude(height=20-4, twist=-360*4, center=false, scale=.65) 
         translate([2.5, 0, 0]) circle(r=3);//scale([1, 3, 1]) circle(r=1);
         
       
@@ -49,10 +49,15 @@ module helix(print_error=0) {
       translate([0, 0, -2-2]) cylinder(h=2, r=7);
     }
     
-    // дырка сбоку для проволоки
-    translate([0, -1, helix_height-1.5]) rotate([-90, 0, 0]) cylinder(h=6, r=0.5+print_error);
-    translate([-0.5-print_error, -1, helix_height-1.5]) cube([1+print_error*2, 6, 3]);
+    // 
+    translate([-6, -3, helix_height-4]) cube([6, 6, 10]);
     
+    // дырка сбоку для проволоки сверху
+    //translate([0, -1, helix_height-1.5]) rotate([-90, 0, 0]) cylinder(h=6, r=0.5+print_error);
+    //translate([-0.5-print_error, -1, helix_height-1.5]) cube([1+print_error*2, 6, 3]);
+    
+    // дырка сбоку для проволоки снизу
+    translate([-3, -7, -4-0.1]) cube([1, 10, 3+0.1]);
     
     // квадратная дырка снизу под ключ
     translate([-2, -2, -4-0.1]) cube([4, 4, 6+0.1]);
@@ -104,7 +109,10 @@ module base(print_error=0) {
   // щель для проволоки
   difference() {
     translate([12, -8, 0]) cube([3, 16, 7+helix_height]);
-    translate([11, 1, 0]) rotate([5, 0, 0]) cube([5, 2, 7+helix_height+0.1]);
+    // вдоль правой стороны
+    //translate([11, 2, 0.1]) rotate([5, 0, 0]) translate([0, -1, 0]) cube([5, 2, 7+helix_height+0.1]);
+    // вдоль левой стороны
+    translate([11, -2, 0.1]) rotate([-5, 0, 0]) translate([0, -1, 0]) cube([5, 2, 7+helix_height+0.1]);
   }
   
   // вторая стенка
@@ -150,10 +158,13 @@ module top(print_error=0) {
     
     // большой диаметр конуса вместе со спиралью - 10мм
     // малый диаметр конуса вместе со спиралькой - 8мм
-    translate([0, 0, -0.1]) cylinder(h=helix_height+0.2, r1=2.5+1, r2=5+1);
+    translate([0, 0, -0.1]) cylinder(h=helix_height+0.2, r1=3+1, r2=5.5+1);
       
     // щель для проволоки
-    rotate([5, 0, 0]) translate([2, -2, -1]) cube([5, 4.5, helix_height+2]);
+    // вдоль правой стороны
+    //rotate([5, 0, 0]) translate([2, -2, -1]) cube([5, 4.5, helix_height+2]);
+    // вдоль левой стороны
+    rotate([-5, 0, 0]) translate([2, -2.5, -1]) cube([5, 4.5, helix_height+2]);
   }
 }
 
