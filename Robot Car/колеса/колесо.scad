@@ -1,7 +1,11 @@
+$fn=100;
+print_error=0.2;
+
 // левое колесо
-wheel_with_axis(print_error=0.1);
+wheel_with_axis(print_error=print_error);
 // правое колесо
-//rotate([180, 0, 0]) mirror([0, 0, 1]) wheel_with_axis(print_error=0.2);
+//rotate([180, 0, 0]) mirror([0, 0, 1]) wheel_with_axis(print_error=print_error);
+
 // зажим для оси, блокирующий колесо
 //axis_jam(3.1);
 // прокладка между задним колесом и платформой
@@ -23,6 +27,12 @@ module wheel_with_axis(print_error=0) {
     //motor1_axis(print_error=print_error);
     // желтый со срезанной осью
     motor2_axis(print_error=print_error);
+      
+    // добавить технологический паз - круглое
+    // углубление вокруг основания оси, чтобы
+    // пластик на первом слое при печати не 
+    // забивал отверсие под ось
+    translate([0,0,-0.1]) cylinder(r=2+print_error, h=1+0.1);
   }
 }
 
@@ -131,7 +141,7 @@ module wheel_shim(height=3) {
  */
 module generic_axis(length=22, radius=1.5, print_error=0) {
   translate([0,0,-1])
-    cylinder(h=length, r=radius+print_error, $fn=20);
+    cylinder(h=length, r=radius+print_error);
 }
 
 /** 
@@ -167,7 +177,7 @@ module motor2_axis(length=22, radius=1.5, cut_radius=0.9, print_error=0) {
   // диаметр 3мм, срез с одного бока 0.3мм
   translate([0,0,-1])
   difference() {
-    cylinder(h=length, r=radius+print_error, $fn=20);
+    cylinder(h=length, r=radius+print_error);
     // 1.5 мм "вниз" по y (совместить куб с цилиндром), 
     // 0.9 мм "вправо" по x (срезать справа, cut_radius=0.9мм)
     translate([cut_radius+print_error, -1.5, 0])
