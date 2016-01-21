@@ -33,9 +33,9 @@
      showgrid="false"
      inkscape:current-layer="layer1"
      inkscape:document-units="mm"
-     inkscape:cy="1926.2342"
-     inkscape:cx="781.99082"
-     inkscape:zoom="0.14"
+     inkscape:cy="2657.5326"
+     inkscape:cx="-155.54831"
+     inkscape:zoom="1.12"
      inkscape:pageshadow="2"
      inkscape:pageopacity="0.0"
      borderopacity="1.0"
@@ -52,7 +52,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -64,59 +64,59 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:56.42049408px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
-       x="-22.762821"
-       y="-2419.7781"
+       x="-17.712059"
+       y="-1879.3464"
        id="text3006"
        sodipodi:linespacing="125%"><tspan
          style="text-align:end;text-anchor:end"
          sodipodi:role="line"
          id="tspan3008"
-         x="-22.762787"
-         y="-2419.7781">Расширения &gt; Отрисовка &gt; Box for robot</tspan><tspan
+         x="-17.712025"
+         y="-1879.3464">Расширения &gt; Отрисовка &gt; Box for robot</tspan><tspan
          style="text-align:end;text-anchor:end"
          sodipodi:role="line"
-         x="-22.762829"
-         y="-2349.2524"
-         id="tspan3664">ширина: 390мм</tspan><tspan
+         x="-17.712019"
+         y="-1808.8208"
+         id="tspan3664">ширина (width): 390мм</tspan><tspan
          style="text-align:end;text-anchor:end"
          id="tspan3208"
          sodipodi:role="line"
-         x="-22.762829"
-         y="-2278.7268">выста: 220мм</tspan><tspan
+         x="-17.712044"
+         y="-1738.2952">высота (height): 220мм</tspan><tspan
          style="text-align:end;text-anchor:end"
          id="tspan3210"
          sodipodi:role="line"
-         x="-22.7628"
-         y="-2208.2012">глубина: 80мм</tspan><tspan
+         x="-17.712051"
+         y="-1667.7695">глубина (depth): 80мм</tspan><tspan
          style="text-align:end;text-anchor:end"
          id="tspan3206"
          sodipodi:role="line"
-         x="-22.762821"
-         y="-2137.6755">толщина: 2мм</tspan><tspan
+         x="-17.71212"
+         y="-1597.244">толщина бумаги (paper thickness): 2мм</tspan><tspan
          style="text-align:end;text-anchor:end"
          id="tspan4326"
          sodipodi:role="line"
-         x="-22.762852"
-         y="-2067.1499">уши для защелок (cramp ear height): 4мм</tspan><tspan
+         x="-17.71209"
+         y="-1526.7184">уши для защелок (cramp ear height): 4мм</tspan><tspan
          style="text-align:end;text-anchor:end"
          id="tspan4328"
          sodipodi:role="line"
-         x="-22.762917"
-         y="-1996.6244">длина пунктира (bend line dash width): 5мм</tspan><tspan
+         x="-17.712154"
+         y="-1456.1927">длина пунктира (bend line dash width): 5мм</tspan><tspan
          style="text-align:end;text-anchor:end"
          id="tspan4330"
          sodipodi:role="line"
-         x="-22.762791"
-         y="-1926.0988">шаг пунктира (bend line dash step): 5мм</tspan><tspan
+         x="-17.712029"
+         y="-1385.6671">шаг пунктира (bend line dash step): 5мм</tspan><tspan
          style="text-align:end;text-anchor:end"
          sodipodi:role="line"
-         x="-22.762821"
-         y="-1855.5731"
+         x="-17.712059"
+         y="-1315.1415"
          id="tspan3010">линия сгиба: middle</tspan><tspan
          style="text-align:end;text-anchor:end"
          sodipodi:role="line"
-         x="-22.762821"
-         y="-1785.0475"
+         x="-17.712059"
+         y="-1244.6158"
          id="tspan3012" /></text>
     <g
        id="g3555"
