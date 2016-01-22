@@ -145,9 +145,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.25"
-     inkscape:cx="1671.6777"
-     inkscape:cy="839.93255"
+     inkscape:zoom="1.4142136"
+     inkscape:cx="1620.2697"
+     inkscape:cy="1675.7462"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -597,25 +597,6 @@
        height="218.61423"
        width="291.48566"
        transform="matrix(0,-1,1,0,0,0)" />
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:26.98484993px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#002255;fill-opacity:1;stroke:none"
-       x="1480.1626"
-       y="-574.7735"
-       id="text5611"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         id="tspan5613"
-         x="1480.1626"
-         y="-574.7735"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'DejaVu Sans';-inkscape-font-specification:'DejaVu Sans'">sadrobot.su</tspan></text>
-    <image
-       y="-728.77466"
-       x="1493.0551"
-       id="image3128"
-       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIQAAACECAIAAADeJhTwAAAAA3NCSVQICAjb4U/gAAACqElEQVR4 nO2dy27DMAzAlmH//8vdcb4YkCDJYRbyWCRtAkJW5ef1+Xy+hMH33Q8gfygDhDJAKAOEMkAoA4Qy QCgDhDJAKAOEMkAoA4QyQCgDhDJA/GRvuK6r/SGyYyrrM+zu3V0T+byL7HsZGSCUAUIZINI5Y6Uy fr5ro3efr79Fa+tXKs9jZIBQBghlgCjljJVIW5lti7M1xI7s9bt7d3TNPTMyQCgDhDJAtOWMk2Rz SaRvioCRAUIZIJQBApczIv1O2fEJWm7YYWSAUAYIZYBoyxl3tcvTeeLkexkZIJQBQhkgSjljYvw5 O69pos6YeK8IRgYIZYBQBoiL1m8T6Y86+T0nMTJAKAOEMkCU1md0zUndfU/XnNrImHnl+si9EYwM EMoAoQwQ6Zwx8X+/qy+oMp9qd/3u+yfGTowMEMoAoQwQbXVGpW6o5I9KTZCdm1tZhxjByAChDBDK AIEYz6j0Ed21d8hEzWFkgFAGCGWAGB/PmNjfKVtbVNr07HqRCkYGCGWAUAaIkTqj0n/VNS49UQeY M16EMkAoA0QpZ3T1Ea1U/tdP9C9V6iTHMx6MMkAoA8TI3iGVPqK78kQE64wXoQwQygDRVmfsmJ5T e/KcjOl9rowMEMoAoQwQiHlTK9Pr5ipj+LtncN7UP0QZIJQBAndO313nW0zMB7POeDDKAKEMELhz +rL3RsY5Tp4HVcHIAKEMEMoAgT6nb3pdRVfe6sLIAKEMEMoAgTtzaUdlzu5de5NkMTJAKAOEMkCg c0aktojsDZU95/Xk/N0VIwOEMkAoA8RjzumbXhtY2dOwCyMDhDJAKAPEY87pq/xuJX+cPLPPyACh DBDKAIFbn/FmjAwQygChDBDKAKEMEMoAoQwQygChDBDKAKEMEMoAoQwQygChDBC/HIWNG8HrsLgA AAAASUVORK5CYII= "
-       height="132"
-       width="132" />
     <image
        y="-1326.7616"
        x="110.8814"
@@ -1519,6 +1500,42 @@
          y="1194.7361"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'DejaVu Sans';-inkscape-font-specification:'DejaVu Sans';text-align:center;text-anchor:middle"
          id="tspan4137">sadrobot.su</tspan></text>
+    <image
+       y="-739.45868"
+       x="1486.9636"
+       id="image3597"
+       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAYAAACvDDbuAAAABHNCSVQICAgIfAhkiAAAAy9JREFU
+eJzt3VFqGzEUQNG6dP9bdjaQoSjoIV3nnO8ydtyLYJ490uv9fr//QMzf028AfkK4JAmXJOGSJFyS
+hEuScEkSLknCJUm4JAmXJOGSJFyShEuScEkSLknCJUm4JAmXJOGSJFyShEuScEn6N/0Cr9dr+iW2
+eNpe4un9r25HMX2d20xv12HFJUm4JAmXJOGSJFySxqcKT05tErnrrnz1OtN/b/3zXGXFJUm4JAmX
+JOGSJFySjk0Vnuy6S911l10/IuO2z3MXKy5JwiVJuCQJlyThknTdVOE2u55cOHX9T2XFJUm4JAmX
+JOGSJFySTBX+Y9d+C6YHe1lxSRIuScIlSbgkCZek66YK9bvs1ScOpqcN9c/ziRWXJOGSJFyShEuS
+cEk6NlWonGUw/ZuEU7tH1llxSRIuScIlSbgkCZek8anCp35Xfmp68Kmf5yorLknCJUm4JAmXJOGS
+ND5VmL77vu0ufvo3A7uemDj1/7KLFZck4ZIkXJKES5JwScrsqzB9V/t0/VO7LN42PZie3qyy4pIk
+XJKES5JwSRIuSR/7BMSpKcT0GRDTf9dt04MnVlyShEuScEkSLknCJenX7dZ42xMNq6+7665/9fq3
+TRusuCQJlyThkiRckoRL0rF9FVZN/2J/13f6q//+1BMK9ZMrrbgkCZck4ZIkXJKES1L+CYjpacCT
++jRg1W3vx4pLknBJEi5JwiVJuCS93sO3hbc9j//ktl/4T6ufUGnFJUm4JAmXJOGSJFySju2rcNt3
+7rvc9luI1evv4mRJ+IZwSRIuScIlSbgkXXey5PQ+DLuus+skytv+3tuedHhixSVJuCQJlyThkiRc
+kq6bKtzm1G6Ht52Rcdu0wYpLknBJEi5JwiVJuCSZKvzQ6l3/qRMhd/FbBdhAuCQJlyThkiRckq6b
+Ktx293rqyYXpfRLqT0xYcUkSLknCJUm4JAmXpGNThcrZCrvumlevs2vacOp9TrPikiRckoRLknBJ
+Ei5J4ydLwgQrLknCJUm4JAmXJOGSJFyShEuScEkSLknCJUm4JAmXJOGSJFyShEuScEkSLknCJUm4
+JAmXJOGSJFyShEvSF/EMG3Dph2PIAAAAAElFTkSuQmCC
+"
+       preserveAspectRatio="none"
+       height="144.18306"
+       width="144.18306" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:26.98484993px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#002255;fill-opacity:1;stroke:none"
+       x="1480.1626"
+       y="-574.7735"
+       id="text5611"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan5613"
+         x="1480.1626"
+         y="-574.7735"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'DejaVu Sans';-inkscape-font-specification:'DejaVu Sans'">sadrobot.su</tspan></text>
   </g>
   <g
      inkscape:groupmode="layer"
