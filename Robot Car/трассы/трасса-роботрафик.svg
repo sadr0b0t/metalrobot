@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="1189mm"
+   height="841mm"
+   viewBox="0 0 4212.992 2979.9212"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="трасса-роботрафик.svg">
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.1979899"
+     inkscape:cx="2278.48"
+     inkscape:cy="2249.1675"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1366"
+     inkscape:window-height="705"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,1927.5591)">
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:106.29920959;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 331.14173,89.651648 c 12.75791,189.254772 -55.00696,422.337962 70.36092,564.686222 213.02246,241.87515 615.52295,212.9559 936.70845,239.82638 419.2412,35.07386 837.5822,-83.25249 1257.6975,-105.53461 403.4595,-21.39873 932.2981,264.78526 1211.7795,-26.98115 134.821,-140.74724 63.2369,-404.83716 -12.1272,-584.57794 C 3588.6151,-316.48801 3195.094,-849.60654 2674.0592,-971.87387 2454.1893,-1023.4691 2254.3379,-800.02296 2034.53,-748.1639 1475.2676,-616.21765 701.97279,-963.29639 324.53823,-530.02121 c -135.68423,155.75842 -7.29008,413.57127 6.6035,619.672858 z"
+       id="path3336"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="aaaaaaaaaa" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="-323.44144"
+       y="1820.4158"
+       id="text3334"
+       sodipodi:linespacing="125%"
+       transform="scale(-1,-1)"><tspan
+         sodipodi:role="line"
+         id="tspan3336"
+         x="-317.07425"
+         y="1820.4158">Клуб изобретательства </tspan><tspan
+         sodipodi:role="line"
+         x="-323.44144"
+         y="1870.4158"
+         id="tspan3338">и робототехники ДОСААФ</tspan></text>
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:106.29920959;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 3154.9528,-387.48468 c 294.4721,-275.13359 798.8697,-661.42592 634.2643,-1029.28102 -129.5977,-289.6209 -620.939,-139.7546 -937.0061,-167.6362 -497.2628,-43.8656 -1128.8183,-334.8769 -1497.5808,1.5881 -234.9777,214.3976 -66.6416,632.82462 -88.2305,950.18053 -13.5344,198.9551 -157.9723,448.30343 -25.8686,597.68521 239.4752,270.79657 726.9662,158.67854 1081.0743,85.96948 307.4775,-63.134397 603.9886,-224.2097 833.3474,-438.5061 z"
+       id="path3336-7"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="aaaaaaaa" />
+  </g>
+</svg>
