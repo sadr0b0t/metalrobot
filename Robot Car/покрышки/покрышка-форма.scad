@@ -1,11 +1,12 @@
+print_error = 0.2;
 
 // увеличим ширину фиксирующего обода для внешней формы по сравнению
 // с пазом под обод на внутренней форме, чтобы учесть
 // погрешность при печати на FDM-принтере
-outer_box_half1(4);
-//outer_box_half2(4);
+outer_box_half1(hoop_width=3, print_error=print_error);
+//outer_box_half2(hoop_width=3, print_error=print_error);
 
-//inner_surface(2);
+//inner_surface(hoop_width=3, print_error=print_error);
 
 /**
  * Внутренняя поверхность покрышки, должна совпадать 
@@ -13,7 +14,9 @@ outer_box_half1(4);
  * @param hoop_width - ширина обода, выступающего вниз для
  * для фиксации на площадке внешней части формы.
  */
-module inner_surface(hoop_width=2) {
+module inner_surface(hoop_width=2, print_error=0) {
+  fixator_width=4;
+    
   difference() {
     union() {
       // рельеф колеса
@@ -37,17 +40,17 @@ module inner_surface(hoop_width=2) {
   // выступающий вниз обод для фиксации на площадке
   difference() {
     translate([0, 0, -5])
-      cylinder(h=10, r=20+hoop_width/2, $fn=100);
+      cylinder(h=10, r=20+hoop_width/2-print_error, $fn=100);
 
     translate([0, 0, -6])
-      cylinder(h=12, r=20-hoop_width/2, $fn=100);
+      cylinder(h=12, r=20-hoop_width/2+print_error, $fn=100);
   }
 
   // фиксторы вращения
-  translate([14.5, -1.5, -5])
-    cube([6, 3, 6]);
-  translate([-20.5, -1.5, -5])
-    cube([6, 3, 6]);
+  translate([14.5, -fixator_width/2+print_error, -5]) 
+    cube([6, fixator_width-print_error*2, 6]);
+  translate([-20.5, -fixator_width/2+print_error, -5]) 
+    cube([6, fixator_width-print_error*2, 6]);
 }
 
 /**
@@ -55,9 +58,9 @@ module inner_surface(hoop_width=2) {
  * @param hoop_width - ширина обода, выступающего вниз для
  * для фиксации на площадке внешней части формы.
  */
-module outer_box_half1(hoop_width=2) {
+module outer_box_half1(hoop_width=2, print_error=0) {
   difference() {
-    outer_box(hoop_width);
+    outer_box(hoop_width=hoop_width, print_error=print_error);
 
     translate([0, -34, -8])
         cube([34, 68, 32]);
@@ -69,9 +72,9 @@ module outer_box_half1(hoop_width=2) {
  * @param hoop_width - ширина обода, выступающего вниз для
  * для фиксации на площадке внешней части формы.
  */
-module outer_box_half2(hoop_width=2) {
+module outer_box_half2(hoop_width=2, print_error=0) {
   difference() {
-    outer_box(hoop_width);
+    outer_box(hoop_width=hoop_width, print_error=print_error);
 
     translate([-34, -34, -8])
         cube([34, 68, 32]);
@@ -83,7 +86,9 @@ module outer_box_half2(hoop_width=2) {
  * @param hoop_width - ширина обода, выступающего вниз для
  * для фиксации на площадке внешней части формы.
  */
-module outer_box(hoop_width=2) {
+module outer_box(hoop_width=2, print_error=0) {
+  fixator_width=4;
+    
   difference() {
     // матрица для рисунка протектора
     translate([0, 0, -7])
@@ -99,17 +104,17 @@ module outer_box(hoop_width=2) {
     // паз для выступающего вниз обода
     difference() {
       translate([0, 0, -5.5])
-        cylinder(h=10, r=20+hoop_width/2, $fn=100);
+        cylinder(h=10, r=20+hoop_width/2+print_error, $fn=100);
 
       translate([0, 0, -6])
-        cylinder(h=12, r=20-hoop_width/2, $fn=100);
+        cylinder(h=12, r=20-hoop_width/2-print_error, $fn=100);
     }
       
     // пазы для фиксаторов
-    translate([14, -2, -5.5])
-      cube([6, 4, 6]);
-    translate([-20, -2, -5.5])
-      cube([6, 4, 6]);
+    translate([14, -fixator_width/2-print_error, -5.5]) 
+      cube([6, fixator_width+print_error*2, 6]);
+    translate([-20, -fixator_width/2-print_error, -5.5]) 
+      cube([6, fixator_width+print_error*2, 6]);
 
     // внутренняя дырка для экономии пластика
     translate([0, 0, -10])
