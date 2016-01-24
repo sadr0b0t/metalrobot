@@ -11,8 +11,8 @@ angle1(holes=3, print_error=print_error);
  *
  * Диаметр отверстия 4мм, расстояние между краями отверстий 6мм.
  * 
- * @holes количество отверстий
- * @print_error погрешность при печати
+ * @param holes количество отверстий
+ * @param print_error погрешность при печати
  */
 module angle1(holes=1, print_error=print_error) {
   // отверстие=4мм
