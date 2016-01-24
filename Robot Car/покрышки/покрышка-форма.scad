@@ -34,7 +34,7 @@ module inner_surface(hoop_width=2, print_error=0) {
 
     // вычтем изнутри цилиндр для экономии пластика
     translate([0, 0, -1])
-      cylinder(h=25, r=20, $fn=100);
+      cylinder(h=25, r=18.7, $fn=100);
   }
 
   // выступающий вниз обод для фиксации на площадке
