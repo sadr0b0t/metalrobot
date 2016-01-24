@@ -15,7 +15,9 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.91 r"
-   sodipodi:docname="wire-plate1.svg">
+   sodipodi:docname="contact-plus-minus-d2mm.svg">
+  <defs
+     id="defs4" />
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -23,9 +25,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="8.9600003"
-     inkscape:cx="50.114119"
-     inkscape:cy="9.3724873"
+     inkscape:zoom="1.5839192"
+     inkscape:cx="111.55083"
+     inkscape:cy="70.508861"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -43,34 +45,20 @@
      inkscape:snap-midpoints="false"
      inkscape:snap-global="true">
     <inkscape:grid
-       empspacing="10"
-       dotted="true"
-       spacingy="1.7716536"
-       spacingx="1.7716536"
-       units="mm"
+       type="xygrid"
        id="grid3336"
-       type="xygrid" />
-    <inkscape:grid
-       spacingy="3.5433072"
-       spacingx="3.5433071"
        units="mm"
+       spacingx="1.7716536"
+       spacingy="1.7716536"
+       dotted="true"
+       empspacing="10" />
+    <inkscape:grid
+       type="xygrid"
        id="grid5100"
-       type="xygrid" />
-    <sodipodi:guide
-       id="guide4201"
-       orientation="1052.3622,0"
-       position="372.0472,0" />
-    <sodipodi:guide
-       id="guide4203"
-       orientation="0,744.0945"
-       position="0,350.7874" />
-    <sodipodi:guide
-       id="guide4205"
-       orientation="0,744.0945"
-       position="0,701.5748" />
+       units="mm"
+       spacingx="3.5433071"
+       spacingy="3.5433072" />
   </sodipodi:namedview>
-  <defs
-     id="defs4" />
   <metadata
      id="metadata7">
     <rdf:RDF>
@@ -84,13 +72,13 @@
     </rdf:RDF>
   </metadata>
   <g
-     id="layer1"
+     inkscape:label="Layer 1"
      inkscape:groupmode="layer"
-     inkscape:label="Layer 1">
+     id="layer1">
     <path
        inkscape:connector-curvature="0"
-       style="fill:#ffcc00;fill-opacity:1;stroke:none"
-       d="m 12.40039,1020.4735 -12.40039,0 0,31.8887 35.43359,0 0,-31.8887 -12.40234,0 0,3.543 -10.63086,0 0,-3.543 z m 5.31641,12.4023 a 5.31496,5.31496 0 0 1 5.31445,5.3145 5.31496,5.31496 0 0 1 -5.31445,5.3145 5.31496,5.31496 0 0 1 -5.31641,-5.3145 5.31496,5.31496 0 0 1 5.31641,-5.3145 z"
-       id="rect4962-4-6" />
+       style="fill:#aad400;fill-opacity:1;stroke:none;stroke-width:7.08661413;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 3.54297,974.40906 A 3.5436614,3.5436614 0 0 0 0,977.95203 l 0,70.86717 a 3.5436614,3.5436614 0 0 0 3.54297,3.543 l 67.322269,0 a 3.5436614,3.5436614 0 0 0 3.54297,-3.543 l 0,-70.86717 a 3.5436614,3.5436614 0 0 0 -3.54297,-3.54297 l -14.17188,0 a 3.5436614,3.5436614 0 0 0 -3.54297,3.54297 l -0.002,38.97847 -31.88867,0 0,-38.97847 a 3.5436614,3.5436614 0 0 0 -3.54297,-3.54297 l -14.173829,0 z"
+       id="path4284-5-1" />
   </g>
 </svg>
