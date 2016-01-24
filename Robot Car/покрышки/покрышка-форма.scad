@@ -3,10 +3,10 @@ print_error = 0.2;
 // увеличим ширину фиксирующего обода для внешней формы по сравнению
 // с пазом под обод на внутренней форме, чтобы учесть
 // погрешность при печати на FDM-принтере
-outer_box_half1(hoop_width=3, print_error=print_error);
+//outer_box_half1(hoop_width=3, print_error=print_error);
 //outer_box_half2(hoop_width=3, print_error=print_error);
 
-//inner_surface(hoop_width=3, print_error=print_error);
+inner_surface(hoop_width=3, print_error=print_error);
 
 /**
  * Внутренняя поверхность покрышки, должна совпадать 
@@ -47,10 +47,16 @@ module inner_surface(hoop_width=2, print_error=0) {
   }
 
   // фиксторы вращения
-  translate([14.5, -fixator_width/2+print_error, -5]) 
-    cube([6, fixator_width-print_error*2, 6]);
-  translate([-20.5, -fixator_width/2+print_error, -5]) 
-    cube([6, fixator_width-print_error*2, 6]);
+  translate([14.5, -fixator_width/2+print_error, -5]) difference() {
+    cube([6, fixator_width-print_error*2, 8]);
+    // небольшой скос сверху
+    translate([0, -0.1, 3]) rotate([0, -45, 0]) cube([8, fixator_width+0.2, 4]);
+  }
+  mirror([1, 0, 0]) translate([14.5, -fixator_width/2+print_error, -5]) difference() {
+    cube([6, fixator_width-print_error*2, 8]);
+    // небольшой скос сверху
+    translate([0, -0.1, 3]) rotate([0, -45, 0]) cube([8, fixator_width+0.2, 4]);
+  }
 }
 
 /**
