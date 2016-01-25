@@ -1,12 +1,12 @@
-print_error = 0.2;
+print_error = 0.1;
 
 // увеличим ширину фиксирующего обода для внешней формы по сравнению
 // с пазом под обод на внутренней форме, чтобы учесть
 // погрешность при печати на FDM-принтере
 //outer_box_half1(hoop_width=3, print_error=print_error);
-//outer_box_half2(hoop_width=3, print_error=print_error);
+outer_box_half2(hoop_width=3, print_error=print_error);
 
-inner_surface(hoop_width=3, print_error=print_error);
+//inner_surface(hoop_width=3, print_error=print_error);
 
 /**
  * Внутренняя поверхность покрышки, должна совпадать 
@@ -34,7 +34,7 @@ module inner_surface(hoop_width=2, print_error=0) {
 
     // вычтем изнутри цилиндр для экономии пластика
     translate([0, 0, -1])
-      cylinder(h=25, r=18.7, $fn=100);
+      cylinder(h=25, r=18.6, $fn=100);
   }
 
   // выступающий вниз обод для фиксации на площадке
