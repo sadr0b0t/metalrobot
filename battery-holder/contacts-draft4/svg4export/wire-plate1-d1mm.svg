@@ -15,7 +15,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.91 r"
-   sodipodi:docname="wire-plate1-d1.1mm.svg">
+   sodipodi:docname="wire-plate1-d1mm.svg">
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -89,13 +89,13 @@
      inkscape:label="Layer 1">
     <path
        inkscape:connector-curvature="0"
-       style="fill:#ffcc00;fill-opacity:1;stroke:#000000;stroke-width:3.89763784;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 16.298429,1014.6263 -12.4003901,0 a 1.9490138,1.9490138 0 0 0 -1.94922,1.9492 l 0,31.8887 a 1.9490138,1.9490138 0 0 0 1.94922,1.9492 l 35.4336301,0 a 1.9490138,1.9490138 0 0 0 1.9492,-1.9492 l 0,-31.8887 a 1.9490138,1.9490138 0 0 0 -1.9492,-1.9492 l -12.40238,0 a 1.9490138,1.9490138 0 0 0 -1.94922,1.9492 l 0,1.5938 -6.73242,0 0,-1.5938 a 1.9490138,1.9490138 0 0 0 -1.94922,-1.9492 z"
-       id="path4663-0" />
+       style="fill:#ffcc00;fill-opacity:1;stroke:#000000;stroke-width:3.54330709;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 15.943455,1015.1569 -12.4004015,0 a 1.7718307,1.7718307 0 0 0 -1.7714,1.7715 l 0,31.8907 a 1.7718307,1.7718307 0 0 0 1.7714,1.7715 l 35.4336015,0 a 1.7718307,1.7718307 0 0 0 1.7715,-1.7715 l 0,-31.8907 a 1.7718307,1.7718307 0 0 0 -1.7715,-1.7715 l -12.4023,0 a 1.7718307,1.7718307 0 0 0 -1.7715,1.7715 l 0,1.7715 -7.0879,0 0,-1.7715 a 1.7718307,1.7718307 0 0 0 -1.7715,-1.7715 z"
+       id="path4723-7" />
     <path
        inkscape:connector-curvature="0"
-       style="opacity:1;fill:#ff6600;fill-opacity:1;stroke:#000000;stroke-width:3.89763784;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:24.16535187;stroke-opacity:1"
-       d="m 21.614829,1030.9271 c -1.76229,2e-4 -3.36506,1.6029 -3.36523,3.3652 -4.8e-4,1.7627 1.60253,3.367 3.36523,3.3672 1.76271,-2e-4 3.36572,-1.6045 3.36524,-3.3672 -1.7e-4,-1.7623 -1.60294,-3.365 -3.36524,-3.3652 z"
-       id="path4665-6" />
+       style="opacity:1;fill:#ff6600;fill-opacity:1;stroke:#000000;stroke-width:3.54330709;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:24.16535187;stroke-opacity:1"
+       d="m 21.259855,1031.1023 c -1.8554,2e-4 -3.5434,1.6894 -3.5429,3.5449 2e-4,1.855 1.6879,3.5428 3.5429,3.5429 1.8551,-10e-5 3.5428,-1.6879 3.543,-3.5429 5e-4,-1.8555 -1.6875,-3.5448 -3.543,-3.5449 z"
+       id="path4725-5" />
   </g>
 </svg>
