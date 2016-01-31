@@ -4,23 +4,30 @@ use <../breadboard/breadboard.scad>;
 // Turn off rendering at=10000 (2000 не хватает)
 
 //print_error = 0;
+//print_error = 0.1;
 print_error = 0.2;
 //print_error = 0.4;
 //print_error = 0.6;
 
 // батарейки AA
 //holder(count=2, holes=6, print_error=print_error);
-//holder(count=4, holes=6, print_error=print_error);
+holder(count=4, holes=6, print_error=print_error);
 //holder(count=6, holes=6, print_error=print_error);
 
+//holder(count=4, holes=6, spring_length=4, print_error=print_error);
+
 // 
-holder(count=4, holes=6, body_width=14, body_length=49, noze_length=1.5, spring_length=6, print_error=print_error);
-//holder(count=6, holes=6, body_width=14, body_length=49, noze_length=1.5, spring_length=3, print_error=print_error);
+//holder(count=4, holes=6, body_width=14, body_length=49, noze_length=1.5, spring_length=4, print_error=print_error);
+//holder(count=6, holes=6, body_width=14, body_length=49, noze_length=1.5, spring_length=4, print_error=print_error);
 
 // отладка
 //holder_aa(count=2, print_error=print_error);
 //holder_aa(count=4, print_error=print_error);
 //holder_aa(count=6, print_error=print_error);
+
+
+//holder_aa(count=2, spring_length=6, print_error=print_error);
+
 //battery_aa_bed();
 //rotate([0, 90, 0]) wire_jam();
 //wire_jam(print_error=print_error);
@@ -40,7 +47,7 @@ holder(count=4, holes=6, body_width=14, body_length=49, noze_length=1.5, spring_
  * @param spring_length - длина пружинки
  */
 module holder(count=6, holes=6, 
-        body_width=14, body_length=49, noze_length=1.5, spring_length=3, 
+        body_width=14, body_length=49, noze_length=1.5, spring_length=4, 
         print_error=0) {
   // 7*2мм - батарейка + 1мм - на боковые стенки по 1/2мм
   bed_width = body_width+1;
@@ -113,7 +120,7 @@ module holder(count=6, holes=6,
  * @param spring_length - длина пружинки
  */
 module holder_aa(count=4,
-        body_width=14, body_length=49, noze_length=1.5, spring_length=3,
+        body_width=14, body_length=49, noze_length=1.5, spring_length=4,
         print_error=0) {
   // 7*2мм - батарейка + 1мм - на боковые стенки по 1/2мм
   bed_width = body_width+1;
@@ -147,8 +154,8 @@ module holder_aa(count=4,
     //translate([2, 4 + noze_length, body_width/2]) 
     //  cube([bed_width*count-3, spring_length+body_length-noze_length, body_width/2+1]);
     // с учетом ячейки для пружинки
-    translate([2, 4 + noze_length+2, body_width/2]) 
-      cube([bed_width*count-3, spring_length+body_length-noze_length-4, body_width/2+1]);
+    translate([2, 4 + noze_length+0.5, body_width/2]) 
+      cube([bed_width*count-3, spring_length+body_length-noze_length-1, body_width/2+1]);
     
     
     // выемки по бокам
@@ -189,7 +196,7 @@ module holder_aa(count=4,
  * @param noze_length - длина выступающего носика на плюсе (взять минимум)
  * @param spring_length - длина пружинки
  */
-module battery_aa_bed(body_width=14, body_length=49, noze_length=1.5, spring_length=3, 
+module battery_aa_bed(body_width=14, body_length=49, noze_length=1.5, spring_length=4, 
         print_error=0) {
   difference() {
     union() {
@@ -209,15 +216,19 @@ module battery_aa_bed(body_width=14, body_length=49, noze_length=1.5, spring_len
     //translate([-2, -6, body_width/2]) rotate([0, 90, 0]) 
     //  cylinder(h=4, r=7, $fn=100);
     // крепление для пружинки на минусе
-    difference() {
-      translate([-body_width/2-1, 2, 0]) cube([body_width+2, 1, body_width]);
-      translate([body_width/2-3, 1, 2]) cube([1, 3, body_width]);
-    }
-
+    translate([body_width/2-4, 1, 0]) cube([5, 1, body_width+0.1]);
+    translate([-body_width/2-1, 1, 0]) cube([5, 1, body_width+0.1]);
+    
+    translate([-body_width/2-1, -0.1, -1]) cube([2, 1+0.2, body_width+2]);
+    translate([body_width/2-1, -0.1, -1]) cube([2, 1+0.2, body_width+2]);
+    
     // "пружинистый" выступ на плюсе (0.5мм внутри выемки под носик)
     translate([-2, spring_length+body_length+7+(noze_length-0.5), body_width/2]) 
       rotate([0, 90, 0]) cylinder(h=4, r=7, $fn=100);
   }
+  
+  // крепление для пружинки на минусе (заглубиться вниз)
+  translate([-body_width/2+1, 0, -0.5]) cube([body_width-2, 1, body_width+0.5]);
   
   // метка минус
   translate([-2, 6, -3]) cube([4, 2, 6]);
@@ -312,14 +323,14 @@ module wire_jam(print_error=0) {
       translate([5, nut_shift_y, -1]) /*rotate([0, 0, 90])*/ linear_extrude(height=4) 
         import(file = "screw-nut-m3.dxf");
       
-      // еще щелка над гайкой
-      translate([0, nut_shift_y-8/2, 2]) cube([13, 8, 1]);
+      // щель за гайкой для внутреннего контакта
+      translate([0, nut_shift_y-10/2, 2]) cube([13, 10, 1]);
         
-      // канавка за гайкой
+      // канавка под гайкой для согнутого внутреннего контакта
       translate([11, nut_shift_y-(4+print_error*2)/2, -1]) cube([2, 4+print_error*2, 4]);
     }
     
-    // площадка для контакта
+    // площадка для внешнего контакта
     translate([0, nut_shift_y-0.5, 4]) union() {
       translate([5, 4, 0]) rotate([0, 0, 270]) linear_extrude(height=3) 
         import(file = "wire-plate1-43d.dxf");
@@ -340,19 +351,37 @@ module wire_jam_with_breadboard(print_error=0) {
         wire_jam(print_error=print_error);
 
       // 6.5 мм от центра винта до левого края макетки
-      // дырки в макетке будут гулять вместе с print_error
-      translate([1+print_error, 12, 0]) breadboard_half(lines=1, height=10, print_error=print_error);
+      // дырки в макетке будут гулять вперед-назад (не влево-вправо) вместе с print_error
+      //translate([1+print_error, 12, 0]) breadboard_half(lines=1, height=10, print_error=print_error);
+      translate([1+print_error, 12, 0]) breadboard_half(lines=1, height=11, print_error=print_error);
   
       // стенка спереди потолще
       translate([4.5, 13, 0]) cube([1.5, 16, 8]);
-        
-      // "полочка" для края макетки, чтобы не выпадала вниз
-      translate([1.5, 27, 0]) cube([3, 2, 1]);
     }
     
     // путь до контактов макетки
-    translate([2, 10, -0.1]) cube([1, 5, 9+0.1]);
+    translate([2, 10, -0.1]) cube([1, 5, 10+0.1]);
+    
+    // немного срежем снизу, чтобы пластик не заливал дырку
+    //translate([1.5, 12.2, -0.1]) cube([3, 13.8, 1]);
+    //translate([1, 2, -0.1]) cube([3, 9, 1]);
+    
+    // и еще срежем внутри слева
+    //translate([2, 13.2, -0.1]) cube([1.9, 2, 10.1]);
+    //translate([2, 12.2, -0.1]) cube([1.9, 2, 4.3]);
+    
+    // и еще срежем внутри слева и справа
+    // расстояние между левой и правой стенками должно
+    // быть не меньше, чем ... мм - это диагональ сложенного
+    // контакта макеточной части; длина макеточной части ...мм,
+    // но нужна именно диагональ, т.к. мы вставляем контакт в
+    // корпус сначала одиним углом вперед, чтобы он сел на
+    // небольшую подставку и не выпадал при втыкании провода
+    translate([2, 12.2, -0.1]) cube([1.9, 16, 10+0.1]);
   }
+  
+  // "полочка" для края макетки, чтобы не выпадала вниз
+  translate([1.5, 26, 0]) cube([3, 3, 1]);
 }
 
 /** 
