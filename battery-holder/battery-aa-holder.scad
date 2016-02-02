@@ -11,10 +11,10 @@ print_error = 0.2;
 
 // батарейки AA
 //holder(count=2, holes=6, print_error=print_error);
-holder(count=4, holes=6, print_error=print_error);
+//holder(count=4, holes=6, print_error=print_error);
 //holder(count=6, holes=6, print_error=print_error);
 
-//holder(count=4, holes=6, spring_length=4, print_error=print_error);
+holder(count=4, holes=6, spring_length=4, print_error=print_error);
 
 // 
 //holder(count=4, holes=6, body_width=14, body_length=49, noze_length=1.5, spring_length=4, print_error=print_error);
@@ -377,11 +377,15 @@ module wire_jam_with_breadboard(print_error=0) {
     // но нужна именно диагональ, т.к. мы вставляем контакт в
     // корпус сначала одиним углом вперед, чтобы он сел на
     // небольшую подставку и не выпадал при втыкании провода
-    translate([2, 12.2, -0.1]) cube([1.9, 16, 10+0.1]);
+    //translate([2, 12.2, -0.1]) cube([1.9, 16, 10+0.1]);
+    
+    // щель для правой защелки
+    translate([2, 26-0.2, -0.1]) cube([5, 1, 8+0.1]);
+    translate([5, 23-0.2, 6]) cube([1+0.1, 3+0.1, 2+0.1]);
   }
   
   // "полочка" для края макетки, чтобы не выпадала вниз
-  translate([1.5, 26, 0]) cube([3, 3, 1]);
+  //translate([1.5, 26, 0]) cube([3, 3, 1]);
 }
 
 /** 
