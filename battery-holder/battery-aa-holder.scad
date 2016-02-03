@@ -90,8 +90,8 @@ module holder(count=6, holes=6,
     }
     
     // логотип и ссылки на нижней стороне
-    translate([2, 15, -1])
-      linear_extrude(height=2) import(file="credits-43d.dxf");
+    //translate([2, 15, -1])
+    //  linear_extrude(height=2) import(file="credits-43d.dxf");
   }
 
   // рейка с отверстиями для крепления
