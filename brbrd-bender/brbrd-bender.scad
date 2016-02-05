@@ -7,7 +7,7 @@ brbrd_bender_socket(print_error=print_error);
 
 module brbrd_bender_socket(print_error=0) {
   translate([0, 0, 3])
-    linear_extrude(height=15) import(file="brbrd-bender-socket-43d.dxf");
+    linear_extrude(height=19) import(file="brbrd-bender-socket-43d.dxf");
   
   difference() {
     cube([22, 12+10, 4]);
@@ -19,7 +19,7 @@ module brbrd_bender_socket(print_error=0) {
 
 module brbrd_bender_plug(print_error=0) {
   translate([0, 0, 2])
-    linear_extrude(height=15) import(file="brbrd-bender-plug-43d.dxf");
+    linear_extrude(height=19) import(file="brbrd-bender-plug-43d.dxf");
     
   // рельс
   //translate([3.5/2-rail_width/2+print_error, 0, 0]) cube([rail_width-print_error*2, 9, 2]);
