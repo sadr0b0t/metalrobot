@@ -1,4 +1,7 @@
+//print_error=0;
+//print_error=0.1;
 print_error=0.2;
+//print_error=0.3;
 
 rail_width=1;
 
@@ -22,9 +25,5 @@ module brbrd_bender_plug(print_error=0) {
     linear_extrude(height=19) import(file="brbrd-bender-plug-43d.dxf");
     
   // рельс
-  //translate([3.5/2-rail_width/2+print_error, 0, 0]) cube([rail_width-print_error*2, 9, 2]);
-  translate([15/2-rail_width/2, 2, 0]) cube([rail_width, 10, 2]);
+  translate([15/2-rail_width/2+print_error, 2, 0]) cube([rail_width-print_error*2, 10, 2]);
 }
-
-
-
