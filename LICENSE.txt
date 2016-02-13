@@ -1,8 +1,24 @@
+
+For battery-holder project
+Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)
+http://creativecommons.org/licenses/by-nc/4.0/
+
+Для проекта Battery holder (отсек для батареек):
+используйте, меняйте и распространяйте работу по вашему усмотрению
+при условии ссылки на автора: 
+Антон Моисеев 1i7.livejournal.com
+
+Коммерческое использование также допускается, за исключением серийного
+производства модели и продажи отсека как самостоятельного продукта, не
+являющегося частью другой модели или набора.
+
+For all other projects in this repository
 Attribution 4.0 International (CC BY 4.0)
 http://creativecommons.org/licenses/by/4.0/
 
-Используйте, меняйте и распространяйте работу по вашему усмотрению при условии ссылки
-на автора: Антон Моисеев 1i7.livejournal.com
+Используйте, меняйте и распространяйте работу по вашему усмотрению в том числе для
+коммерческих целей при условии ссылки на автора: 
+Антон Моисеев 1i7.livejournal.com
 
 You are free to:
     Share — copy and redistribute the material in any medium or format
