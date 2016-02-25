@@ -6,10 +6,6 @@ print_error = 0.2;
 motor_fix(print_error=print_error);
 //rod_fix(print_error=print_error);
 
-
-
-
-
 /**
  * Крепление для мотора-редуктора popolu.
  */
@@ -41,20 +37,23 @@ module motor_fix(print_error=0) {
   difference() {
     union() {
       // по ширине рамки + стенки 2мм
-      translate([-(mlenx_3+4)/2, -mleny_1/2-2, 0]) cube([mlenx_3+4, mleny_1+2, 20]);
+      translate([-(mlenx_3+4)/2, -mleny_1/2-2, 0]) cube([mlenx_3+4, mleny_1+2, 28]);
       // крепления на корпус
       linear_extrude(height=2) import(file="крепление-мотор-43d.dxf");
-      //translate([-2, 2, 20]) cube([mlenx_1, mleny_1, 2]);
     }
     // главный блок с шестеренками
     translate([-mlenx_1/2-print_error, -mleny_1/2-print_error, -0.1]) 
-      cube([mlenx_1+print_error*2, mleny_1+print_error*2+0.1, 22+0.2]);
+      cube([mlenx_1+print_error*2, mleny_1+print_error*2+0.1, 28+0.2]);
     // защелки
     translate([-mlenx_2/2-print_error, -mleny_2/2-print_error, -0.1]) 
       cube([mlenx_2+print_error*2, mleny_2+print_error*2, mlenz_3+mlenz_2]);
     // рамка вокруг мотора
     translate([-mlenx_3/2-print_error, -mleny_3/2-print_error, -0.1]) 
       cube([mlenx_3+print_error*2, mleny_3+print_error*2+0.1, mlenz_3]);
+    
+    // канавка по внутренней поверхности задней стенки
+    translate([-6/2, -mleny_1/2-print_error-1, -0.1])
+      cube([6, 1+0.1, 30+0.2]);
     
     // рассверлить отверстия под винты с учетом print_error
     // справа
@@ -95,3 +94,4 @@ module rod_fix(print_error=0) {
     translate([3+4+6+2, 3+4+6+2, -0.1]) cylinder(h=3+0.2, r=2+print_error);
   }
 }
+
