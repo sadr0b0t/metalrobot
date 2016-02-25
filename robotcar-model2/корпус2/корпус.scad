@@ -5,6 +5,7 @@ print_error = 0.2;
 
 motor_fix(print_error=print_error);
 //rod_fix(print_error=print_error);
+//frame_fix(print_error=print_error);
 
 /**
  * Крепление для мотора-редуктора popolu.
@@ -95,3 +96,48 @@ module rod_fix(print_error=0) {
   }
 }
 
+/**
+ * Вертикальные крепления рамы корпуса.
+ */
+module frame_fix(print_error=0) {
+  difference() {
+    union() {
+      cube([30, 2, 28]);
+      cube([30, 3+4+3, 2]);
+      translate([0, 0, 28-2])
+        cube([30, 3+4+3, 2]);
+    }
+    
+    // вертикальные дырки для винтов
+    translate([3+2, 3+2, -0.1])
+      cylinder(h=28+0.2, r=2+print_error);
+    translate([3+2+10, 3+2, -0.1])
+      cylinder(h=28+0.2, r=2+print_error);
+    translate([3+2+10+10, 3+2, -0.1])
+      cylinder(h=28+0.2, r=2+print_error);
+    
+    // вертикальные канавки в стенках для шляпок
+    translate([3+2, 3+2, 2])
+      cylinder(h=28-4, r=4+print_error);
+    translate([3+2+10, 3+2, 2])
+      cylinder(h=28-4, r=4+print_error);
+    translate([3+2+10+10, 3+2, 2])
+      cylinder(h=28-4, r=4+print_error);
+    
+    // горизонтальные дырки в стенах для винтов просто так
+    // нижний ряд
+    translate([3+2, -0.1, 2+3+2])
+      rotate([-90,0,0]) cylinder(h=2+0.2, r=2+print_error);
+    translate([3+2+10, -0.1, 2+3+2])
+      rotate([-90,0,0]) cylinder(h=2+0.2, r=2+print_error);
+    translate([3+2+10+10, -0.1, 2+3+2])
+      rotate([-90,0,0]) cylinder(h=2+0.2, r=2+print_error);
+    // второй снизу ряд
+    translate([3+2, -0.1, 2+3+2+10])
+      rotate([-90,0,0]) cylinder(h=2+0.2, r=2+print_error);
+    translate([3+2+10, -0.1, 2+3+2+10])
+      rotate([-90,0,0]) cylinder(h=2+0.2, r=2+print_error);
+    translate([3+2+10+10, -0.1, 2+3+2+10])
+      rotate([-90,0,0]) cylinder(h=2+0.2, r=2+print_error);
+  }
+}
