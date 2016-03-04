@@ -112,7 +112,7 @@ module holder(count=6, holes=6,
   translate([bed_width*count+1, 2.5, 0]) 
     plank_with_holes(holes=holes, corner_radius=[0,2,0,2], print_error=print_error);
   // дотянуться до блока контактного зажима
-  translate([bed_width*count-1, -2, 0]) cube([2, 3, 2]);
+  //translate([bed_width*count-1, -2, 0]) cube([2, 3, 2]);
   
   // планка для проверки совпадения дырок на обоих конца отсека
   //translate([-10+1, 12.5, -1]) rotate([0,0,-90])  plank_with_holes(holes=14, print_error=print_error);
