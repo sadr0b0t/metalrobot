@@ -4,7 +4,7 @@ $fn=100;
 print_error = 0.2;
 
 motor_fix(print_error=print_error);
-//rod_fix(print_error=print_error);
+//axis_fix(print_error=print_error);
 //frame_fix(print_error=print_error);
 
 /**
@@ -75,7 +75,7 @@ module motor_fix(print_error=0) {
 /**
  * Крепление для оси
  */
-module rod_fix(print_error=0) {
+module axis_fix(print_error=0) {
   rod_fix_lenx = 20;
   rod_fix_leny = 20;
   difference() {
