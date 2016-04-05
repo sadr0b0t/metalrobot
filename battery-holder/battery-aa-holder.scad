@@ -258,10 +258,13 @@ module contact_plate_minus(body_width=14, print_error=0) {
   // щелка сверху
   translate([-print_error, 0, body_width]) cube([4+print_error*2, 3, 4]);
     
-  // расчистить путь для канавки под гайкой +
-  // дополнительная выемка снизу, чтобы щель не заплывала
+  // расчистить путь для канавки под гайкой
+  translate([-1-print_error, -3, 0]) cube([4+2+print_error*2, 3.5, 2]);
+  // +дополнительная выемка снизу, чтобы щель не заплывала
   // при печати
-  translate([-1-print_error, -3, 0]) cube([4+2+print_error*2, 5, 2]);
+  translate([-1-print_error, .5, 0.5]) rotate([0, 90, 0]) 
+    cylinder(h=4+2+print_error*2, r=1.5, $fn=100);
+  //translate([-1-print_error, -3, 0]) cube([4+2+print_error*2, 5, 2]);
 }
 
 /**
@@ -277,10 +280,13 @@ module contact_plate_plus(body_width=14, print_error=0) {
   // щелка сверху
   translate([-print_error, 0, body_width]) cube([4+print_error*2, 3, 4]);
     
-  // расчистить путь для канавки под гайкой +
-  // дополнительная выемка снизу, чтобы щель не заплывала
+  // расчистить путь для канавки под гайкой
+  translate([-1-print_error, -3, 0]) cube([4+2+print_error*2, 3.5, 2]);
+  // +дополнительная выемка снизу, чтобы щель не заплывала
   // при печати
-  translate([-1-print_error, -3, 0]) cube([4+2+print_error*2, 5, 2]);
+  translate([-1-print_error, .5, 0.5]) rotate([0, 90, 0]) 
+    cylinder(h=4+2+print_error*2, r=1.5, $fn=100);
+  //translate([-1-print_error, -3, 0]) cube([4+2+print_error*2, 5, 2]);
 }
 
 /**
@@ -302,7 +308,9 @@ module contact_gap(body_width=14, print_error=0) {
     
   // дополнительная выемка снизу, чтобы щель не заплывала
   // при печати
-  translate([-1-print_error, -1, 0]) cube([bed_width+4+2+print_error, 3, 2]); 
+  //translate([-1-print_error, -1, 0]) cube([bed_width+4+2+print_error, 3, 2]);
+  translate([-1-print_error, 0.5, 0]) rotate([0, 90, 0]) 
+    cylinder(h=bed_width+4+2+print_error, r=1.5, $fn=100);
 }
 
 /**
