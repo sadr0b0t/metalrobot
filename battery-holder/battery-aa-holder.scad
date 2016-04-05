@@ -103,13 +103,13 @@ module holder(count=6, holes=6,
   // 2) для отсека 4АА левую рейку нужно сдвинуть по X на (-10+1), 
   // а правую на (bed_width*count+1), тогда отверстия на обеих рейках
   // будут равно отстоять от стенок отсека
-  translate([-10+1, 3.5, 0]) 
+  translate([-10+1, 2.5, 0]) 
     plank_with_holes(holes=holes, corner_radius=[2,0,2,0], print_error=print_error);
   // дотянуться до блока контактного зажима
   //translate([0, -2, 0]) cube([2, 3, 2]);
 
   // еще рейка с отверстиями
-  translate([bed_width*count+1, 3.5, 0]) 
+  translate([bed_width*count+1, 2.5, 0]) 
     plank_with_holes(holes=holes, corner_radius=[0,2,0,2], print_error=print_error);
   // дотянуться до блока контактного зажима
   //translate([bed_width*count-1, -2, 0]) cube([2, 3, 2]);
@@ -139,19 +139,19 @@ module holder_aa(count=4,
   difference() {
     // толщина боковых стенок и стенок между батарейками
     // 1/2 мм без учета погрешности
-    cube([bed_width*count+2, bed_length+8, body_width+2]);
+    cube([bed_width*count+2, bed_length+7, body_width+2]);
     
     // срезать сверху
-    translate([-1, 2, body_width]) cube([bed_width*count+4, bed_length+4, 4]);
+    translate([-1, 1.5, body_width]) cube([bed_width*count+4, bed_length+4, 4]);
     
     
     // ложа под батарейки
     for(i = [1 : count/2]) {
-      translate([1+bed_width/2+bed_width*(i*2-2), 4, 2]) 
+      translate([1+bed_width/2+bed_width*(i*2-2), 3.5, 2]) 
         battery_aa_bed(body_width=body_width, body_length=body_length, 
           noze_length=noze_length, spring_length=spring_length,
           print_error=print_error);
-      translate([1+bed_width/2+bed_width*(i*2-1), bed_length+4, 2]) rotate([0,0,180]) 
+      translate([1+bed_width/2+bed_width*(i*2-1), bed_length+3.5, 2]) rotate([0,0,180]) 
         battery_aa_bed(body_width=body_width, body_length=body_length, 
           noze_length=noze_length, spring_length=spring_length,
           print_error=print_error);
@@ -162,7 +162,7 @@ module holder_aa(count=4,
     //translate([2, 4 + noze_length, body_width/2]) 
     //  cube([bed_width*count-3, spring_length+body_length-noze_length, body_width/2+1]);
     // с учетом ячейки для пружинки
-    translate([2, 4 + noze_length+0.5, body_width/2]) 
+    translate([2, 4 + noze_length, body_width/2]) 
       cube([bed_width*count-3, spring_length+body_length-noze_length-1, body_width/2+1]);
     
     
@@ -174,23 +174,23 @@ module holder_aa(count=4,
     // внизу
     if(count > 2) {
       for(i = [1 : count/2-1]) {
-        translate([body_width/2-0.5+bed_width+30*(i-1), 2, -1]) 
+        translate([body_width/2-0.5+bed_width+30*(i-1), 1.5, -1]) 
           contact_gap(body_width=body_width, print_error=print_error);
       }
     }
 
     // наверху
     for(i = [1 : count/2]) {
-      translate([body_width/2-0.5+bed_width*2*(i-1), bed_length+6, -1]) mirror([0, 1, 0])
+      translate([body_width/2-0.5+bed_width*2*(i-1), bed_length+5.5, -1]) mirror([0, 1, 0])
         contact_gap(body_width=body_width, print_error=print_error);
     }
 
     // одинокая пружинка
-    translate([body_width/2-0.5, 2, -1])
+    translate([body_width/2-0.5, 1.5, -1])
       contact_plate_minus(body_width=body_width, print_error=print_error);
 
     // одинокая пипка
-    translate([body_width/2-0.5+bed_width*(count-1), 2, -1])
+    translate([body_width/2-0.5+bed_width*(count-1), 1.5, -1])
       contact_plate_plus(body_width=body_width, print_error=print_error);
   }
 }
