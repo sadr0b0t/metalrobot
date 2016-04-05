@@ -14,7 +14,7 @@ print_error = 0.2;
 //holder(count=4, holes=6, print_error=print_error);
 //holder(count=6, holes=6, print_error=print_error);
 
-holder(count=4, holes=6, spring_length=4, print_error=print_error);
+holder(count=4, holes=6, spring_length=5, print_error=print_error);
 
 // 
 //holder(count=4, holes=6, body_width=14, body_length=49, noze_length=1.5, spring_length=4, print_error=print_error);
@@ -103,13 +103,13 @@ module holder(count=6, holes=6,
   // 2) для отсека 4АА левую рейку нужно сдвинуть по X на (-10+1), 
   // а правую на (bed_width*count+1), тогда отверстия на обеих рейках
   // будут равно отстоять от стенок отсека
-  translate([-10+1, 2.5, 0]) 
+  translate([-10+1, 3.5, 0]) 
     plank_with_holes(holes=holes, corner_radius=[2,0,2,0], print_error=print_error);
   // дотянуться до блока контактного зажима
   //translate([0, -2, 0]) cube([2, 3, 2]);
 
   // еще рейка с отверстиями
-  translate([bed_width*count+1, 2.5, 0]) 
+  translate([bed_width*count+1, 3.5, 0]) 
     plank_with_holes(holes=holes, corner_radius=[0,2,0,2], print_error=print_error);
   // дотянуться до блока контактного зажима
   //translate([bed_width*count-1, -2, 0]) cube([2, 3, 2]);
