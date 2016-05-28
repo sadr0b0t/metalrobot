@@ -1,6 +1,6 @@
 use <3pty/ISOThread-mod1.scad>
 
-// параметры можно задавать внешним скриптом
+// параметры для отрисовки винтов, можно задавать внешним скриптом
 
 // диаметр винта
 dia=4;
@@ -15,6 +15,7 @@ cq = 100;
 // нужно задать глобальный $fn (общее качество для резьбы и сердечника), 
 // иначе резьба не отрисуется
 //$fn=20;
+
 
 // для внешних скриптов export-crosshead-xxx.sh
 crosshead_screw(dia, hi, thr, cq);
@@ -79,6 +80,12 @@ crosshead_screw(dia, hi, thr, cq);
 
 // гайка M4
 //hex_nut(4);
+
+// пружинная шайба M3
+//mirror([0,-1,0]) spring_washer(3,3/5+0.1,100);
+
+// пружинная шайба M4
+//mirror([0,-1,0]) spring_washer(4,4/5+0.1,100);
 
 /**
  * Винт с резьбой, скругленной головкой и крестообразным шлицем для 
@@ -179,4 +186,71 @@ module nohead_screw(dia, hi, thr=$fn, cq=$fn) {
     
 	thread_out(dia,hi+0.1, thr);
 	thread_out_centre(dia,hi+0.1, cq);
+}
+
+/**
+ *  Пружинная шайба
+ */
+module spring_washer(dia,p,thr=$fn)
+// spring washer with single turn
+//  dia=diameter, 6=M6 etc
+//  p=pitch
+//  thr=thread quality, 10=make a thread with 10 segments per turn
+{
+    
+    // washer ring width would be dia/3
+    rw = dia/3;
+    // washer thikness (ring height) would be
+    h = dia/5;
+    
+	s = 360/thr;
+	for(sg=[0:thr-1])
+		washer_pt(dia/2,s,sg,thr,rw,h,p/thr);
+}
+
+/**
+ * Один сегмент пружинной шайбы
+ */
+module washer_pt(rt,s,sg,thr,rw,h,sh)
+// make a part of spring washer thread (single segment)
+//  rt = inner radius of washer thread (nearest centre)
+//  p = pitch
+//  s = segment length (degrees)
+//  sg = segment number
+//  thr = segments in circumference
+//  rw = washer ringh width
+//  h = ISO h of washer plate
+//  sh = segment height (z)
+{
+	as = (sg % thr) * s;			// angle to start of seg
+	ae = as + s  - (s/100);		// angle to end of seg (with overlap)
+	z = sh*sg;
+    
+	//   1,5__________2,6
+	//   |               |
+ 	//   |               |
+	//   |___________|
+	//   0,4             3,7
+	//  view from front (x & z) extruded in y by sg
+	//  
+	//echo(str("as=",as,", ae=",ae," z=",z));
+    
+	polyhedron(
+		points = [
+			[cos(as)*rt,sin(as)*rt,z],                  // 0
+			[cos(as)*rt,sin(as)*rt,z+h],               // 1
+			[cos(as)*(rt+rw),sin(as)*(rt+rw),z+h],    // 2
+			[cos(as)*(rt+rw),sin(as)*(rt+rw),z],       // 3
+    
+			[cos(ae)*rt,sin(ae)*rt,z+sh],              // 4
+			[cos(ae)*rt,sin(ae)*rt,z+h+sh],            // 5
+			[cos(ae)*(rt+rw),sin(ae)*(rt+rw),z+h+sh], // 6
+			[cos(ae)*(rt+rw),sin(ae)*(rt+rw),z+sh]],   // 7
+		faces = [
+			[0,1,2,3],    // near face
+			[4,7,6,5],    // far face
+			[0,4,5,1],	 // left face
+			[6,7,3,2],    // right face
+			[0,3,7,4],    // bottom face
+			[1,5,6,2] ]);	 // top face
 }
