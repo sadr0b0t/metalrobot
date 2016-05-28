@@ -1,4 +1,26 @@
-use <3pty/ISOThread.scad>
+use <3pty/ISOThread-mod1.scad>
+
+// параметры можно задавать внешним скриптом
+
+// диаметр винта
+dia=4;
+// длина винта
+hi=14;
+// качество отрисовки резьбы
+thr = 30;
+// качество отрисовки цилиндра-сердечника
+cq = 100;
+
+// если не использовать параметры thr и cq напрямую,
+// нужно задать глобальный $fn (общее качество для резьбы и сердечника), 
+// иначе резьба не отрисуется
+//$fn=20;
+
+// для внешних скриптов export-crosshead-xxx.sh
+crosshead_screw(dia, hi, thr, cq);
+
+// для внешних скриптов export-crosshead-xxx.sh
+//mounting_screw(dia, hi, thr, cq);
 
 // Используем библиотеку ISOThread.scad
 // http://www.thingiverse.com/thing:311031/
@@ -11,7 +33,7 @@ use <3pty/ISOThread.scad>
 //crosshead_screw(3,4);
 //crosshead_screw(3,6);
 //crosshead_screw(3,8);
-crosshead_screw(3,10);
+//crosshead_screw(3,10);
 //crosshead_screw(3,12);
 //crosshead_screw(3,14);
 //crosshead_screw(3,16);
@@ -69,7 +91,7 @@ crosshead_screw(3,10);
  * @param dia диаметр (3=M3, 4=M4 и т.п.)
  * @param hi длина нарезной части
  */
-module crosshead_screw(dia, hi) {
+module crosshead_screw(dia, hi, thr=$fn, cq=$fn) {
     
     // версия для круглой головки
     // высота головки
@@ -91,8 +113,8 @@ module crosshead_screw(dia, hi) {
       translate([0, 0, (hhi-1)/2-0.1]) cube([hr*2-hr*3/4, hr/4, hhi-1], center=true);
     }
     // резьба
-	translate([0,0,hhi-0.1])	thread_out(dia,hi+0.1);
-	translate([0,0,hhi-0.1])	thread_out_centre(dia,hi+0.1);
+	translate([0,0,hhi-0.1])	thread_out(dia,hi+0.1, thr);
+	translate([0,0,hhi-0.1])	thread_out_centre(dia,hi+0.1, cq);
 }
 
 /**
@@ -107,12 +129,13 @@ module crosshead_screw(dia, hi) {
  * http://www.master-krepezh.ru/vinty_44.html
  */
 
-module mounting_screw(dia, hi) {
+module mounting_screw(dia, hi, thr=$fn, cq=$fn) {
     // радиус внутреннего стержня (под резьбой),
     // формула из модулей ISOThread: thread_out_centre, thread_out_centre_pitch
     p = get_coarse_pitch(dia);
     h = (cos(30)*p)/8;
-	Rmin = (dia/2) - (5*h);	// as wiki Dmin    
+	//Rmin = (dia/2) - (5*h);	// as wiki Dmin
+    Rmin = (dia/2) - (3*h);	// as wiki Dmin
     
     // радиус головки - радиус внутреннего стержня винта
     hr = Rmin;    
@@ -133,7 +156,7 @@ module mounting_screw(dia, hi) {
           
         // винт с резьбой
 	    translate([0,0,hhi])	thread_out(dia,thread_height+0.1);
-	    translate([0,0,hhi])	thread_out_centre(dia,thread_height+0.1);
+	    translate([0,0,hhi])	thread_out_centre(dia,thread_height+0.1, cq);
       }
       
       // прорезь для отвертки
@@ -151,9 +174,9 @@ module mounting_screw(dia, hi) {
  * @param dia диаметр (3=M3, 4=M4 и т.п.)
  * @param hi длина нарезной части
  */
-module nohead_screw(dia, hi) {
+module nohead_screw(dia, hi, thr=$fn, cq=$fn) {
     hr = rolson_hex_bolt_dia(dia)/2;
     
-	thread_out(dia,hi+0.1);
-	thread_out_centre(dia,hi+0.1);
+	thread_out(dia,hi+0.1, thr);
+	thread_out_centre(dia,hi+0.1, cq);
 }
