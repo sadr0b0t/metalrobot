@@ -1,5 +1,13 @@
 
+// L293D
 chip_dip(legs=8);
+
+// PIC32 с ChipKIT Uno32
+//chip_smd(len_x=10, len_y=10, pins_x=15, pins_y=15);
+
+// AVR с китайской ардуины
+//chip_smd(len_x=6, len_y=6, pins_x=8, pins_y=8);
+
 
 /** 
  * Микросхема в корпусе DIP
@@ -82,5 +90,32 @@ module chip_dip(legs=4) {
   for(i = [0 : legs-1]) {
     translate([-box_width/2-box_brow-0.2, leg_base_width/2 + leg_step*i, -box_height/2]) leg();
     mirror([1,0,0]) translate([-box_width/2-box_brow-0.2,, leg_base_width/2 + leg_step*i, -box_height/2]) leg();
+  }
+}
+
+/**
+ * Чип в корпусе SMD
+ */
+module chip_smd(len_x=10, len_y=10, pins_x=15, pins_y=15) {
+  module pin() {
+    translate([0, -0.5, 0]) cube([0.3, 0.5, 1]);
+    translate([0, -2, 0]) cube([0.3, 2, 0.1]);
+  }
+    
+  // чип  
+  cube([len_x, len_y, 2]);
+  
+  // ножки по X
+  if(pins_x > 0) for(i = [0:pins_x-1]) {
+    translate([1+(0.3+0.25)*i, 0, 0]) pin();
+    translate([1+(0.3+0.25)*i, len_y, 0]) mirror([0, -1, 0]) pin();  
+  }
+  
+  // ножки по Y
+  if(pins_y > 0) for(i = [0:pins_y-1]) {
+    translate([0, 1+(0.3+0.25)*i, 0]) 
+      translate([0, 0.3, 0]) rotate([0, 0, -90]) pin();
+    translate([len_x, 1+(0.3+0.25)*i, 0]) mirror([-1, 0, 0]) 
+      translate([0, 0.3, 0]) rotate([0, 0, -90]) pin();
   }
 }

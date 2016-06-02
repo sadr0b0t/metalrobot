@@ -1,11 +1,64 @@
+use <microchips.scad>
+
 //chipkit_uno32();
-arduino_uno_china();
+arduino_uno();
+//arduino_uno_china();
 
 //power_socket();
 //GPIO_socket();
 //socket_usb_b();
 //socket_mini_usb();
 //button();
+
+/**
+ * Плата ChipKIT Uno32, классическая 
+ * с чипом AVR в корпусе DIP
+ * http://amperka.ru/product/arduino-uno
+ */
+module arduino_uno() {
+  size_x = 55;
+  size_y = 70;
+  
+  // плата
+  difference() {
+    cube([size_x, size_y, 2]);
+      
+    // отверстия для винтов
+    translate([8.5, 2.5, -0.1]) cylinder(r=1.5, h=2+0.2, $fn=100);
+    translate([37, 2.5, -0.1]) cylinder(r=1.5, h=2+0.2, $fn=100);
+    translate([2.5, 55, -0.1]) cylinder(r=1.5, h=2+0.2, $fn=100);
+    translate([size_x-2.5, 53, -0.1]) cylinder(r=1.5, h=2+0.2, $fn=100);
+  }
+  
+  
+  // Analog In
+  translate([2, 3, 2]) GPIO_socket(count_x=1, count_y=6); 
+  
+  // Power
+  translate([2, 3+2.5*6+2, 2]) GPIO_socket(count_x=1, count_y=8); 
+    
+  // GPIO
+  translate([size_x-2.5-2, 3, 2]) GPIO_socket(count_x=1, count_y=8);
+  // GPIO
+  translate([size_x-2.5-2, 3+2.5*8+.5, 2]) GPIO_socket(count_x=1, count_y=10);
+    
+  // чип AVR
+  translate([17, 3, 8]) chip_dip(legs=14);
+  // в кроватке
+  difference() {
+    translate([12.5, 2.5, 2-0.1]) cube([9, 35.5, 3]);
+    translate([12.5+0.5, 2.5+0.5, 3]) cube([9-1, 35.5-1, 3]);
+  }
+  
+  // питание
+  translate([3, 58, 2]) power_socket();
+    
+  // порт USB-B
+  translate([32, 61, 2-0.1]) socket_usb_b();
+  
+  // кнопка Reset
+  translate([47, 60, 2]) button();
+}
 
 /**
  * Плата ChipKIT Uno32, безымянный китайский клон
@@ -242,29 +295,3 @@ module socket_mini_usb() {
   }
 }
 
-/**
- * Чип в корпусе SMD
- */
-module chip_smd(len_x=10, len_y=10, pins_x=15, pins_y=15) {
-  module pin() {
-    translate([0, -0.5, 0]) cube([0.3, 0.5, 1]);
-    translate([0, -2, 0]) cube([0.3, 2, 0.1]);
-  }
-    
-  // чип  
-  cube([len_x, len_y, 2]);
-  
-  // ножки по X
-  if(pins_x > 0) for(i = [0:pins_x-1]) {
-    translate([1+(0.3+0.25)*i, 0, 0]) pin();
-    translate([1+(0.3+0.25)*i, len_y, 0]) mirror([0, -1, 0]) pin();  
-  }
-  
-  // ножки по Y
-  if(pins_y > 0) for(i = [0:pins_y-1]) {
-    translate([0, 1+(0.3+0.25)*i, 0]) 
-      translate([0, 0.3, 0]) rotate([0, 0, -90]) pin();
-    translate([len_x, 1+(0.3+0.25)*i, 0]) mirror([-1, 0, 0]) 
-      translate([0, 0.3, 0]) rotate([0, 0, -90]) pin();
-  }
-}
