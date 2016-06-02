@@ -1,18 +1,17 @@
-
 //chipkit_uno32();
-arduino_uno();
+arduino_uno_china();
 
 //power_socket();
 //GPIO_socket();
 //socket_usb_b();
 //socket_mini_usb();
 //button();
-//chip_smd();
 
 /**
- * Плата ChipKIT Uno32
+ * Плата ChipKIT Uno32, безымянный китайский клон
+ * с чипом AVR в корпусе SMD
  */
-module arduino_uno() {
+module arduino_uno_china() {
   size_x = 55;
   size_y = 70;
   
