@@ -1,22 +1,31 @@
 
-//sonar();
-ir_line_sensor();
+sonar();
+//ir_line_sensor();
 
 //pin_bended(count=4);
 //trimming_resistor(val=15);
 
 /**
- * Плата Arduino Uno (ChipKIT Uno32)
+ * Сонар
  */
 module sonar() {
+  // "глаз" сонара - цилиндр
+  module sonar_eye() {
+    difference() {
+      cylinder(r=8, h=12, $fn=100);
+      translate([0, 0, 11]) cylinder(r=6, h=1+0.1, $fn=100);
+    }
+  }
+    
   // плата
-  translate([0, 2, 1]) cube([26, 14, 2], center=true);
+  translate([0, 0, 1]) cube([45, 20, 2], center=true);
   
-  translate([-7, 0, 2]) cylinder(r=5, h=6, $fn=100);
-  translate([7, 0, 2]) cylinder(r=5, h=6, $fn=100);
+  // глаза сонара
+  translate([-13, 0, 2]) sonar_eye();
+  translate([13, 0, 2]) sonar_eye();
   
   // штыри
-  translate([0, 10, 2.5]) cube([8, 6, 3], center=true);
+  translate([-2.5-2.5/2, -7.5, -3.8]) mirror([0, 0, -1]) pin_bended(count=4);
 }
 
 /**
