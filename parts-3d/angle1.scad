@@ -1,9 +1,9 @@
 print_error = 0.2;
 
-//angle1(holes=1, print_error=print_error);
-//angle1(holes=2, print_error=print_error);
-angle1(holes=3, print_error=print_error);
-//angle1(holes=4, print_error=print_error);
+//angle_1xX(holes=1, print_error=print_error);
+//angle_1xX(holes=2, print_error=print_error);
+angle_1xX(holes=3, print_error=print_error);
+//angle_1xX(holes=4, print_error=print_error);
 
 /**
  * Уголок: одно отверстие в высоту, произвольное количество 
@@ -14,7 +14,7 @@ angle1(holes=3, print_error=print_error);
  * @param holes количество отверстий
  * @param print_error погрешность при печати
  */
-module angle1(holes=1, print_error=print_error) {
+module angle_1xX(holes=1, print_error=print_error) {
   // отверстие=4мм
   // расстояние между отверстиями=6мм
   // расстояние от отверстия до края=3мм
