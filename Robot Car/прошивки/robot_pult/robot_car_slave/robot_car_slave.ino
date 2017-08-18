@@ -383,6 +383,8 @@ void mright_backward() {
 void mright_stop() {
     // выключить моторы
     digitalWrite(MOTOR_RIGHT_EN, LOW);
+    digitalWrite(MOTOR_RIGHT_1, LOW);
+    digitalWrite(MOTOR_RIGHT_2, LOW);
 }
 
 
@@ -397,13 +399,15 @@ void cmd_backward() {
 }
 
 void cmd_left() {
-    mleft_backward();
+    //mleft_backward();
     mright_forward();
+    mleft_stop();
 }
 
 void cmd_right() {
     mleft_forward();
-    mright_backward();
+    //mright_backward();
+    mright_stop();
 }
 
 void cmd_stop() {

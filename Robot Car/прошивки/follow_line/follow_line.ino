@@ -84,6 +84,7 @@ void setup() {
     mright_stop();
 }
 
+
 void loop() {
     if( digitalRead(LINE_SENSOR_L) == 0 && digitalRead(LINE_SENSOR_R) == 0 ) {
       // линии нет на обоих датчиках
