@@ -158,12 +158,12 @@ module generic_axis(length=22, radius=1.5, print_error=0) {
 
 
 /** 
- * Ось для для мотора 2:
+ * Ось с лыской для для мотора 2:
  * Pololu 4.5V, 80rpm Right Angle (прямой, желтый)
- * www.robotshop.com/en/solarbotics-gm7-gear-motor-7.html
+ * https://www.pololu.com/product/1593
  *
  * @param radius радиус оси, диаметр оси мотора 3мм; 
- * @param cut_radius расстояние от центра до среза 
+ * @param cut_radius расстояние от центра до среза (лыски)
  * @param print_error погрешность при печати 3д-принтером (мм), стоит учитывать 
  * для элементов (отверстий или штырей), стыкующихся с 
  * внешними объектами (отверстие для вала при печати получится меньше
