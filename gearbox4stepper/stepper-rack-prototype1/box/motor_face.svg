@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 744.09448819 1052.3622047"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="motor_face.svg"
+   inkscape:label="123">
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="2.8284272"
+     inkscape:cx="81.358259"
+     inkscape:cy="-18.823456"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer2"
+     showgrid="true"
+     inkscape:window-width="1839"
+     inkscape:window-height="1050"
+     inkscape:window-x="81"
+     inkscape:window-y="30"
+     inkscape:window-maximized="1"
+     inkscape:snap-bbox="true"
+     inkscape:snap-bbox-midpoints="true"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:snap-global="true">
+    <inkscape:grid
+       type="xygrid"
+       id="grid3375"
+       spacingx="0.35433071"
+       spacingy="0.35433072" />
+    <sodipodi:guide
+       position="170.07874,0"
+       orientation="0,1"
+       id="guide4148" />
+    <sodipodi:guide
+       position="0,162.99213"
+       orientation="1,0"
+       id="guide4150" />
+    <sodipodi:guide
+       position="-54.92126,51.377954"
+       orientation="1,0"
+       id="guide4191"
+       inkscape:label=""
+       inkscape:color="rgb(0,0,255)" />
+    <sodipodi:guide
+       position="-44.291339,54.921261"
+       orientation="0,1"
+       id="guide4193"
+       inkscape:label=""
+       inkscape:color="rgb(0,0,255)" />
+    <sodipodi:guide
+       position="54.92126,38.976379"
+       orientation="1,0"
+       id="guide4195"
+       inkscape:label=""
+       inkscape:color="rgb(0,0,255)" />
+    <sodipodi:guide
+       position="-24.80315,-54.921261"
+       orientation="0,1"
+       id="guide4197"
+       inkscape:label=""
+       inkscape:color="rgb(0,0,255)" />
+  </sodipodi:namedview>
+  <defs
+     id="defs4" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="motor"
+     id="layer2"
+     inkscape:groupmode="layer"
+     style="display:inline">
+    <path
+       style="fill:#ffdd55;fill-opacity:1;stroke:none"
+       d="m -58.464577,977.42126 116.929154,0 16.476371,16.47638 0,116.92916 -16.476371,16.4764 -116.929154,0 -16.476371,-16.4764 0,-116.92916 z"
+       id="rect4197"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccccccc" />
+    <circle
+       style="fill:#87de87;fill-opacity:1;stroke:none"
+       id="path4226"
+       cx="0"
+       cy="1052.3622"
+       r="38.976379" />
+    <circle
+       style="fill:#ff0000;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       id="path3346"
+       cx="0.21259873"
+       cy="1052.1497"
+       r="8.8582678" />
+    <circle
+       style="fill:#ffaaee;fill-opacity:1;stroke:none"
+       id="path4189"
+       cx="-54.921261"
+       cy="997.44092"
+       r="5.3149605" />
+    <circle
+       style="display:inline;fill:#ffaaee;fill-opacity:1;stroke:none"
+       id="path4189-3"
+       cx="-54.921261"
+       cy="1107.2834"
+       r="5.3149605" />
+    <circle
+       style="display:inline;fill:#ffaaee;fill-opacity:1;stroke:none"
+       id="path4189-6"
+       cx="54.921261"
+       cy="1107.2834"
+       r="5.3149605" />
+    <circle
+       style="display:inline;fill:#ffaaee;fill-opacity:1;stroke:none"
+       id="path4189-7"
+       cx="54.921261"
+       cy="997.44092"
+       r="5.3149605" />
+  </g>
+</svg>
