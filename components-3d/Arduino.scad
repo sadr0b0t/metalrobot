@@ -11,9 +11,9 @@ arduino_uno();
 //button();
 
 /**
- * Плата ChipKIT Uno32, классическая 
+ * Плата Arduino Uno, классическая 
  * с чипом AVR в корпусе DIP
- * http://amperka.ru/product/arduino-uno
+ * https://store.arduino.cc/usa/arduino-uno-rev3
  */
 module arduino_uno() {
   size_x = 55;
@@ -61,7 +61,7 @@ module arduino_uno() {
 }
 
 /**
- * Плата ChipKIT Uno32, безымянный китайский клон
+ * Плата Arduino Uno, безымянный китайский клон
  * с чипом AVR в корпусе SMD
  */
 module arduino_uno_china() {
